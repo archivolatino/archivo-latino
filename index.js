@@ -443,7 +443,47 @@ function sortByColumn(column) {
 /* preview */
 
 // the last hovered entry stays lit, and every copy of it in the stacks does too
+// every row's thumbnail, loaded once and kept, so the preview can show one the moment its row is
+// pointed at instead of waiting on it
+const thumbnails = new Map();
+function thumbnailImage(src) {
+	if (!thumbnails.has(src)) {
+		let image = new Image();
+		image.decoding = 'async';
+		image.src = src;
+		thumbnails.set(src, image);
+	}
+	return thumbnails.get(src);
+}
+
+// only a pointer can hover, so only a pointer is worth loading them all ahead for
+function preloadThumbnails() {
+	if (!window.matchMedia('(hover: hover)').matches) {
+		return;
+	}
+	for (let row of originalRows) {
+		if (row.dataset.thumbnail) {
+			thumbnailImage(row.dataset.thumbnail);
+		}
+	}
+}
+
+function showPreview(entry) {
+	let thumbnail = entry.dataset.thumbnail;
+	PREVIEW.dataset.tint = entry.dataset.tint;
+	PREVIEW.style.setProperty('--preview-ratio', entry.dataset.ratio || 1);
+	PREVIEW.style.setProperty('--tint', `url("${thumbnail}")`);
+	if (PREVIEW_IMAGE.getAttribute('src') != thumbnail) {
+		PREVIEW_IMAGE.setAttribute('src', thumbnail);
+	}
+	PREVIEW.dataset.active = '1';
+}
+
 function setActiveEntry(entry) {
+	// the pointer crosses the spans inside a row, and each crossing asks again for the same row
+	if (entry == activeEntry) {
+		return;
+	}
 	activeEntry = entry;
 	for (let row of LIST_LINKS.children) {
 		row.dataset.active = originalRows[row.dataset.row] == activeEntry ? '1' : '0';
@@ -454,13 +494,19 @@ function setActiveEntry(entry) {
 		PREVIEW.dataset.active = '0';
 		return;
 	}
-	PREVIEW.dataset.tint = activeEntry.dataset.tint;
-	PREVIEW.style.setProperty('--preview-ratio', activeEntry.dataset.ratio || 1);
-	PREVIEW.style.setProperty('--tint', `url("${thumbnail}")`);
-	if (PREVIEW_IMAGE.getAttribute('src') != thumbnail) {
-		PREVIEW_IMAGE.setAttribute('src', thumbnail);
+	// a picture still on its way would leave the last one standing in the new row's frame, so the
+	// preview waits for it, and only shows it if the pointer is still on that row by then
+	let image = thumbnailImage(thumbnail);
+	if (image.complete && image.naturalWidth) {
+		showPreview(activeEntry);
+		return;
 	}
-	PREVIEW.dataset.active = '1';
+	PREVIEW.dataset.active = '0';
+	image.decode().catch(() => {}).then(() => {
+		if (activeEntry == entry) {
+			showPreview(entry);
+		}
+	});
 }
 
 
@@ -1515,6 +1561,9 @@ new ResizeObserver(queueTrack).observe(ENTRY_MEDIA);
 new ResizeObserver(queueTrack).observe(ENTRY_TEXT);
 
 setColumn(0); // addressee shows first on mobile
+
+// the thumbnails load once the page itself has, so they never hold up anything on screen
+window.addEventListener('load', preloadThumbnails);
 setSortMenu(false);
 bindInput();
 sortByColumn(DEFAULT_SORT); // opens on date received, newest first
