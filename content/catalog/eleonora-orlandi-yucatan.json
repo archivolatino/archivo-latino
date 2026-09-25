@@ -1,0 +1,77 @@
+{
+	"Addressee [ES]": "",
+	"Archive": [
+		{
+			"File": "L000019_ELEONORA ORLANDI_YUCATAN_MEXICO.jpg",
+			"Code": "L00019",
+			"Type": "Letter",
+			"Type [ES]": "Carta",
+			"Tint": true
+		},
+		{
+			"File": "P0000119_ELEONORA ORLANDI_YUCATAN_MEXICO.jpeg",
+			"Code": "P00119",
+			"Type": "Photograph",
+			"Type [ES]": "Fotografía",
+			"Tint": false
+		},
+		{
+			"File": "P0000120_ELEONORA ORLANDI_YUCATAN_MEXICO.jpeg",
+			"Code": "P00120",
+			"Type": "Photograph",
+			"Type [ES]": "Fotografía",
+			"Tint": false
+		},
+		{
+			"File": "P0000121_ELEONORA ORLANDI_YUCATAN_MEXICO.jpeg",
+			"Code": "P00121",
+			"Type": "Photograph",
+			"Type [ES]": "Fotografía",
+			"Tint": false
+		},
+		{
+			"File": "P0000122_ELEONORA ORLANDI_YUCATAN_MEXICO.jpeg",
+			"Code": "P00122",
+			"Type": "Photograph",
+			"Type [ES]": "Fotografía",
+			"Tint": false
+		},
+		{
+			"File": "P0000123_ELEONORA ORLANDI_YUCATAN_MEXICO.jpeg",
+			"Code": "P00123",
+			"Type": "Photograph",
+			"Type [ES]": "Fotografía",
+			"Tint": false
+		},
+		{
+			"File": "P0000123.1_ELEONORA ORLANDI_YUCATAN_MEXICO.jpg",
+			"Code": "P00123.1",
+			"Type": "Photograph",
+			"Type [ES]": "Fotografía",
+			"Tint": false
+		},
+		{
+			"File": "P0000123.2_ELEONORA ORLANDI_YUCATAN_MEXICO.jpg",
+			"Code": "P00123.2",
+			"Type": "Photograph",
+			"Type [ES]": "Fotografía",
+			"Tint": false
+		},
+		{
+			"File": "P0000123.3_ELEONORA ORLANDI_YUCATAN_MEXICO.jpg",
+			"Code": "P00123.3",
+			"Type": "Photograph",
+			"Type [ES]": "Fotografía",
+			"Tint": false
+		}
+	],
+	"City [ES]": "Yucatán",
+	"City": "Yucatan",
+	"Thumbnail": "P00123",
+	"Date": "2025-12",
+	"Addressee": "Eleonora Orlandi",
+	"Country": "Mexico",
+	"Type [ES]": "Carta, Fotografía",
+	"Type": "Letter, Photograph",
+	"Country [ES]": "México"
+}

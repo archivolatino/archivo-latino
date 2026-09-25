@@ -1,0 +1,28 @@
+{
+	"Addressee [ES]": "",
+	"Archive": [
+		{
+			"File": "L000024_ANDREI HARWELL_CDMX_MEXICO.jpg",
+			"Code": "L00024",
+			"Type": "Letter",
+			"Type [ES]": "Carta",
+			"Tint": true
+		},
+		{
+			"File": "P0000123_ANDREI HARWELL_CDMX_MEXICO.jpeg",
+			"Code": "P00123",
+			"Type": "Photograph",
+			"Type [ES]": "Fotografía",
+			"Tint": false
+		}
+	],
+	"City [ES]": "Ciudad de México",
+	"City": "Mexico City",
+	"Thumbnail": "P00123",
+	"Date": "2025-06",
+	"Addressee": "Andrei Harwell",
+	"Country": "Mexico",
+	"Type [ES]": "Carta, Fotografía",
+	"Type": "Letter, Photograph",
+	"Country [ES]": "México"
+}

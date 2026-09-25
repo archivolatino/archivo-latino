@@ -1,0 +1,63 @@
+{
+	"Addressee [ES]": "",
+	"Archive": [
+		{
+			"File": "L000071_MARGOT KALACH_CDMX_MEXICO.webp",
+			"Code": "L00071",
+			"Type": "Letter",
+			"Type [ES]": "Carta",
+			"Tint": true
+		},
+		{
+			"File": "P0000237_MARGOT KALACH_CDMX_MEXICO.jpg",
+			"Code": "P00237",
+			"Type": "Photograph",
+			"Type [ES]": "Fotografía",
+			"Tint": false
+		},
+		{
+			"File": "P0000238_MARGOT KALACH_CDMX_MEXICO.jpg",
+			"Code": "P00238",
+			"Type": "Photograph",
+			"Type [ES]": "Fotografía",
+			"Tint": false
+		},
+		{
+			"File": "P0000239_MARGOT KALACH_CDMX_MEXICO.jpg",
+			"Code": "P00239",
+			"Type": "Photograph",
+			"Type [ES]": "Fotografía",
+			"Tint": false
+		},
+		{
+			"File": "P0000240_MARGOT KALACH_CDMX_MEXICO.jpg",
+			"Code": "P00240",
+			"Type": "Photograph",
+			"Type [ES]": "Fotografía",
+			"Tint": false
+		},
+		{
+			"File": "P0000241_MARGOT KALACH_CDMX_MEXICO.jpg",
+			"Code": "P00241",
+			"Type": "Photograph",
+			"Type [ES]": "Fotografía",
+			"Tint": false
+		},
+		{
+			"File": "P0000242_MARGOT KALACH_CDMX_MEXICO.jpg",
+			"Code": "P00242",
+			"Type": "Photograph",
+			"Type [ES]": "Fotografía",
+			"Tint": false
+		}
+	],
+	"City [ES]": "Ciudad de México",
+	"City": "Mexico City",
+	"Thumbnail": "P00241",
+	"Date": "2025-11",
+	"Addressee": "Margot Kalach",
+	"Country": "Mexico",
+	"Type [ES]": "Carta, Fotografía",
+	"Type": "Letter, Photograph",
+	"Country [ES]": "México"
+}

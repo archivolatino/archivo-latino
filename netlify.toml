@@ -1,0 +1,36 @@
+# The build lays the finished pages down in the repository root, so that is what gets published.
+# Netlify leaves node_modules out of the deploy on its own.
+
+[build]
+  command = "npm run build"
+  publish = "."
+
+[build.environment]
+  NODE_VERSION = "20"
+
+# the cms is not a page anyone should land on from a search
+[[headers]]
+  for = "/admin/*"
+  [headers.values]
+    X-Robots-Tag = "noindex"
+
+# the notes page is the journal now, and the links that were shared before it moved still land on it
+[[redirects]]
+  from = "/notes"
+  to = "/journal/"
+  status = 301
+
+[[redirects]]
+  from = "/notes/*"
+  to = "/journal/:splat"
+  status = 301
+
+[[redirects]]
+  from = "/es/notes"
+  to = "/es/journal/"
+  status = 301
+
+[[redirects]]
+  from = "/es/notes/*"
+  to = "/es/journal/:splat"
+  status = 301

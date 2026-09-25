@@ -1,0 +1,21 @@
+{
+	"Addressee [ES]": "",
+	"Archive": [
+		{
+			"File": "L000074_LUCAS_LOS CABOS_MEXICO.webp",
+			"Code": "L00074",
+			"Type": "Letter",
+			"Type [ES]": "Carta",
+			"Tint": true
+		}
+	],
+	"City [ES]": "",
+	"City": "Los Cabos",
+	"Thumbnail": "L00074",
+	"Date": "2026-03",
+	"Addressee": "Lucas Treviño",
+	"Country": "Mexico",
+	"Type [ES]": "Carta",
+	"Type": "Letter",
+	"Country [ES]": "México"
+}

@@ -1,0 +1,70 @@
+{
+	"Addressee [ES]": "",
+	"Archive": [
+		{
+			"File": "L00002_ANA BATLLE_REPUBLICA DOMINICANA.webp",
+			"Code": "L00002",
+			"Type": "Letter",
+			"Type [ES]": "Carta",
+			"Tint": true
+		},
+		{
+			"File": "L00003_ANA BATLLE_REPUBLICA DOMINICANA.webp",
+			"Code": "L00003",
+			"Type": "Letter",
+			"Type [ES]": "Carta",
+			"Tint": true
+		},
+		{
+			"File": "P00005_ANA BATLLE_REPUBLICA DOMINICANA.jpg",
+			"Code": "P00005",
+			"Type": "Photograph",
+			"Type [ES]": "Fotografía",
+			"Tint": false
+		},
+		{
+			"File": "P00006_ANA BATLLE_REPUBLICA DOMINICANA.jpg",
+			"Code": "P00006",
+			"Type": "Photograph",
+			"Type [ES]": "Fotografía",
+			"Tint": false
+		},
+		{
+			"File": "P00007_ANA BATLLE_REPUBLICA DOMINICANA.jpg",
+			"Code": "P00007",
+			"Type": "Photograph",
+			"Type [ES]": "Fotografía",
+			"Tint": false
+		},
+		{
+			"File": "P00008_ANA BATLLE_REPUBLICA DOMINICANA.jpg",
+			"Code": "P00008",
+			"Type": "Photograph",
+			"Type [ES]": "Fotografía",
+			"Tint": false
+		},
+		{
+			"File": "P00009_ANA BATLLE_REPUBLICA DOMINICANA.jpg",
+			"Code": "P00009",
+			"Type": "Photograph",
+			"Type [ES]": "Fotografía",
+			"Tint": false
+		},
+		{
+			"File": "P000010_ANA BATLLE_REPUBLICA DOMINICANA.jpg",
+			"Code": "P00010",
+			"Type": "Photograph",
+			"Type [ES]": "Fotografía",
+			"Tint": false
+		}
+	],
+	"City [ES]": "Nagua",
+	"City": "Santo Domingo",
+	"Thumbnail": "L00002",
+	"Date": "2025-05",
+	"Addressee": "Ana Batlle",
+	"Country": "Dominican Republic",
+	"Type [ES]": "Carta, Fotografía",
+	"Type": "Letter, Photograph",
+	"Country [ES]": "República Dominicana"
+}

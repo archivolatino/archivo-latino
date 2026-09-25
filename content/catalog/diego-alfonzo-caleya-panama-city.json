@@ -1,0 +1,70 @@
+{
+	"Addressee [ES]": "",
+	"Archive": [
+		{
+			"File": "L000072_DIEGO ALFONZO CALEYA_PANAMA CITY_PANAMA.webp",
+			"Code": "L00072",
+			"Type": "Letter",
+			"Type [ES]": "Carta",
+			"Tint": true
+		},
+		{
+			"File": "P0000286_DIEGO ALFONZO CALEYA_PANAMA CITY_PANAMA.jpg",
+			"Code": "P00286",
+			"Type": "Photograph",
+			"Type [ES]": "Fotografía",
+			"Tint": false
+		},
+		{
+			"File": "P0000287_DIEGO ALFONZO CALEYA_PANAMA CITY_PANAMA.jpg",
+			"Code": "P00287",
+			"Type": "Photograph",
+			"Type [ES]": "Fotografía",
+			"Tint": false
+		},
+		{
+			"File": "P0000288_DIEGO ALFONZO CALEYA_PANAMA CITY_PANAMA.jpeg",
+			"Code": "P00288",
+			"Type": "Photograph",
+			"Type [ES]": "Fotografía",
+			"Tint": false
+		},
+		{
+			"File": "P0000289_DIEGO ALFONZO CALEYA_PANAMA CITY_PANAMA.jpg",
+			"Code": "P00289",
+			"Type": "Photograph",
+			"Type [ES]": "Fotografía",
+			"Tint": false
+		},
+		{
+			"File": "P0000290_DIEGO ALFONZO CALEYA_PANAMA CITY_PANAMA.jpg",
+			"Code": "P00290",
+			"Type": "Photograph",
+			"Type [ES]": "Fotografía",
+			"Tint": false
+		},
+		{
+			"File": "P0000291_DIEGO ALFONZO CALEYA_PANAMA CITY_PANAMA.jpg",
+			"Code": "P00291",
+			"Type": "Photograph",
+			"Type [ES]": "Fotografía",
+			"Tint": false
+		},
+		{
+			"File": "P0000292_DIEGO ALFONZO CALEYA_PANAMA CITY_PANAMA.jpg",
+			"Code": "P00292",
+			"Type": "Photograph",
+			"Type [ES]": "Fotografía",
+			"Tint": false
+		}
+	],
+	"City [ES]": "Panama City",
+	"City": "Panama city",
+	"Thumbnail": "P00289",
+	"Date": "2026-05",
+	"Addressee": "Diego Alfonzo Caleya",
+	"Country": "Panama",
+	"Type [ES]": "Carta, Fotografía",
+	"Type": "Letter, Photograph",
+	"Country [ES]": ""
+}

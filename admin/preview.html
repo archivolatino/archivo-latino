@@ -1,0 +1,25 @@
+<!doctype html>
+<!-- an empty page on the site's own address for the cms preview to write each page into, so the page's
+scripts run as they do on the site and can read and set the address the way they expect to -->
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="robots" content="noindex">
+	<script>
+		// the page is written from in here rather than by the cms, since a document takes the address of
+		// whichever page writes it, and this is the address its scripts should see
+		window.addEventListener('load', () => {
+			let preview = window.top.archivoPreview;
+			if (!preview) {
+				return;
+			}
+			let html = preview.page();
+			document.open();
+			document.write(html);
+			document.close();
+			preview.written(document);
+		});
+	</script>
+</head>
+<body></body>
+</html>

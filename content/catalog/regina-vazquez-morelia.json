@@ -1,0 +1,49 @@
+{
+	"Addressee [ES]": "",
+	"Archive": [
+		{
+			"File": "L000020_REGINA VAZQUEZ_MORELIA_MEXICO.jpeg",
+			"Code": "L00020",
+			"Type": "Letter",
+			"Type [ES]": "Carta",
+			"Tint": true
+		},
+		{
+			"File": "LR00003_REGINA VAZQUEZ_MORELIA_MEXICO.jpg",
+			"Code": "LR00003",
+			"Type": "Letter",
+			"Type [ES]": "Carta",
+			"Tint": true
+		},
+		{
+			"File": "LR00003a_REGINA VAZQUEZ_MORELIA_MEXICO.jpg",
+			"Code": "LR00003a",
+			"Type": "Letter",
+			"Type [ES]": "Carta",
+			"Tint": true
+		},
+		{
+			"File": "P0000120_REGINA VAZQUEZ_MORELIA_MEXICO.jpeg",
+			"Code": "P00120",
+			"Type": "Photograph",
+			"Type [ES]": "Fotografía",
+			"Tint": false
+		},
+		{
+			"File": "P0000121_REGINA VAZQUEZ_MORELIA_MEXICO.jpeg",
+			"Code": "P00121",
+			"Type": "Photograph",
+			"Type [ES]": "Fotografía",
+			"Tint": false
+		}
+	],
+	"City [ES]": "",
+	"City": "Morelia",
+	"Thumbnail": "P00121",
+	"Date": "2025-10",
+	"Addressee": "Regina Vazquez",
+	"Country": "Mexico",
+	"Type [ES]": "Carta, Fotografía",
+	"Type": "Letter, Photograph",
+	"Country [ES]": "México"
+}

@@ -1,0 +1,77 @@
+{
+	"Addressee [ES]": "",
+	"Archive": [
+		{
+			"File": "L00008_MARCELO SANCHEZ BRETON_VERACRUZ_MEXICO.jpg",
+			"Code": "L00008",
+			"Type": "Letter",
+			"Type [ES]": "Carta",
+			"Tint": true
+		},
+		{
+			"File": "LR0008_MARCELO SANCHEZ BRETON_VERACRUZ_MEXICO.webp",
+			"Code": "LR0008",
+			"Type": "Letter",
+			"Type [ES]": "Carta",
+			"Tint": true
+		},
+		{
+			"File": "LR0009_MARCELO SANCHEZ BRETON_VERACRUZ_MEXICO.webp",
+			"Code": "LR0009",
+			"Type": "Letter",
+			"Type [ES]": "Carta",
+			"Tint": true
+		},
+		{
+			"File": "LR00010_MARCELO SANCHEZ BRETON_VERACRUZ_MEXICO.webp",
+			"Code": "LR00010",
+			"Type": "Letter",
+			"Type [ES]": "Carta",
+			"Tint": true
+		},
+		{
+			"File": "LR00011_MARCELO SANCHEZ BRETON_VERACRUZ_MEXICO.webp",
+			"Code": "LR00011",
+			"Type": "Letter",
+			"Type [ES]": "Carta",
+			"Tint": true
+		},
+		{
+			"File": "P000040_MARCELO SANCHEZ BRETON_VERACRUZ_MEXICO.jpeg",
+			"Code": "P00040",
+			"Type": "Photograph",
+			"Type [ES]": "Fotografía",
+			"Tint": false
+		},
+		{
+			"File": "P000041_MARCELO SANCHEZ BRETON_VERACRUZ_MEXICO.jpeg",
+			"Code": "P00041",
+			"Type": "Photograph",
+			"Type [ES]": "Fotografía",
+			"Tint": false
+		},
+		{
+			"File": "P000042_MARCELO SANCHEZ BRETON_VERACRUZ_MEXICO.jpeg",
+			"Code": "P00042",
+			"Type": "Photograph",
+			"Type [ES]": "Fotografía",
+			"Tint": false
+		},
+		{
+			"File": "P000043_MARCELO SANCHEZ BRETON_VERACRUZ_MEXICO.jpeg",
+			"Code": "P00043",
+			"Type": "Photograph",
+			"Type [ES]": "Fotografía",
+			"Tint": false
+		}
+	],
+	"City [ES]": "",
+	"City": "Veracruz",
+	"Thumbnail": "P00043",
+	"Date": "2025-09",
+	"Addressee": "Marcelo Sánchez Breton",
+	"Country": "Mexico",
+	"Type [ES]": "Carta, Fotografía",
+	"Type": "Letter, Photograph",
+	"Country [ES]": "México"
+}

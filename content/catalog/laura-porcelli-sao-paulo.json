@@ -1,0 +1,21 @@
+{
+	"Addressee [ES]": "",
+	"Archive": [
+		{
+			"File": "L000035_LAURA PORCELLI_SAO PAULO_BRAZIL.jpg",
+			"Code": "L00035",
+			"Type": "Letter",
+			"Type [ES]": "Carta",
+			"Tint": true
+		}
+	],
+	"City [ES]": "",
+	"City": "São Paulo",
+	"Thumbnail": "L00035",
+	"Date": "2025-09",
+	"Addressee": "Laura Porcelli",
+	"Country": "Brazil",
+	"Type [ES]": "Carta",
+	"Type": "Letter",
+	"Country [ES]": "Brasil"
+}

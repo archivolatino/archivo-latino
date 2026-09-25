@@ -1,0 +1,70 @@
+{
+	"Addressee [ES]": "",
+	"Archive": [
+		{
+			"File": "L000012_JIAXING YAN & MILES MURPHY_SAO PAULO_BRAZIL.jpg",
+			"Code": "L00012",
+			"Type": "Letter",
+			"Type [ES]": "Carta",
+			"Tint": true
+		},
+		{
+			"File": "P000071_JIAXING YAN & MILES MURPHY_SAO PAULO_BRAZIL.jpg",
+			"Code": "P00071",
+			"Type": "Photograph",
+			"Type [ES]": "Fotografía",
+			"Tint": false
+		},
+		{
+			"File": "P000072_JIAXING YAN & MILES MURPHY_SAO PAULO_BRAZIL.jpg",
+			"Code": "P00072",
+			"Type": "Photograph",
+			"Type [ES]": "Fotografía",
+			"Tint": false
+		},
+		{
+			"File": "P000073_JIAXING YAN & MILES MURPHY_SAO PAULO_BRAZIL.jpg",
+			"Code": "P00073",
+			"Type": "Photograph",
+			"Type [ES]": "Fotografía",
+			"Tint": false
+		},
+		{
+			"File": "P000074_JIAXING YAN & MILES MURPHY_SAO PAULO_BRAZIL.jpg",
+			"Code": "P00074",
+			"Type": "Photograph",
+			"Type [ES]": "Fotografía",
+			"Tint": false
+		},
+		{
+			"File": "P000075_JIAXING YAN & MILES MURPHY_SAO PAULO_BRAZIL.jpeg",
+			"Code": "P00075",
+			"Type": "Photograph",
+			"Type [ES]": "Fotografía",
+			"Tint": false
+		},
+		{
+			"File": "P000076_JIAXING YAN & MILES MURPHY_SAO PAULO_BRAZIL.jpg",
+			"Code": "P00076",
+			"Type": "Photograph",
+			"Type [ES]": "Fotografía",
+			"Tint": false
+		},
+		{
+			"File": "P000077_JIAXING YAN & MILES MURPHY_SAO PAULO_BRAZIL.jpeg",
+			"Code": "P00077",
+			"Type": "Photograph",
+			"Type [ES]": "Fotografía",
+			"Tint": false
+		}
+	],
+	"City [ES]": "",
+	"City": "São Paulo",
+	"Thumbnail": "P00071",
+	"Date": "2025-04",
+	"Addressee": "Jiaxing Yan & Miles Murphy",
+	"Country": "Brazil",
+	"Type [ES]": "Carta, Fotografía",
+	"Type": "Letter, Photograph",
+	"Country [ES]": "Brasil"
+}

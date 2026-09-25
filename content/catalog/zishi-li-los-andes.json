@@ -1,0 +1,168 @@
+{
+	"Addressee [ES]": "",
+	"Archive": [
+		{
+			"File": "L00009_ZISHI LI_LOS ANDES_CHILE.jpg",
+			"Code": "L00009",
+			"Type": "Letter",
+			"Type [ES]": "Carta",
+			"Tint": true
+		},
+		{
+			"File": "P000044_ZISHI LI_LOS ANDES_CHILE.JPG",
+			"Code": "P00044",
+			"Type": "Photograph",
+			"Type [ES]": "Fotografía",
+			"Tint": false
+		},
+		{
+			"File": "P000045_ZISHI LI_LOS ANDES_CHILE.JPG",
+			"Code": "P00045",
+			"Type": "Photograph",
+			"Type [ES]": "Fotografía",
+			"Tint": false
+		},
+		{
+			"File": "P000046_ZISHI LI_LOS ANDES_CHILE.JPG",
+			"Code": "P00046",
+			"Type": "Photograph",
+			"Type [ES]": "Fotografía",
+			"Tint": false
+		},
+		{
+			"File": "P000047_ZISHI LI_LOS ANDES_CHILE.JPG",
+			"Code": "P00047",
+			"Type": "Photograph",
+			"Type [ES]": "Fotografía",
+			"Tint": false
+		},
+		{
+			"File": "P000048_ZISHI LI_LOS ANDES_CHILE.JPG",
+			"Code": "P00048",
+			"Type": "Photograph",
+			"Type [ES]": "Fotografía",
+			"Tint": false
+		},
+		{
+			"File": "P000049_ZISHI LI_LOS ANDES_CHILE.JPG",
+			"Code": "P00049",
+			"Type": "Photograph",
+			"Type [ES]": "Fotografía",
+			"Tint": false
+		},
+		{
+			"File": "P000050_ZISHI LI_LOS ANDES_CHILE.JPG",
+			"Code": "P00050",
+			"Type": "Photograph",
+			"Type [ES]": "Fotografía",
+			"Tint": false
+		},
+		{
+			"File": "P000051_ZISHI LI_LOS ANDES_CHILE.JPG",
+			"Code": "P00051",
+			"Type": "Photograph",
+			"Type [ES]": "Fotografía",
+			"Tint": false
+		},
+		{
+			"File": "P000052_ZISHI LI_LOS ANDES_CHILE.JPG",
+			"Code": "P00052",
+			"Type": "Photograph",
+			"Type [ES]": "Fotografía",
+			"Tint": false
+		},
+		{
+			"File": "P000053_ZISHI LI_LOS ANDES_CHILE.JPG",
+			"Code": "P00053",
+			"Type": "Photograph",
+			"Type [ES]": "Fotografía",
+			"Tint": false
+		},
+		{
+			"File": "P000054_ZISHI LI_LOS ANDES_CHILE.JPG",
+			"Code": "P00054",
+			"Type": "Photograph",
+			"Type [ES]": "Fotografía",
+			"Tint": false
+		},
+		{
+			"File": "P000055_ZISHI LI_LOS ANDES_CHILE.JPG",
+			"Code": "P00055",
+			"Type": "Photograph",
+			"Type [ES]": "Fotografía",
+			"Tint": false
+		},
+		{
+			"File": "P000056_ZISHI LI_LOS ANDES_CHILE.JPG",
+			"Code": "P00056",
+			"Type": "Photograph",
+			"Type [ES]": "Fotografía",
+			"Tint": false
+		},
+		{
+			"File": "P000057_ZISHI LI_LOS ANDES_CHILE.JPG",
+			"Code": "P00057",
+			"Type": "Photograph",
+			"Type [ES]": "Fotografía",
+			"Tint": false
+		},
+		{
+			"File": "P000058_ZISHI LI_LOS ANDES_CHILE.JPG",
+			"Code": "P00058",
+			"Type": "Photograph",
+			"Type [ES]": "Fotografía",
+			"Tint": false
+		},
+		{
+			"File": "P000059_ZISHI LI_LOS ANDES_CHILE.JPG",
+			"Code": "P00059",
+			"Type": "Photograph",
+			"Type [ES]": "Fotografía",
+			"Tint": false
+		},
+		{
+			"File": "P000060_ZISHI LI_LOS ANDES_CHILE.JPG",
+			"Code": "P00060",
+			"Type": "Photograph",
+			"Type [ES]": "Fotografía",
+			"Tint": false
+		},
+		{
+			"File": "P000061_ZISHI LI_LOS ANDES_CHILE.JPG",
+			"Code": "P00061",
+			"Type": "Photograph",
+			"Type [ES]": "Fotografía",
+			"Tint": false
+		},
+		{
+			"File": "P000061.1_ZISHI LI_LOS ANDES_CHILE.JPG",
+			"Code": "P00061.1",
+			"Type": "Photograph",
+			"Type [ES]": "Fotografía",
+			"Tint": false
+		},
+		{
+			"File": "P000061.2_ZISHI LI_LOS ANDES_CHILE.JPG",
+			"Code": "P00061.2",
+			"Type": "Photograph",
+			"Type [ES]": "Fotografía",
+			"Tint": false
+		},
+		{
+			"File": "P000061.3_ZISHI LI_LOS ANDES_CHILE.JPG",
+			"Code": "P00061.3",
+			"Type": "Photograph",
+			"Type [ES]": "Fotografía",
+			"Tint": false
+		}
+	],
+	"City [ES]": "",
+	"City": "Los Andes",
+	"Thumbnail": "P00059",
+	"Date": "2025-03",
+	"Addressee": "Zishi Li",
+	"Country": "Chile",
+	"Type [ES]": "Carta, Fotografía",
+	"Type": "Letter, Photograph",
+	"Country [ES]": ""
+}

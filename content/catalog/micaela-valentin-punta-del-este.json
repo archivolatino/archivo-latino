@@ -1,0 +1,70 @@
+{
+	"Addressee [ES]": "",
+	"Archive": [
+		{
+			"File": "L000013_MICAELA VALENTIN_ PUNTA DEL ESTE_URUGUAY.jpg",
+			"Code": "L00013",
+			"Type": "Letter",
+			"Type [ES]": "Carta",
+			"Tint": true
+		},
+		{
+			"File": "P000078_MICAELA VALENTIN_ PUNTA DEL ESTE_URUGUAY.jpg",
+			"Code": "P00078",
+			"Type": "Photograph",
+			"Type [ES]": "Fotografía",
+			"Tint": false
+		},
+		{
+			"File": "P000079_MICAELA VALENTIN_ PUNTA DEL ESTE_URUGUAY.jpg",
+			"Code": "P00079",
+			"Type": "Photograph",
+			"Type [ES]": "Fotografía",
+			"Tint": false
+		},
+		{
+			"File": "P000080_MICAELA VALENTIN_ PUNTA DEL ESTE_URUGUAY.jpg",
+			"Code": "P00080",
+			"Type": "Photograph",
+			"Type [ES]": "Fotografía",
+			"Tint": false
+		},
+		{
+			"File": "P000081_MICAELA VALENTIN_ PUNTA DEL ESTE_URUGUAY.jpg",
+			"Code": "P00081",
+			"Type": "Photograph",
+			"Type [ES]": "Fotografía",
+			"Tint": false
+		},
+		{
+			"File": "P000082_MICAELA VALENTIN_ PUNTA DEL ESTE_URUGUAY.jpg",
+			"Code": "P00082",
+			"Type": "Photograph",
+			"Type [ES]": "Fotografía",
+			"Tint": false
+		},
+		{
+			"File": "P000083_MICAELA VALENTIN_ PUNTA DEL ESTE_URUGUAY.jpg",
+			"Code": "P00083",
+			"Type": "Photograph",
+			"Type [ES]": "Fotografía",
+			"Tint": false
+		},
+		{
+			"File": "P000084_MICAELA VALENTIN_ PUNTA DEL ESTE_URUGUAY.jpg",
+			"Code": "P00084",
+			"Type": "Photograph",
+			"Type [ES]": "Fotografía",
+			"Tint": false
+		}
+	],
+	"City [ES]": "Punta Del Este",
+	"City": "Punta del Este",
+	"Thumbnail": "P00082",
+	"Date": "2025-03",
+	"Addressee": "Micaela Valentin",
+	"Country": "Uruguay",
+	"Type [ES]": "Carta, Fotografía",
+	"Type": "Letter, Photograph",
+	"Country [ES]": ""
+}

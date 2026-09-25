@@ -1,0 +1,91 @@
+{
+	"Addressee [ES]": "",
+	"Archive": [
+		{
+			"File": "L000010_ANDREA SM_BUENOS AIRES_ARGENTINA.jpg",
+			"Code": "L00010",
+			"Type": "Letter",
+			"Type [ES]": "Carta",
+			"Tint": true
+		},
+		{
+			"File": "L000011_ANDREA SM_BUENOS AIRES_ARGENTINA.jpg",
+			"Code": "L00011",
+			"Type": "Letter",
+			"Type [ES]": "Carta",
+			"Tint": true
+		},
+		{
+			"File": "P000062_ANDREA SM_BUENOS AIRES_ARGENTINA.JPG",
+			"Code": "P00062",
+			"Type": "Photograph",
+			"Type [ES]": "Fotografía",
+			"Tint": false
+		},
+		{
+			"File": "P000063_ANDREA SM_BUENOS AIRES_ARGENTINA.JPG",
+			"Code": "P00063",
+			"Type": "Photograph",
+			"Type [ES]": "Fotografía",
+			"Tint": false
+		},
+		{
+			"File": "P000064_ANDREA SM_BUENOS AIRES_ARGENTINA.JPG",
+			"Code": "P00064",
+			"Type": "Photograph",
+			"Type [ES]": "Fotografía",
+			"Tint": false
+		},
+		{
+			"File": "P000065_ANDREA SM_BUENOS AIRES_ARGENTINA.JPG",
+			"Code": "P00065",
+			"Type": "Photograph",
+			"Type [ES]": "Fotografía",
+			"Tint": false
+		},
+		{
+			"File": "P000066_ANDREA SM_BUENOS AIRES_ARGENTINA.JPG",
+			"Code": "P00066",
+			"Type": "Photograph",
+			"Type [ES]": "Fotografía",
+			"Tint": false
+		},
+		{
+			"File": "P000067_ANDREA SM_BUENOS AIRES_ARGENTINA.JPG",
+			"Code": "P00067",
+			"Type": "Photograph",
+			"Type [ES]": "Fotografía",
+			"Tint": false
+		},
+		{
+			"File": "P000068_ANDREA SM_BUENOS AIRES_ARGENTINA.JPG",
+			"Code": "P00068",
+			"Type": "Photograph",
+			"Type [ES]": "Fotografía",
+			"Tint": false
+		},
+		{
+			"File": "P000069_ANDREA SM_BUENOS AIRES_ARGENTINA.JPG",
+			"Code": "P00069",
+			"Type": "Photograph",
+			"Type [ES]": "Fotografía",
+			"Tint": false
+		},
+		{
+			"File": "P000070_ANDREA SM_BUENOS AIRES_ARGENTINA.jpg",
+			"Code": "P00070",
+			"Type": "Photograph",
+			"Type [ES]": "Fotografía",
+			"Tint": false
+		}
+	],
+	"City [ES]": "",
+	"City": "Buenos Aires",
+	"Thumbnail": "P00069",
+	"Date": "2025-02",
+	"Addressee": "Andrea Sánchez Moctezuma",
+	"Country": "Argentina",
+	"Type [ES]": "Carta, Fotografía",
+	"Type": "Letter, Photograph",
+	"Country [ES]": ""
+}

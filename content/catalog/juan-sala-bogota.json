@@ -1,0 +1,84 @@
+{
+	"Addressee [ES]": "",
+	"Archive": [
+		{
+			"File": "L000015_JUAN SALA_BOGOTA_COLOMBIA.webp",
+			"Code": "L00015",
+			"Type": "Letter",
+			"Type [ES]": "Carta",
+			"Tint": true
+		},
+		{
+			"File": "LR00001_JUAN SALA_BOGOTA_COLOMBIA.jpg",
+			"Code": "LR00001",
+			"Type": "Letter",
+			"Type [ES]": "Carta",
+			"Tint": true
+		},
+		{
+			"File": "LR00001a_JUAN SALA_BOGOTA_COLOMBIA.jpg",
+			"Code": "LR00001a",
+			"Type": "Letter",
+			"Type [ES]": "Carta",
+			"Tint": true
+		},
+		{
+			"File": "LR00001b_JUAN SALA_BOGOTA_COLOMBIA.jpg",
+			"Code": "LR00001b",
+			"Type": "Letter",
+			"Type [ES]": "Carta",
+			"Tint": true
+		},
+		{
+			"File": "LR00001c_JUAN SALA_BOGOTA_COLOMBIA.jpg",
+			"Code": "LR00001c",
+			"Type": "Letter",
+			"Type [ES]": "Carta",
+			"Tint": true
+		},
+		{
+			"File": "LR00001d_JUAN SALA_BOGOTA_COLOMBIA.jpg",
+			"Code": "LR00001d",
+			"Type": "Letter",
+			"Type [ES]": "Carta",
+			"Tint": true
+		},
+		{
+			"File": "P000091_JUAN SALA_BOGOTA_COLOMBIA.webp",
+			"Code": "P00091",
+			"Type": "Photograph",
+			"Type [ES]": "Fotografía",
+			"Tint": false
+		},
+		{
+			"File": "P000092_JUAN SALA_BOGOTA_COLOMBIA.webp",
+			"Code": "P00092",
+			"Type": "Photograph",
+			"Type [ES]": "Fotografía",
+			"Tint": false
+		},
+		{
+			"File": "P000093_JUAN SALA_BOGOTA_COLOMBIA.webp",
+			"Code": "P00093",
+			"Type": "Photograph",
+			"Type [ES]": "Fotografía",
+			"Tint": false
+		},
+		{
+			"File": "P000094_JUAN SALA_BOGOTA_COLOMBIA.webp",
+			"Code": "P00094",
+			"Type": "Photograph",
+			"Type [ES]": "Fotografía",
+			"Tint": false
+		}
+	],
+	"City [ES]": "Bogotá",
+	"City": "Bogota",
+	"Thumbnail": "P00091",
+	"Date": "2025-06",
+	"Addressee": "Juan Sala",
+	"Country": "Colombia",
+	"Type [ES]": "Carta, Fotografía",
+	"Type": "Letter, Photograph",
+	"Country [ES]": ""
+}

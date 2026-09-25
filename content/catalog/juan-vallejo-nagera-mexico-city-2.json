@@ -1,0 +1,21 @@
+{
+	"Addressee [ES]": "",
+	"Archive": [
+		{
+			"File": "L000076_JUAN VALLEJO NAGERA _CDMX_MEXICO.jpg",
+			"Code": "L00076",
+			"Type": "Letter",
+			"Type [ES]": "Carta",
+			"Tint": true
+		}
+	],
+	"City [ES]": "Ciudad de México",
+	"City": "Mexico City",
+	"Thumbnail": "L00076",
+	"Date": "2026-07",
+	"Addressee": "Juan Vallejo Nagera",
+	"Country": "Mexico",
+	"Type [ES]": "Carta",
+	"Type": "Letter",
+	"Country [ES]": "México"
+}

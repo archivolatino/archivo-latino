@@ -1,0 +1,21 @@
+{
+	"Addressee [ES]": "",
+	"Archive": [
+		{
+			"File": "L000021_MARINA SILVA_TEQUILA_MEXICO.webp",
+			"Code": "L00021",
+			"Type": "Letter",
+			"Type [ES]": "Carta",
+			"Tint": true
+		}
+	],
+	"City [ES]": "",
+	"City": "Tequila",
+	"Thumbnail": "L00021",
+	"Date": "2025-10",
+	"Addressee": "Marina Silva",
+	"Country": "Mexico",
+	"Type [ES]": "Carta",
+	"Type": "Letter",
+	"Country [ES]": "México"
+}

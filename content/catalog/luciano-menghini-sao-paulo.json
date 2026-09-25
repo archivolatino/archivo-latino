@@ -1,0 +1,98 @@
+{
+	"Addressee [ES]": "",
+	"Archive": [
+		{
+			"File": "L00004_LUCIANO MENGHINI_SAO PAULO_BRAZIL.webp",
+			"Code": "L00004",
+			"Type": "Letter",
+			"Type [ES]": "Carta",
+			"Tint": true
+		},
+		{
+			"File": "LR00004.1_LUCIANO MENGHINI_SAO PAULO_BRAZIL.jpg",
+			"Code": "LR00004.1",
+			"Type": "Letter",
+			"Type [ES]": "Carta",
+			"Tint": true
+		},
+		{
+			"File": "LR00004.1a_LUCIANO MENGHINI_SAO PAULO_BRAZIL.jpg",
+			"Code": "LR00004.1a",
+			"Type": "Letter",
+			"Type [ES]": "Carta",
+			"Tint": true
+		},
+		{
+			"File": "LR00004.1b_LUCIANO MENGHINI_SAO PAULO_BRAZIL.jpg",
+			"Code": "LR00004.1b",
+			"Type": "Letter",
+			"Type [ES]": "Carta",
+			"Tint": true
+		},
+		{
+			"File": "LR00004.1c_LUCIANO MENGHINI_SAO PAULO_BRAZIL.jpg",
+			"Code": "LR00004.1c",
+			"Type": "Letter",
+			"Type [ES]": "Carta",
+			"Tint": true
+		},
+		{
+			"File": "P000011_LUCIANO MENGHINI_SAO PAULO_BRAZIL.jpg",
+			"Code": "P00011",
+			"Type": "Photograph",
+			"Type [ES]": "Fotografía",
+			"Tint": false
+		},
+		{
+			"File": "P000012_LUCIANO MENGHINI_SAO PAULO_BRAZIL.png",
+			"Code": "P00012",
+			"Type": "Photograph",
+			"Type [ES]": "Fotografía",
+			"Tint": false
+		},
+		{
+			"File": "P000013_LUCIANO MENGHINI_SAO PAULO_BRAZIL.JPG",
+			"Code": "P00013",
+			"Type": "Photograph",
+			"Type [ES]": "Fotografía",
+			"Tint": false
+		},
+		{
+			"File": "P000014_LUCIANO MENGHINI_SAO PAULO_BRAZIL.JPG",
+			"Code": "P00014",
+			"Type": "Photograph",
+			"Type [ES]": "Fotografía",
+			"Tint": false
+		},
+		{
+			"File": "P000015_LUCIANO MENGHINI_SAO PAULO_BRAZIL.JPG",
+			"Code": "P00015",
+			"Type": "Photograph",
+			"Type [ES]": "Fotografía",
+			"Tint": false
+		},
+		{
+			"File": "P000016_LUCIANO MENGHINI_SAO PAULO_BRAZIL.JPG",
+			"Code": "P00016",
+			"Type": "Photograph",
+			"Type [ES]": "Fotografía",
+			"Tint": false
+		},
+		{
+			"File": "P000017_LUCIANO MENGHINI_SAO PAULO_BRAZIL.JPG",
+			"Code": "P00017",
+			"Type": "Photograph",
+			"Type [ES]": "Fotografía",
+			"Tint": false
+		}
+	],
+	"City [ES]": "",
+	"City": "São Paulo",
+	"Thumbnail": "P00016",
+	"Date": "2024-12",
+	"Addressee": "Luciano Menghini",
+	"Country": "Brazil",
+	"Type [ES]": "Carta, Fotografía",
+	"Type": "Letter, Photograph",
+	"Country [ES]": "Brasil"
+}

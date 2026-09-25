@@ -1,0 +1,21 @@
+{
+	"Addressee [ES]": "",
+	"Archive": [
+		{
+			"File": "L000029_GOSBINDA_VIZARRETEA_CDMX_MEXICO.jpg",
+			"Code": "L00029",
+			"Type": "Letter",
+			"Type [ES]": "Carta",
+			"Tint": true
+		}
+	],
+	"City [ES]": "Puerto Escondido",
+	"City": "Puerto escondido",
+	"Thumbnail": "L00029",
+	"Date": "2025-06",
+	"Addressee": "Gosbinda Vizarretea",
+	"Country": "Mexico",
+	"Type [ES]": "Carta",
+	"Type": "Letter",
+	"Country [ES]": "México"
+}

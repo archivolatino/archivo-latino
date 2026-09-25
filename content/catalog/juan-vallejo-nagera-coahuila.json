@@ -1,0 +1,105 @@
+{
+	"Addressee [ES]": "",
+	"Archive": [
+		{
+			"File": "L00001_JUAN VALLEJO NAGERA_COAHUILA_MEXICO.jpg",
+			"Code": "L00001",
+			"Type": "Letter",
+			"Type [ES]": "Carta",
+			"Tint": true
+		},
+		{
+			"File": "LR00001_JUAN VALLEJO NAGERA_COAHUILA_MEXICO.jpg",
+			"Code": "LR00001",
+			"Type": "Letter",
+			"Type [ES]": "Carta",
+			"Tint": true
+		},
+		{
+			"File": "LR00001c_JUAN VALLEJO NAGERA_COAHUILA_MEXICO.jpg",
+			"Code": "LR00001c",
+			"Type": "Letter",
+			"Type [ES]": "Carta",
+			"Tint": true
+		},
+		{
+			"File": "LR00001b_JUAN VALLEJO NAGERA_COAHUILA_MEXICO.jpg",
+			"Code": "LR00001b",
+			"Type": "Letter",
+			"Type [ES]": "Carta",
+			"Tint": true
+		},
+		{
+			"File": "LR00001a_JUAN VALLEJO NAGERA_COAHUILA_MEXICO.jpg",
+			"Code": "LR00001a",
+			"Type": "Letter",
+			"Type [ES]": "Carta",
+			"Tint": true
+		},
+		{
+			"File": "LR00002_JUAN VALLEJO NAGERA_COAHUILA_MEXICO.jpg",
+			"Code": "LR00002",
+			"Type": "Letter",
+			"Type [ES]": "Carta",
+			"Tint": true
+		},
+		{
+			"File": "LR00003_JUAN VALLEJO NAGERA_COAHUILA_MEXICO.jpg",
+			"Code": "LR00003",
+			"Type": "Letter",
+			"Type [ES]": "Carta",
+			"Tint": true
+		},
+		{
+			"File": "LR00004_JUAN VALLEJO NAGERA_COAHUILA_MEXICO.jpg",
+			"Code": "LR00004",
+			"Type": "Letter",
+			"Type [ES]": "Carta",
+			"Tint": true
+		},
+		{
+			"File": "LR00005_JUAN VALLEJO NAGERA_COAHUILA_MEXICO.jpg",
+			"Code": "LR00005",
+			"Type": "Letter",
+			"Type [ES]": "Carta",
+			"Tint": true
+		},
+		{
+			"File": "P00001_JUAN VALLEJO NAGERA_COAHUILA_MEXICO.jpg",
+			"Code": "P00001",
+			"Type": "Photograph",
+			"Type [ES]": "Fotografía",
+			"Tint": false
+		},
+		{
+			"File": "P00002_JUAN VALLEJO NAGERA_COAHUILA_MEXICO.jpg",
+			"Code": "P00002",
+			"Type": "Photograph",
+			"Type [ES]": "Fotografía",
+			"Tint": false
+		},
+		{
+			"File": "P00003_JUAN VALLEJO NAGERA_COAHUILA_MEXICO.jpg",
+			"Code": "P00003",
+			"Type": "Photograph",
+			"Type [ES]": "Fotografía",
+			"Tint": false
+		},
+		{
+			"File": "P00004_JUAN VALLEJO NAGERA_COAHUILA_MEXICO.jpg",
+			"Code": "P00004",
+			"Type": "Photograph",
+			"Type [ES]": "Fotografía",
+			"Tint": false
+		}
+	],
+	"City [ES]": "",
+	"City": "Coahuila",
+	"Thumbnail": "P00001",
+	"Date": "2025-06",
+	"Addressee": "Juan Vallejo Nagera",
+	"Country": "Mexico",
+	"Type [ES]": "Carta, Fotografía",
+	"Type": "Letter, Photograph",
+	"Country [ES]": "México"
+}

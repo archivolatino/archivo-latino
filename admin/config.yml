@@ -1,0 +1,347 @@
+# Decap CMS, writing straight back into the json the build already reads.
+#
+# Every field a file holds has to be named here: anything the cms does not know about is dropped the
+# next time an editor saves that file. Add the field here first, then the data.
+#
+# A field ending in [ES] is the spanish copy of the one above it. Leaving it empty is normal. The
+# build falls back to the english.
+#
+# Longer texts are rich text fields that hold paragraphs and links and nothing else. Enter starts a
+# new paragraph and Shift+Enter breaks a line inside one.
+
+backend:
+  name: git-gateway
+  branch: main
+
+# saving keeps a change as a draft, on a branch of its own, so several pages can be worked on at once
+# and each published when it is ready, from the workflow tab
+publish_mode: editorial_workflow
+
+media_folder: assets/uploads
+public_folder: /assets/uploads
+
+site_url: https://archivolatino.org
+display_url: https://archivolatino.org
+
+# the catalog, the events and the journal are folders with a file for each entry, event and issue,
+# listed straight from the sidebar. the pages that stand alone, and the intro to the events page,
+# are files of their own under page settings. each is also the name its preview in admin/index.html is
+# registered under
+collections:
+  # ------------------------------------------------------------------ catalog
+  - name: catalog
+    label: Catalog
+    label_singular: Entry
+    description: One entry per addressee, each holding the pictures sent with it.
+    folder: content/catalog
+    extension: json
+    format: json
+    create: true
+    identifier_field: Addressee
+    slug: "{{Addressee}}-{{City}}"
+    summary: "{{Addressee}}, {{City}}, {{Country}} ({{Date}})"
+    sortable_fields:
+      - {field: Date, label: Date, default_sort: desc}
+      - {field: Addressee, label: Addressee}
+      - {field: City, label: City}
+      - {field: Country, label: Country}
+    fields:
+      - {label: Addressee, name: Addressee, widget: string}
+      - {label: "Addressee [ES]", name: "Addressee [ES]", widget: string, required: false}
+      - {label: City, name: City, widget: string}
+      - {label: "City [ES]", name: "City [ES]", widget: string, required: false}
+      - {label: Country, name: Country, widget: string}
+      - {label: "Country [ES]", name: "Country [ES]", widget: string, required: false}
+      - label: Type
+        name: Type
+        widget: string
+        hint: "Every kind of thing in the entry, separated by commas: Letter, Photograph"
+      - {label: "Type [ES]", name: "Type [ES]", widget: string, required: false}
+      - label: Date
+        name: Date
+        widget: datetime
+        format: "YYYY-MM"
+        date_format: "YYYY-MM"
+        time_format: false
+        hint: The month it was received. The index opens on this, newest first.
+      - label: Batch thumbnail
+        name: Thumbnail
+        widget: string
+        required: false
+        hint: The code of the picture below that stands for this batch in the list and the image view. Leave it empty to use the first one.
+      - label: Archive
+        name: Archive
+        widget: list
+        label_singular: Picture
+        summary: "{{fields.Code}}: {{fields.Type}}"
+        fields:
+          - {label: File, name: File, widget: image}
+          - label: Code
+            name: Code
+            widget: string
+            hint: Unique across the whole archive. It is what a link to this picture carries.
+          - {label: Type, name: Type, widget: string, required: false}
+          - {label: "Type [ES]", name: "Type [ES]", widget: string, required: false}
+          - label: Paper tint
+            name: Tint
+            widget: boolean
+            default: false
+            required: false
+            hint: Lays the yellow paper tint over this picture. For ink on paper, not photographs.
+
+  # ------------------------------------------------------------------- events
+  - name: events
+    label: Events
+    label_singular: Event
+    folder: content/events
+    extension: json
+    format: json
+    create: true
+    identifier_field: Name
+    slug: "{{Name}}"
+    summary: "{{Type}}: {{Name}} ({{Dates.Start}})"
+    sortable_fields:
+      - {field: Dates.Start, label: Date, default_sort: desc}
+      - {field: Name, label: Name}
+    fields:
+      - label: Type
+        name: Type
+        widget: string
+        hint: "Exhibition, Open Call, Workshop. It heads the listing and names the link that opens it."
+      - {label: "Type [ES]", name: "Type [ES]", widget: string, required: false}
+      - {label: Name, name: Name, widget: string}
+      - {label: "Name [ES]", name: "Name [ES]", widget: string, required: false}
+      - label: Dates
+        name: Dates
+        widget: object
+        hint: "A start date alone reads as a single day. A start and an end read as the days it is on view, or for an open call, the days it opens and closes."
+        fields:
+          - label: Start
+            name: Start
+            widget: datetime
+            format: "YYYY-MM-DD"
+            date_format: "YYYY-MM-DD"
+            time_format: false
+            hint: The day it happens, opens or goes on view. The listing and the calendar are sorted by it.
+          - label: End
+            name: End
+            widget: datetime
+            required: false
+            default: ""
+            format: "YYYY-MM-DD"
+            date_format: "YYYY-MM-DD"
+            time_format: false
+            hint: The last day, for anything that runs longer than one.
+          - label: Reception
+            name: Reception
+            widget: datetime
+            required: false
+            default: ""
+            format: "YYYY-MM-DD"
+            date_format: "YYYY-MM-DD"
+            time_format: false
+          - {label: Reception time, name: Reception Time, widget: string, required: false}
+      - {label: Collaborator, name: Collaborator, widget: string, required: false}
+      - {label: "Collaborator [ES]", name: "Collaborator [ES]", widget: string, required: false}
+      - {label: Location, name: Location, widget: string, required: false}
+      - {label: "Location [ES]", name: "Location [ES]", widget: string, required: false}
+      - label: Request
+        name: Request
+        widget: string
+        required: false
+        hint: What an open call asks for. It is set on the dotted paper.
+      - {label: "Request [ES]", name: "Request [ES]", widget: string, required: false}
+      - {label: Submission link, name: Submission Link, widget: string, required: false}
+      - label: Thumbnail
+        name: Thumbnail
+        widget: object
+        required: false
+        collapsed: true
+        fields:
+          - {label: File, name: File, widget: image, required: false}
+      - {label: Blurb, name: Blurb, widget: markdown, modes: [rich_text], buttons: [link], editor_components: [], required: false}
+      - {label: "Blurb [ES]", name: "Blurb [ES]", widget: markdown, modes: [rich_text], buttons: [link], editor_components: [], required: false}
+      - {label: Read more, name: Description, widget: markdown, modes: [rich_text], buttons: [link], editor_components: [], required: false, hint: Folded away behind “Read more”.}
+      - {label: "Read more [ES]", name: "Description [ES]", widget: markdown, modes: [rich_text], buttons: [link], editor_components: [], required: false}
+      - label: Show gallery?
+        name: View
+        widget: boolean
+        default: false
+        required: false
+        hint: Gives the event a gallery of pictures, opened from the listing.
+      - label: Gallery images
+        name: Images
+        widget: list
+        required: false
+        label_singular: Picture
+        fields:
+          - {label: File, name: File, widget: image}
+      - label: Archived
+        name: Archived
+        widget: boolean
+        default: false
+        required: false
+        hint: Kept here but taken off the events page and the calendar. A direct link to its gallery still works.
+
+  # ------------------------------------------------------------------ journal
+  - name: journal
+    label: Journal
+    label_singular: Issue
+    folder: content/journal
+    extension: json
+    format: json
+    create: true
+    identifier_field: Name
+    slug: "issue-{{Number}}"
+    summary: "Volume {{Number}}: {{Name}}"
+    sortable_fields:
+      - {field: Number, label: Number, default_sort: desc}
+    fields:
+      - {label: Number, name: Number, widget: number, value_type: int, min: 1}
+      - label: Draft
+        name: Draft
+        widget: boolean
+        default: false
+        required: false
+        hint: Kept here but left off the site altogether. The preview still shows it.
+      - {label: Name, name: Name, widget: string}
+      - {label: "Name [ES]", name: "Name [ES]", widget: string, required: false}
+      - {label: Publication, name: Publication, widget: string, required: false, hint: The line above the volume in the editor’s note.}
+      - {label: "Publication [ES]", name: "Publication [ES]", widget: string, required: false}
+      - {label: Season, name: Season, widget: string, required: false, hint: "When the volume came out, as it should read: Fall 2026."}
+      - {label: "Season [ES]", name: "Season [ES]", widget: string, required: false}
+      - label: Dear reader
+        name: Intro
+        widget: markdown
+        modes: [rich_text]
+        buttons: [link]
+        editor_components: []
+        hint: Starts with the greeting as a paragraph of its own. It changes with the issue.
+      - {label: "Dear reader [ES]", name: "Intro [ES]", widget: markdown, modes: [rich_text], buttons: [link], editor_components: [], required: false}
+      - {label: Editor’s note, name: Note, widget: markdown, modes: [rich_text], buttons: [link], editor_components: []}
+      - {label: "Editor’s note [ES]", name: "Note [ES]", widget: markdown, modes: [rich_text], buttons: [link], editor_components: [], required: false}
+      - {label: Read more, name: More, widget: markdown, modes: [rich_text], buttons: [link], editor_components: [], required: false, hint: Folded away behind “Read more”.}
+      - {label: "Read more [ES]", name: "More [ES]", widget: markdown, modes: [rich_text], buttons: [link], editor_components: [], required: false}
+      - label: Articles
+        name: Articles
+        widget: list
+        label_singular: Article
+        summary: "{{fields.Type}}: {{fields.Title}}"
+        fields:
+          - {label: Type, name: Type, widget: string}
+          - {label: "Type [ES]", name: "Type [ES]", widget: string, required: false}
+          - {label: Title, name: Title, widget: string}
+          - {label: "Title [ES]", name: "Title [ES]", widget: string, required: false}
+          - label: Date
+            name: Date
+            widget: string
+            required: false
+            hint: A full date written 2026-09-28 is set out in the reader’s own language. Anything else is printed as you type it.
+          - {label: Blurb, name: Blurb, widget: text, required: false}
+          - {label: "Blurb [ES]", name: "Blurb [ES]", widget: text, required: false}
+          - label: Draft
+            name: Draft
+            widget: boolean
+            default: false
+            required: false
+            hint: Still set out on the journal page and among the rest of its issue, but nothing links to it. It can only be opened by its own address.
+          - label: Credits
+            name: Credits
+            widget: list
+            required: false
+            label_singular: Author
+            summary: "{{fields.Name}}"
+            fields:
+              - {label: Name, name: Name, widget: string}
+              - {label: Bio, name: Bio, widget: text, required: false}
+              - {label: "Bio [ES]", name: "Bio [ES]", widget: text, required: false}
+          - label: Body
+            name: Body
+            widget: markdown
+            modes: [rich_text]
+            buttons: [link]
+            editor_components: [figure]
+            hint: "Write {{note: the annotation}} inside a sentence where its number should sit. Pictures come from the Image block in the + menu."
+          - label: "Body [ES]"
+            name: "Body [ES]"
+            widget: markdown
+            required: false
+            modes: [rich_text]
+            buttons: [link]
+            editor_components: [figure]
+
+  # -------------------------------------------------------------------- pages
+  - name: pages
+    label: Page Settings
+    files:
+      - name: about
+        label: About page
+        file: content/about.json
+        fields:
+          - label: What
+            name: What
+            widget: object
+            fields:
+              - {label: Intro, name: Intro, widget: markdown, modes: [rich_text], buttons: [link], editor_components: []}
+              - {label: "Intro [ES]", name: "Intro [ES]", widget: markdown, modes: [rich_text], buttons: [link], editor_components: [], required: false}
+              - {label: Read more, name: More, widget: markdown, modes: [rich_text], buttons: [link], editor_components: [], required: false, hint: Folded away behind “Read more”.}
+              - {label: "Read more [ES]", name: "More [ES]", widget: markdown, modes: [rich_text], buttons: [link], editor_components: [], required: false}
+          - label: Image
+            name: Image
+            widget: object
+            hint: The picture at the foot of the page.
+            fields:
+              - {label: File, name: File, widget: image}
+          - label: Team
+            name: Team
+            widget: object
+            fields:
+              - {label: Intro, name: Intro, widget: markdown, modes: [rich_text], buttons: [link], editor_components: [], required: false}
+              - {label: "Intro [ES]", name: "Intro [ES]", widget: markdown, modes: [rich_text], buttons: [link], editor_components: [], required: false}
+              - label: Members
+                name: Members
+                widget: list
+                label_singular: Member
+                summary: "{{fields.Name}}, {{fields.Role}}"
+                fields:
+                  - {label: Name, name: Name, widget: string}
+                  - {label: Role, name: Role, widget: string, required: false}
+                  - {label: "Role [ES]", name: "Role [ES]", widget: string, required: false}
+                  - {label: Bio, name: Bio, widget: markdown, modes: [rich_text], buttons: [link], editor_components: [], required: false}
+                  - {label: "Bio [ES]", name: "Bio [ES]", widget: markdown, modes: [rich_text], buttons: [link], editor_components: [], required: false}
+          - label: Contact
+            name: Contact
+            widget: object
+            fields:
+              - {label: Email, name: Email, widget: string}
+              - {label: Instagram, name: Instagram, widget: string, hint: "The handle as it is written, e.g. @archivo.latino"}
+              - {label: Instagram URL, name: Instagram URL, widget: string}
+          - label: Legal
+            name: Legal
+            widget: object
+            fields:
+              - label: Policies
+                name: Policies
+                widget: list
+                label_singular: Policy
+                summary: "{{fields.Label}}"
+                hint: Each one opens in a panel on the about page.
+                fields:
+                  - {label: Label, name: Label, widget: string}
+                  - {label: "Label [ES]", name: "Label [ES]", widget: string, required: false}
+                  - {label: Text, name: Text, widget: markdown, modes: [rich_text], buttons: [link], editor_components: []}
+                  - {label: "Text [ES]", name: "Text [ES]", widget: markdown, modes: [rich_text], buttons: [link], editor_components: [], required: false}
+
+      - name: events-intro
+        label: Events page
+        file: content/events.json
+        description: The greeting and introduction at the top of the events page.
+        fields:
+          - label: Intro
+            name: Intro
+            widget: markdown
+            modes: [rich_text]
+            buttons: [link]
+            editor_components: []
+            hint: Starts with the greeting as a paragraph of its own.
+          - {label: "Intro [ES]", name: "Intro [ES]", widget: markdown, modes: [rich_text], buttons: [link], editor_components: [], required: false}

@@ -1,0 +1,84 @@
+{
+	"Addressee [ES]": "",
+	"Archive": [
+		{
+			"File": "L00007_TANIA OJEDA_HOLBOX_MEXICO.jpg",
+			"Code": "L00007",
+			"Type": "Letter",
+			"Type [ES]": "Carta",
+			"Tint": true
+		},
+		{
+			"File": "P000031_TANIA OJEDA_HOLBOX_MEXICO.jpg",
+			"Code": "P00031",
+			"Type": "Photograph",
+			"Type [ES]": "Fotografía",
+			"Tint": false
+		},
+		{
+			"File": "P000032_TANIA OJEDA_HOLBOX_MEXICO.jpg",
+			"Code": "P00032",
+			"Type": "Photograph",
+			"Type [ES]": "Fotografía",
+			"Tint": false
+		},
+		{
+			"File": "P000033_TANIA OJEDA_HOLBOX_MEXICO.jpg",
+			"Code": "P00033",
+			"Type": "Photograph",
+			"Type [ES]": "Fotografía",
+			"Tint": false
+		},
+		{
+			"File": "P000034_TANIA OJEDA_HOLBOX_MEXICO.jpg",
+			"Code": "P00034",
+			"Type": "Photograph",
+			"Type [ES]": "Fotografía",
+			"Tint": false
+		},
+		{
+			"File": "P000035_TANIA OJEDA_HOLBOX_MEXICO.jpg",
+			"Code": "P00035",
+			"Type": "Photograph",
+			"Type [ES]": "Fotografía",
+			"Tint": false
+		},
+		{
+			"File": "P000036_TANIA OJEDA_HOLBOX_MEXICO.jpg",
+			"Code": "P00036",
+			"Type": "Photograph",
+			"Type [ES]": "Fotografía",
+			"Tint": false
+		},
+		{
+			"File": "P000037_TANIA OJEDA_HOLBOX_MEXICO.jpg",
+			"Code": "P00037",
+			"Type": "Photograph",
+			"Type [ES]": "Fotografía",
+			"Tint": false
+		},
+		{
+			"File": "P000038_TANIA OJEDA_HOLBOX_MEXICO.jpg",
+			"Code": "P00038",
+			"Type": "Photograph",
+			"Type [ES]": "Fotografía",
+			"Tint": false
+		},
+		{
+			"File": "P000039_TANIA OJEDA_HOLBOX_MEXICO.jpg",
+			"Code": "P00039",
+			"Type": "Photograph",
+			"Type [ES]": "Fotografía",
+			"Tint": false
+		}
+	],
+	"City [ES]": "",
+	"City": "Holbox",
+	"Thumbnail": "P00031",
+	"Date": "2025-07",
+	"Addressee": "Tania Ojeda",
+	"Country": "Mexico",
+	"Type [ES]": "Carta, Fotografía",
+	"Type": "Letter, Photograph",
+	"Country [ES]": "México"
+}

@@ -1,0 +1,56 @@
+{
+	"Addressee [ES]": "",
+	"Archive": [
+		{
+			"File": "L000018_NATALIA_ARAOZ_COYOACAN_MEXICO.jpg",
+			"Code": "L00018",
+			"Type": "Letter",
+			"Type [ES]": "Carta",
+			"Tint": true
+		},
+		{
+			"File": "P0000114_NATALIA_ARAOZ_COYOACAN_MEXICO.jpeg",
+			"Code": "P00114",
+			"Type": "Photograph",
+			"Type [ES]": "Fotografía",
+			"Tint": false
+		},
+		{
+			"File": "P0000115_NATALIA_ARAOZ_COYOACAN_MEXICO.jpeg",
+			"Code": "P00115",
+			"Type": "Photograph",
+			"Type [ES]": "Fotografía",
+			"Tint": false
+		},
+		{
+			"File": "P0000116_NATALIA_ARAOZ_COYOACAN_MEXICO.jpeg",
+			"Code": "P00116",
+			"Type": "Photograph",
+			"Type [ES]": "Fotografía",
+			"Tint": false
+		},
+		{
+			"File": "P0000117_NATALIA_ARAOZ_COYOACAN_MEXICO.jpeg",
+			"Code": "P00117",
+			"Type": "Photograph",
+			"Type [ES]": "Fotografía",
+			"Tint": false
+		},
+		{
+			"File": "P0000118_NATALIA_ARAOZ_COYOACAN_MEXICO.jpeg",
+			"Code": "P00118",
+			"Type": "Photograph",
+			"Type [ES]": "Fotografía",
+			"Tint": false
+		}
+	],
+	"City [ES]": "Coyoacán",
+	"City": "Coyoacan",
+	"Thumbnail": "P00115",
+	"Date": "2025-07",
+	"Addressee": "Natalia Araoz",
+	"Country": "Mexico",
+	"Type [ES]": "Carta, Fotografía",
+	"Type": "Letter, Photograph",
+	"Country [ES]": "México"
+}

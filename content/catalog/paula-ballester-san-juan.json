@@ -1,0 +1,21 @@
+{
+	"Addressee [ES]": "",
+	"Archive": [
+		{
+			"File": "L000036_PAULA_SAN JUAN_PUERTO RICO.webp",
+			"Code": "L00036",
+			"Type": "Letter",
+			"Type [ES]": "Carta",
+			"Tint": true
+		}
+	],
+	"City [ES]": "",
+	"City": "San Juan",
+	"Thumbnail": "L00036",
+	"Date": "2025-12",
+	"Addressee": "Paula Ballester",
+	"Country": "Puerto Rico",
+	"Type [ES]": "Carta",
+	"Type": "Letter",
+	"Country [ES]": ""
+}

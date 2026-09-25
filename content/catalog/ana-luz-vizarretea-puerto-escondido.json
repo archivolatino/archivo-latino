@@ -1,0 +1,21 @@
+{
+	"Addressee [ES]": "",
+	"Archive": [
+		{
+			"File": "L000026_ANA LUZ VIZARRETEA_PUERTO ESCONDIDO_MEXICO.jpg",
+			"Code": "L00026",
+			"Type": "Letter",
+			"Type [ES]": "Carta",
+			"Tint": true
+		}
+	],
+	"City [ES]": "",
+	"City": "Puerto Escondido",
+	"Thumbnail": "L00026",
+	"Date": "2025-06",
+	"Addressee": "Ana Luz Vizarretea",
+	"Country": "Mexico",
+	"Type [ES]": "Carta",
+	"Type": "Letter",
+	"Country [ES]": "México"
+}

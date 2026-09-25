@@ -1,0 +1,35 @@
+{
+	"Addressee [ES]": "",
+	"Archive": [
+		{
+			"File": "P0000293_INIGO VALLEJO_CDMX_MEXICO.jpeg",
+			"Code": "P00293",
+			"Type": "Photograph",
+			"Type [ES]": "Fotografía",
+			"Tint": false
+		},
+		{
+			"File": "P0000294_INIGO VALLEJO_CDMX_MEXICO.jpeg",
+			"Code": "P00294",
+			"Type": "Photograph",
+			"Type [ES]": "Fotografía",
+			"Tint": false
+		},
+		{
+			"File": "P0000295_INIGO VALLEJO_CDMX_MEXICO.jpeg",
+			"Code": "P00295",
+			"Type": "Photograph",
+			"Type [ES]": "Fotografía",
+			"Tint": false
+		}
+	],
+	"City [ES]": "Ciudad de México",
+	"City": "Mexico City",
+	"Thumbnail": "P00295",
+	"Date": "2026-06",
+	"Addressee": "Íñigo Vallejo",
+	"Country": "Mexico",
+	"Type [ES]": "Fotografía",
+	"Type": "Photograph",
+	"Country [ES]": "México"
+}

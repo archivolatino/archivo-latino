@@ -1,0 +1,21 @@
+{
+	"Addressee [ES]": "",
+	"Archive": [
+		{
+			"File": "L000038_MARIANA_CARACAS_VENEZUELA.jpg",
+			"Code": "L00038",
+			"Type": "Letter",
+			"Type [ES]": "Carta",
+			"Tint": true
+		}
+	],
+	"City [ES]": "",
+	"City": "Caracas",
+	"Thumbnail": "L00038",
+	"Date": "2025-12",
+	"Addressee": "Mariana Alavarez",
+	"Country": "Venezuela",
+	"Type [ES]": "Carta",
+	"Type": "Letter",
+	"Country [ES]": ""
+}

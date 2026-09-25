@@ -1,0 +1,105 @@
+{
+	"Addressee [ES]": "",
+	"Archive": [
+		{
+			"File": "L000016_DIEGO ALFONZO CALEYA_TEQUILA_MEXICO.jpg",
+			"Code": "L00016",
+			"Type": "Letter",
+			"Type [ES]": "Carta",
+			"Tint": true
+		},
+		{
+			"File": "P000095_DIEGO ALFONZO CALEYA_TEQUILA_MEXICO.jpeg",
+			"Code": "P00095",
+			"Type": "Photograph",
+			"Type [ES]": "Fotografía",
+			"Tint": false
+		},
+		{
+			"File": "P000096_DIEGO ALFONZO CALEYA_TEQUILA_MEXICO.jpeg",
+			"Code": "P00096",
+			"Type": "Photograph",
+			"Type [ES]": "Fotografía",
+			"Tint": false
+		},
+		{
+			"File": "P000097_DIEGO ALFONZO CALEYA_TEQUILA_MEXICO.jpeg",
+			"Code": "P00097",
+			"Type": "Photograph",
+			"Type [ES]": "Fotografía",
+			"Tint": false
+		},
+		{
+			"File": "P000098_DIEGO ALFONZO CALEYA_TEQUILA_MEXICO.jpeg",
+			"Code": "P00098",
+			"Type": "Photograph",
+			"Type [ES]": "Fotografía",
+			"Tint": false
+		},
+		{
+			"File": "P000099_DIEGO ALFONZO CALEYA_TEQUILA_MEXICO.jpeg",
+			"Code": "P00099",
+			"Type": "Photograph",
+			"Type [ES]": "Fotografía",
+			"Tint": false
+		},
+		{
+			"File": "P0000100_DIEGO ALFONZO CALEYA_TEQUILA_MEXICO.jpeg",
+			"Code": "P00100",
+			"Type": "Photograph",
+			"Type [ES]": "Fotografía",
+			"Tint": false
+		},
+		{
+			"File": "P0000101_DIEGO ALFONZO CALEYA_TEQUILA_MEXICO.jpeg",
+			"Code": "P00101",
+			"Type": "Photograph",
+			"Type [ES]": "Fotografía",
+			"Tint": false
+		},
+		{
+			"File": "P0000102_DIEGO ALFONZO CALEYA_TEQUILA_MEXICO.jpeg",
+			"Code": "P00102",
+			"Type": "Photograph",
+			"Type [ES]": "Fotografía",
+			"Tint": false
+		},
+		{
+			"File": "P0000103_DIEGO ALFONZO CALEYA_TEQUILA_MEXICO.jpeg",
+			"Code": "P00103",
+			"Type": "Photograph",
+			"Type [ES]": "Fotografía",
+			"Tint": false
+		},
+		{
+			"File": "P0000104_DIEGO ALFONZO CALEYA_TEQUILA_MEXICO.jpeg",
+			"Code": "P00104",
+			"Type": "Photograph",
+			"Type [ES]": "Fotografía",
+			"Tint": false
+		},
+		{
+			"File": "P0000105_DIEGO ALFONZO CALEYA_TEQUILA_MEXICO.jpeg",
+			"Code": "P00105",
+			"Type": "Photograph",
+			"Type [ES]": "Fotografía",
+			"Tint": false
+		},
+		{
+			"File": "P0000106_DIEGO ALFONZO CALEYA_TEQUILA_MEXICO.jpeg",
+			"Code": "P00106",
+			"Type": "Photograph",
+			"Type [ES]": "Fotografía",
+			"Tint": false
+		}
+	],
+	"City [ES]": "",
+	"City": "Tequila",
+	"Thumbnail": "P00102",
+	"Date": "2025-06",
+	"Addressee": "Diego Alfonzo Caleya",
+	"Country": "Mexico",
+	"Type [ES]": "Carta, Fotografía",
+	"Type": "Letter, Photograph",
+	"Country [ES]": "México"
+}

@@ -1,0 +1,28 @@
+{
+	"Addressee [ES]": "",
+	"Archive": [
+		{
+			"File": "L000023_ANA DURAN_QUITO_ECUADOR.jpg",
+			"Code": "L00023",
+			"Type": "Letter",
+			"Type [ES]": "Carta",
+			"Tint": true
+		},
+		{
+			"File": "P0000122_ANA DURAN_QUITO_ECUADOR.jpeg",
+			"Code": "P00122",
+			"Type": "Photograph",
+			"Type [ES]": "Fotografía",
+			"Tint": false
+		}
+	],
+	"City [ES]": "",
+	"City": "Quito",
+	"Thumbnail": "P00122",
+	"Date": "2025-02",
+	"Addressee": "Ana Duran",
+	"Country": "Ecuador",
+	"Type [ES]": "Carta, Fotografía",
+	"Type": "Letter, Photograph",
+	"Country [ES]": ""
+}

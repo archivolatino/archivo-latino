@@ -1,0 +1,98 @@
+{
+	"Addressee [ES]": "",
+	"Archive": [
+		{
+			"File": "L00041_ORLANDO PORRAS_LA HABANA_CUBA.jpeg",
+			"Code": "L00041",
+			"Type": "Letter",
+			"Type [ES]": "Carta",
+			"Tint": true
+		},
+		{
+			"File": "P0000124_ORLANDO PORRAS_LA HABANA_CUBA.JPG",
+			"Code": "P00124",
+			"Type": "Photograph",
+			"Type [ES]": "Fotografía",
+			"Tint": false
+		},
+		{
+			"File": "P0000125_ORLANDO PORRAS_LA HABANA_CUBA.jpeg",
+			"Code": "P00125",
+			"Type": "Photograph",
+			"Type [ES]": "Fotografía",
+			"Tint": false
+		},
+		{
+			"File": "P0000126_ORLANDO PORRAS_LA HABANA_CUBA.jpeg",
+			"Code": "P00126",
+			"Type": "Photograph",
+			"Type [ES]": "Fotografía",
+			"Tint": false
+		},
+		{
+			"File": "P0000127_ORLANDO PORRAS_LA HABANA_CUBA.jpeg",
+			"Code": "P00127",
+			"Type": "Photograph",
+			"Type [ES]": "Fotografía",
+			"Tint": false
+		},
+		{
+			"File": "P0000128_ORLANDO PORRAS_LA HABANA_CUBA.jpeg",
+			"Code": "P00128",
+			"Type": "Photograph",
+			"Type [ES]": "Fotografía",
+			"Tint": false
+		},
+		{
+			"File": "P0000129_ORLANDO PORRAS_LA HABANA_CUBA.jpeg",
+			"Code": "P00129",
+			"Type": "Photograph",
+			"Type [ES]": "Fotografía",
+			"Tint": false
+		},
+		{
+			"File": "P0000130_ORLANDO PORRAS_LA HABANA_CUBA.jpeg",
+			"Code": "P00130",
+			"Type": "Photograph",
+			"Type [ES]": "Fotografía",
+			"Tint": false
+		},
+		{
+			"File": "P0000131_ORLANDO PORRAS_LA HABANA_CUBA.jpeg",
+			"Code": "P00131",
+			"Type": "Photograph",
+			"Type [ES]": "Fotografía",
+			"Tint": false
+		},
+		{
+			"File": "P0000132_ORLANDO PORRAS_LA HABANA_CUBA.jpeg",
+			"Code": "P00132",
+			"Type": "Photograph",
+			"Type [ES]": "Fotografía",
+			"Tint": false
+		},
+		{
+			"File": "P0000133_ORLANDO PORRAS_LA HABANA_CUBA.jpeg",
+			"Code": "P00133",
+			"Type": "Photograph",
+			"Type [ES]": "Fotografía",
+			"Tint": false
+		},
+		{
+			"File": "P0000134_ORLANDO PORRAS_LA HABANA_CUBA.jpeg",
+			"Code": "P00134",
+			"Type": "Photograph",
+			"Type [ES]": "Fotografía",
+			"Tint": false
+		}
+	],
+	"City [ES]": "",
+	"City": "La Habana",
+	"Thumbnail": "P00126",
+	"Date": "2025-10",
+	"Addressee": "Orlando Porras",
+	"Country": "Cuba",
+	"Type [ES]": "Carta, Fotografía",
+	"Type": "Letter, Photograph",
+	"Country [ES]": ""
+}

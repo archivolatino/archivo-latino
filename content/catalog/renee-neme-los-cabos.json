@@ -1,0 +1,70 @@
+{
+	"Addressee [ES]": "",
+	"Archive": [
+		{
+			"File": "L000017_RENEE NEME_LOS CABOS_MEXICO.jpg",
+			"Code": "L00017",
+			"Type": "Letter",
+			"Type [ES]": "Carta",
+			"Tint": true
+		},
+		{
+			"File": "P0000107_RENEE NEME_LOS CABOS_MEXICO.JPG",
+			"Code": "P00107",
+			"Type": "Photograph",
+			"Type [ES]": "Fotografía",
+			"Tint": false
+		},
+		{
+			"File": "P0000108_RENEE NEME_LOS CABOS_MEXICO.JPG",
+			"Code": "P00108",
+			"Type": "Photograph",
+			"Type [ES]": "Fotografía",
+			"Tint": false
+		},
+		{
+			"File": "P0000109_RENEE NEME_LOS CABOS_MEXICO.JPG",
+			"Code": "P00109",
+			"Type": "Photograph",
+			"Type [ES]": "Fotografía",
+			"Tint": false
+		},
+		{
+			"File": "P0000110_RENEE NEME_LOS CABOS_MEXICO.JPG",
+			"Code": "P00110",
+			"Type": "Photograph",
+			"Type [ES]": "Fotografía",
+			"Tint": false
+		},
+		{
+			"File": "P0000111_RENEE NEME_LOS CABOS_MEXICO.JPG",
+			"Code": "P00111",
+			"Type": "Photograph",
+			"Type [ES]": "Fotografía",
+			"Tint": false
+		},
+		{
+			"File": "P0000112_RENEE NEME_LOS CABOS_MEXICO.JPG",
+			"Code": "P00112",
+			"Type": "Photograph",
+			"Type [ES]": "Fotografía",
+			"Tint": false
+		},
+		{
+			"File": "P0000113_RENEE NEME_LOS CABOS_MEXICO.JPG",
+			"Code": "P00113",
+			"Type": "Photograph",
+			"Type [ES]": "Fotografía",
+			"Tint": false
+		}
+	],
+	"City [ES]": "",
+	"City": "Los Cabos",
+	"Thumbnail": "P00108",
+	"Date": "2025-09",
+	"Addressee": "Renee Neme",
+	"Country": "Mexico",
+	"Type [ES]": "Carta, Fotografía",
+	"Type": "Letter, Photograph",
+	"Country [ES]": "México"
+}

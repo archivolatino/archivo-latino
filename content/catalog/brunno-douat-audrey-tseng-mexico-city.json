@@ -1,0 +1,21 @@
+{
+	"Addressee [ES]": "",
+	"Archive": [
+		{
+			"File": "L000075_BRUNNO DOUAT_AUDREY TSENG_CDMX_MEXICO.webp",
+			"Code": "L00075",
+			"Type": "Letter",
+			"Type [ES]": "Carta",
+			"Tint": true
+		}
+	],
+	"City [ES]": "Ciudad de México",
+	"City": "Mexico City",
+	"Thumbnail": "L00075",
+	"Date": "2026-02",
+	"Addressee": "Brunno Douat & Audrey Tseng",
+	"Country": "Mexico",
+	"Type [ES]": "Carta",
+	"Type": "Letter",
+	"Country [ES]": "México"
+}

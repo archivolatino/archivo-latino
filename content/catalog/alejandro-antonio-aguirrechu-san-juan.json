@@ -1,0 +1,63 @@
+{
+	"Addressee [ES]": "",
+	"Archive": [
+		{
+			"File": "L000033_ALEJANDRO ANTONIO AGUIRRECHU_SAN JUAN_PUERTO RICO.jpg",
+			"Code": "L00033",
+			"Type": "Letter",
+			"Type [ES]": "Carta",
+			"Tint": true
+		},
+		{
+			"File": "P0000231_ALEJANDRO ANTONIO AGUIRRECHU_SAN JUAN_PUERTO RICO.webp",
+			"Code": "P00231",
+			"Type": "Photograph",
+			"Type [ES]": "Fotografía",
+			"Tint": false
+		},
+		{
+			"File": "P0000232_ALEJANDRO ANTONIO AGUIRRECHU_SAN JUAN_PUERTO RICO.webp",
+			"Code": "P00232",
+			"Type": "Photograph",
+			"Type [ES]": "Fotografía",
+			"Tint": false
+		},
+		{
+			"File": "P0000233_ALEJANDRO ANTONIO AGUIRRECHU_SAN JUAN_PUERTO RICO.webp",
+			"Code": "P00233",
+			"Type": "Photograph",
+			"Type [ES]": "Fotografía",
+			"Tint": false
+		},
+		{
+			"File": "P0000234_ALEJANDRO ANTONIO AGUIRRECHU_SAN JUAN_PUERTO RICO.webp",
+			"Code": "P00234",
+			"Type": "Photograph",
+			"Type [ES]": "Fotografía",
+			"Tint": false
+		},
+		{
+			"File": "P0000235_ALEJANDRO ANTONIO AGUIRRECHU_SAN JUAN_PUERTO RICO.webp",
+			"Code": "P00235",
+			"Type": "Photograph",
+			"Type [ES]": "Fotografía",
+			"Tint": false
+		},
+		{
+			"File": "P0000236_ALEJANDRO ANTONIO AGUIRRECHU_SAN JUAN_PUERTO RICO.webp",
+			"Code": "P00236",
+			"Type": "Photograph",
+			"Type [ES]": "Fotografía",
+			"Tint": false
+		}
+	],
+	"City [ES]": "",
+	"City": "San Juan",
+	"Thumbnail": "P00236",
+	"Date": "2025-12",
+	"Addressee": "Alejandro Antonio Aguirrechu",
+	"Country": "Puerto Rico",
+	"Type [ES]": "Carta, Fotografía",
+	"Type": "Letter, Photograph",
+	"Country [ES]": ""
+}

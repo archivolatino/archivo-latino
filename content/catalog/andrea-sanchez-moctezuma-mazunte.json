@@ -1,0 +1,63 @@
+{
+	"Addressee [ES]": "",
+	"Archive": [
+		{
+			"File": "L000014_ANDREA SANCHEZ MOCTEZUMA_MAZUNTE_MEXICO.webp",
+			"Code": "L00014",
+			"Type": "Letter",
+			"Type [ES]": "Carta",
+			"Tint": true
+		},
+		{
+			"File": "P000085_ANDREA SANCHEZ MOCTEZUMA_MAZUNTE_MEXICO.JPG",
+			"Code": "P00085",
+			"Type": "Photograph",
+			"Type [ES]": "Fotografía",
+			"Tint": false
+		},
+		{
+			"File": "P000086_ANDREA SANCHEZ MOCTEZUMA_MAZUNTE_MEXICO.jpg",
+			"Code": "P00086",
+			"Type": "Photograph",
+			"Type [ES]": "Fotografía",
+			"Tint": false
+		},
+		{
+			"File": "P000087_ANDREA SANCHEZ MOCTEZUMA_MAZUNTE_MEXICO.JPG",
+			"Code": "P00087",
+			"Type": "Photograph",
+			"Type [ES]": "Fotografía",
+			"Tint": false
+		},
+		{
+			"File": "P000088_ANDREA SANCHEZ MOCTEZUMA_MAZUNTE_MEXICO.JPG",
+			"Code": "P00088",
+			"Type": "Photograph",
+			"Type [ES]": "Fotografía",
+			"Tint": false
+		},
+		{
+			"File": "P000089_ANDREA SANCHEZ MOCTEZUMA_MAZUNTE_MEXICO.JPG",
+			"Code": "P00089",
+			"Type": "Photograph",
+			"Type [ES]": "Fotografía",
+			"Tint": false
+		},
+		{
+			"File": "P000090_ANDREA SANCHEZ MOCTEZUMA_MAZUNTE_MEXICO.JPG",
+			"Code": "P00090",
+			"Type": "Photograph",
+			"Type [ES]": "Fotografía",
+			"Tint": false
+		}
+	],
+	"City [ES]": "",
+	"City": "Mazunte",
+	"Thumbnail": "P00089",
+	"Date": "2025-12",
+	"Addressee": "Andrea Sánchez Moctezuma",
+	"Country": "Mexico",
+	"Type [ES]": "Carta, Fotografía",
+	"Type": "Letter, Photograph",
+	"Country [ES]": "México"
+}

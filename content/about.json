@@ -1,0 +1,66 @@
+{
+	"What": {
+		"Intro": "Archivo Latino is a mail-art-inspired research practice documenting the identities, cultures, and spatial practices of Latin America and its diaspora. Home to an open, evolving archive, we invite travelers and inhabitants to become co-authors through a “Letter of Request”, a prompt addressed to anyone inhabiting or transient to Latinidad.",
+		"Intro [ES]": "Archivo Latino es un proyecto de investigación inspirado en el mail art como método de recopilación y construcción de archivos. Nos enfocamos en documentar identidades, culturas y prácticas de América Latina y su diáspora. Somos un archivo open source y en constante evolución, parte de nuestro proceso incluye invitar a viajeros y habitantes a convertirse en coautores del archivo a través de una “Carta de Solicitud”: una invitación dirigida a cualquiera que habite o transite América Latina.",
+		"More": "The project poetically records ways of inhabiting, building, adapting, and moving through the region, attending to architectural irregularities, everyday encounters, and vernacular forms of ingenuity. It listens to the absent as much as the present, reading space through the informal, precarious, self-built, and incomplete.\n\nBringing together artists, architects, writers, designers, and cultural theorists, Archivo Latino proposes alternative methods of spatial research, uncovering hidden histories and revealing how social, economic, and cultural conditions become inscribed in the everyday landscape.",
+		"More [ES]": "El Archivo documenta en una forma poética las formas de habitar y construir en la región, al igual que sus formas de adaptación y desplazamiento, enfocándose en irregularidades arquitectónicas, encuentros cotidianos y en el ingenio vernáculo.\n\nEl Archivo guarda tanto lo ausente como lo presente, estudiando ciudades y espacios a través de lo informal, lo precario, lo autoconstruido y lo inacabado.\n\nAl reunir a artistas, arquitectos, escritores, diseñadores y teóricos de la cultura, Archivo Latino propone métodos alternativos de investigación y documentación, recopilando historias ocultas y revelando cómo las condiciones sociales, económicas y culturales de la región quedan inscritas en el paisaje cotidiano."
+	},
+	"Image": {
+		"File": "about.png"
+	},
+	"Team": {
+		"Intro": "Led by four practitioners from Latin America and abroad, Andrea Sánchez Moctezuma, Signe Ferguson, Renee Neme and Ana Amelia Batlle Cabral, we combine architecture, curation, and visual research to create malleable, digital archives exploring spatial memory and culture.",
+		"Intro [ES]": "Archivo Latino está dirigido por cuatro creadoras e investigadoras de América Latina y el extranjero; Andrea Sánchez Moctezuma, Signe Ferguson, Renée Neme y Ana Amelia Batlle Cabral. Desde la arquitectura, la curaduría y la investigación visual, el proyecto construye archivos digitales abiertos y maleables, los cuales exploran la memoria, la cultura y diferentes formas de habitar el espacio.",
+		"Members": [
+			{
+				"Name": "Andrea Sánchez Moctezuma",
+				"Role": "Co-founder & Archive Director",
+				"Role [ES]": "Co-fundadora y Directora del Archivo",
+				"Bio": "Andrea is an architectural designer from Mexico City. She holds a Master’s in Architecture from Yale University and a B.Arch with distinction from SCI-Arc, where she received the Thesis Merit Prize. In 2020, Andrea founded Autonomous Construction [AC], a multi-focus design practice based in LA & Mexico City. AC explores built, written, and temporal projects through a continuous loop of research, conceptual work, and fabrication. Some recent studio projects include The Monobloc Archive and The Taxonomy of unscripted living, which documents “informality” in rural Mexico.",
+				"Bio [ES]": "Andrea es diseñadora arquitectónica originaria de la CDMX. Cuenta con una Maestría en Arquitectura por la Universidad de Yale y una Licenciatura en Arquitectura por SCI-Arc, donde recibió el Thesis Merit Prize. En 2020, Andrea fundó Autonomous Construction [AC], una práctica de diseño multidisciplinaria con sede en LA y CDMX. AC explora proyectos construidos, escritos y temporales a través de un ciclo continuo de investigación, trabajo conceptual y fabricación. Entre los proyectos recientes de investigación se encuentran The Monobloc Archive y The Taxonomy of Unscripted Living, una investigación que documenta la “informalidad” en el México rural."
+			},
+			{
+				"Name": "Signe Ferguson",
+				"Role": "Co-founder & Editorial Director",
+				"Role [ES]": "Co-fundadora y Directora Editorial",
+				"Bio": "Signe’s practice explores reassembly, material utopias, and in-between spaces. She is co-founder of BASA Atelier, a collaborative architecture, art, and research studio based between CDMX, New York, the Dominican Republic, and London. Trained at Yale and Brown in architecture, her work spans material science, performance, community fieldwork, collective organization, land art and stewardship, architecture, set design, sculpture, and furniture. Her independent research explores memorial and memory through “climate metronomes,” alongside methodologies for preserving serious play and appreciating the mundane.",
+				"Bio [ES]": "La práctica de Signe explora el reensamblaje, las utopías materiales y los espacios intermedios. Es cofundadora de BASA Atelier, un estudio colaborativo de arquitectura, arte e investigación con sede entre la CDMX, NYC, República Dominicana y Londres. Tras estudiar arquitectura en Yale y Brown, su trabajo abarca la ciencia de materiales, el performance, el trabajo comunitario, la organización colectiva y el land art, así como la arquitectura, el diseño escenográfico, la escultura y el mobiliario. Su investigación independiente explora el memorial y la memoria a través de “metrónomos climáticos”, junto con metodologías para preservar el juego serio y apreciar lo cotidiano."
+			},
+			{
+				"Name": "Renée Neme Villarreal",
+				"Role": "Co-founder & Programming Director",
+				"Role [ES]": "Co-fundadora y Directora de Programación",
+				"Bio": "Renée is a curator, designer, and writer from Mexico City. She studied Integrated Design and Museum and Curatorial Studies at Parsons School of Design in New York. Renée is the Founder and Director of El Patio, a multidisciplinary cultural center and artist studio space, and works as a creative and art consultant within an architecture practice. Her work moves across curatorial, spatial, and written projects, exploring how everyday materials, ideas, and spaces can be transformed into considered, poetic forms.",
+				"Bio [ES]": "Renée es curadora, diseñadora y escritora originaria de la Ciudad de México. Estudió Diseño Integrado y Estudios Museísticos y Curatoriales en Parsons School of Design, en Nueva York. Es fundadora y directora de El Patio, un centro cultural multidisciplinario y espacio de estudios para artistas, y trabaja como consultora creativa y de arte dentro de una práctica de arquitectura. Su trabajo transita entre proyectos curatoriales, espaciales y escritos, explorando cómo los materiales, las ideas y los espacios cotidianos pueden transformarse en formas cuidadas y poéticas."
+			},
+			{
+				"Name": "Ana Amelia Batlle Cabral",
+				"Role": "Archive & Exhibition Consultant",
+				"Role [ES]": "Consultora de Archivos y Exposiciones",
+				"Bio": "Ana is a Dominican-born architect, designer, and co-founder of BASA, trained at the Savannah College of Art and Design (BFA) and Yale University (M.Arch). Grounded in material research, craft, and myth, her practice spans architecture, furniture, surrealist objects, and land art. By treating native Dominican resources as cultural and ecological agents rather than commodities, she crafts ritualistic forms occupying a liminal space between the functional and symbolic, charged with memory, identity, and narrative weight.",
+				"Bio [ES]": "Ana es arquitecta y diseñadora nacida en República Dominicana, y cofundadora de BASA. Estudió en el Savannah College of Art and Design (BFA) y en la Universidad de Yale (M.Arch). Su práctica, arraigada en la investigación material, el oficio y el mito, abarca la arquitectura, el mobiliario, los objetos surrealistas y el land art. Al abordar los recursos nativos dominicanos como agentes culturales y ecológicos, en lugar de mercancías, Ana desarrolla formas rituales que ocupan un espacio liminal entre lo funcional y lo simbólico, cargadas de memoria, identidad y peso narrativo."
+			}
+		]
+	},
+	"Contact": {
+		"Email": "info@archivolatino.org",
+		"Instagram": "@archivo.latino",
+		"Instagram URL": "https://www.instagram.com/archivo.latino/"
+	},
+	"Legal": {
+		"Policies": [
+			{
+				"Label": "Submission Agreement",
+				"Label [ES]": "Acuerdo de Envío",
+				"Text": "By contributing to this project, you grant Archivo Latino permission to digitally replicate, archive, and display your submitted text, imagery, and object media.",
+				"Text [ES]": "Al contribuir a este proyecto, otorgas a Archivo Latino permiso para reproducir digitalmente, archivar y exhibir los textos, imágenes y registros de objetos que hayas enviado."
+			},
+			{
+				"Label": "Privacy Policy",
+				"Label [ES]": "Aviso de Privacidad",
+				"Text": "Archivo Latino respects your privacy and is committed to protecting your personal data. We collect personal details, such as your name and email address, only when you voluntarily provide them through contact forms or project contributions. This information is used to process contributions, communicate with contributors, administer the archive, and maintain project records.\n\nPhotographs and accompanying information intentionally submitted for inclusion in Archivo Latino—including the photographer's name, origin, location, and year of the photograph—may be reproduced, exhibited, published, and distributed as part of the archive, including in exhibitions, books, printed publications, and other project materials. Where applicable, contributors will receive the compensation described in the relevant project invitation or agreement.\n\nWe will never sell, rent, or trade your personal data to third parties. You may request access to or correction of personal information held in our administrative records by contacting us directly. Requests concerning materials intentionally contributed to the archive will be considered in accordance with the terms under which those materials were submitted and the project's archival and publication purposes.",
+				"Text [ES]": "Archivo Latino, con domicilio en CDMX, es responsable del tratamiento de los datos personales recabados a través de este sitio.\n\nPodemos recopilar información que nos proporciones voluntariamente, como nombre, correo electrónico, lugar de procedencia y datos relacionados con tus contribuciones al archivo.\n\nEsta información se utiliza para gestionar participaciones, comunicarnos con colaboradores, administrar el archivo y mantener registros del proyecto.\n\nLos textos, fotografías y materiales enviados expresamente para formar parte de Archivo Latino podrán ser archivados, reproducidos, exhibidos, publicados y difundidos en medios digitales e impresos, incluyendo exposiciones, libros y otros materiales del proyecto, de acuerdo con los términos de cada contribución.\n\nArchivo Latino no vende, renta ni comercializa datos personales con terceros.\n\nPuedes solicitar acceso, rectificación, cancelación u oposición al tratamiento de tus datos personales, así como limitar su uso o revocar tu consentimiento, escribiendo a info@archivolatino.org.\n\nLos materiales incorporados voluntariamente al archivo serán tratados de acuerdo con las condiciones bajo las cuales fueron enviados y con las finalidades culturales, editoriales y de investigación de Archivo Latino.\n\nEste Aviso de Privacidad podrá actualizarse cuando sea necesario. Cualquier cambio será publicado en esta misma sección.\n\nÚltima actualización: 3 de septiembre del 2026"
+			}
+		]
+	}
+}

@@ -1,0 +1,21 @@
+{
+	"Addressee [ES]": "",
+	"Archive": [
+		{
+			"File": "L000039_JUAN CARLOS_CULIACAN_MEXICO.webp",
+			"Code": "L00039",
+			"Type": "Letter",
+			"Type [ES]": "Carta",
+			"Tint": true
+		}
+	],
+	"City [ES]": "Culiacán",
+	"City": "Culiacan",
+	"Thumbnail": "L00039",
+	"Date": "2025-12",
+	"Addressee": "Juan Carlos Beltran",
+	"Country": "Mexico",
+	"Type [ES]": "Carta",
+	"Type": "Letter",
+	"Country [ES]": "México"
+}

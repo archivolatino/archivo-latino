@@ -1,0 +1,126 @@
+{
+	"Addressee [ES]": "",
+	"Archive": [
+		{
+			"File": "L00005_SIGNE FERGUSON_CDMX_MEXICO.webp",
+			"Code": "L00005",
+			"Type": "Letter",
+			"Type [ES]": "Carta",
+			"Tint": true
+		},
+		{
+			"File": "L00006_SIGNE FERGUSON_CDMX_MEXICO.webp",
+			"Code": "L00006",
+			"Type": "Letter",
+			"Type [ES]": "Carta",
+			"Tint": true
+		},
+		{
+			"File": "P000017_SIGNE FERGUSON_CDMX_MEXICO.jpg",
+			"Code": "P00017",
+			"Type": "Photograph",
+			"Type [ES]": "Fotografía",
+			"Tint": false
+		},
+		{
+			"File": "P000018_SIGNE FERGUSON_CDMX_MEXICO.jpeg",
+			"Code": "P00018",
+			"Type": "Photograph",
+			"Type [ES]": "Fotografía",
+			"Tint": false
+		},
+		{
+			"File": "P000019_SIGNE FERGUSON_CDMX_MEXICO.jpeg",
+			"Code": "P00019",
+			"Type": "Photograph",
+			"Type [ES]": "Fotografía",
+			"Tint": false
+		},
+		{
+			"File": "P000020_SIGNE FERGUSON_CDMX_MEXICO.jpeg",
+			"Code": "P00020",
+			"Type": "Photograph",
+			"Type [ES]": "Fotografía",
+			"Tint": false
+		},
+		{
+			"File": "P000021_SIGNE FERGUSON_CDMX_MEXICO.jpeg",
+			"Code": "P00021",
+			"Type": "Photograph",
+			"Type [ES]": "Fotografía",
+			"Tint": false
+		},
+		{
+			"File": "P000022_SIGNE FERGUSON_CDMX_MEXICO.jpeg",
+			"Code": "P00022",
+			"Type": "Photograph",
+			"Type [ES]": "Fotografía",
+			"Tint": false
+		},
+		{
+			"File": "P000023_SIGNE FERGUSON_CDMX_MEXICO.JPG",
+			"Code": "P00023",
+			"Type": "Photograph",
+			"Type [ES]": "Fotografía",
+			"Tint": false
+		},
+		{
+			"File": "P000024_SIGNE FERGUSON_CDMX_MEXICO.JPG",
+			"Code": "P00024",
+			"Type": "Photograph",
+			"Type [ES]": "Fotografía",
+			"Tint": false
+		},
+		{
+			"File": "P000025_SIGNE FERGUSON_CDMX_MEXICO.JPG",
+			"Code": "P00025",
+			"Type": "Photograph",
+			"Type [ES]": "Fotografía",
+			"Tint": false
+		},
+		{
+			"File": "P000026_SIGNE FERGUSON_CDMX_MEXICO.JPG",
+			"Code": "P00026",
+			"Type": "Photograph",
+			"Type [ES]": "Fotografía",
+			"Tint": false
+		},
+		{
+			"File": "P000027_SIGNE FERGUSON_CDMX_MEXICO.JPG",
+			"Code": "P00027",
+			"Type": "Photograph",
+			"Type [ES]": "Fotografía",
+			"Tint": false
+		},
+		{
+			"File": "P000028_SIGNE FERGUSON_CDMX_MEXICO.JPG",
+			"Code": "P00028",
+			"Type": "Photograph",
+			"Type [ES]": "Fotografía",
+			"Tint": false
+		},
+		{
+			"File": "P000029_SIGNE FERGUSON_CDMX_MEXICO.JPG",
+			"Code": "P00029",
+			"Type": "Photograph",
+			"Type [ES]": "Fotografía",
+			"Tint": false
+		},
+		{
+			"File": "P000030_SIGNE FERGUSON_CDMX_MEXICO.JPG",
+			"Code": "P00030",
+			"Type": "Photograph",
+			"Type [ES]": "Fotografía",
+			"Tint": false
+		}
+	],
+	"City [ES]": "Ciudad de México",
+	"City": "Mexico City",
+	"Thumbnail": "P00022",
+	"Date": "2025-06",
+	"Addressee": "Signe Ferguson",
+	"Country": "Mexico",
+	"Type [ES]": "Carta, Fotografía",
+	"Type": "Letter, Photograph",
+	"Country [ES]": "México"
+}

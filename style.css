@@ -1,0 +1,2704 @@
+/* fonts */
+@font-face {
+	font-family: "Courier Prime";
+	src: url("/assets/fonts/CourierPrime-Regular.ttf");
+	font-weight: normal;
+	font-style: normal;
+}
+@font-face {
+	font-family: "Courier Prime";
+	src: url("/assets/fonts/CourierPrime-Bold.ttf");
+	font-weight: bold;
+	font-style: normal;
+}
+@font-face {
+	font-family: "Courier Prime";
+	src: url("/assets/fonts/CourierPrime-Italic.ttf");
+	font-weight: normal;
+	font-style: italic;
+}
+@font-face {
+	font-family: "Courier Prime";
+	src: url("/assets/fonts/CourierPrime-BoldItalic.ttf");
+	font-weight: bold;
+	font-style: italic;
+}
+
+/* variables */
+:root {
+	--Cochinilla-Ink: #ef2735;
+	--Antique-White: #FFFDF4;
+	--White-Paper: #ffffff;
+	/* hsb(53, 18%, 100%) at 95%, converted: css has no hsb notation */
+	--Yellow-Paper: hsl(53 100% 91% / 0.95);
+	--section-width: 100px;
+	--index-narrow: 180px; /* the index column while the about page is open */
+	--entry-info-width: 280px;
+	--entry-bottom: 120px; /* how far the tall side of an image stops short of the bottom */
+	--line: 1.15em;
+	/* the space from one dot to the next on every dotted rule, vertical and horizontal alike */
+	--dot-gap: 2ch;
+	/* how far the index hover rectangle reaches above the capitals, so it stands as far off them as
+	   it does off the baseline: the baseline falls (1.15 - 2300/2048) / 2 + 1600/2048 down the line
+	   box and the cap height is 1187/2048, which leaves this much less room above than below */
+	--row-lift: 0.14em;
+	/* anything pinned to the bottom sits on the line grid running down from 50vh, landing 20px up or one line further, whichever keeps it on the grid */
+	--baseline-bottom: calc(100dvh - 50vh - round(down, 100dvh - 50vh - 20px, var(--line)));
+}
+
+/* overrides */
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	scrollbar-width: none; /* everything scrolls without ever showing a bar */
+	-ms-overflow-style: none;
+}
+*::-webkit-scrollbar {
+	display: none;
+}
+html, body {
+	height: 100%;
+	overflow: hidden;
+	overscroll-behavior: none;
+}
+body {
+	background-color: var(--Antique-White);
+	font-family: "Courier Prime", monospace;
+	color: var(--Cochinilla-Ink);
+	font-size: 14px;
+	line-height: 1.15;
+	letter-spacing: -0.02em;
+}
+h1, h2, h3, h4, h5, h6 {
+	font-family: "Courier Prime", monospace;
+	color: var(--Cochinilla-Ink);
+	font-size: 14px;
+	line-height: 1.15;
+	font-weight: normal;
+	letter-spacing: -0.02em;
+}
+a {
+	text-decoration: none;
+	color: var(--Cochinilla-Ink);
+}
+button {
+	font-family: "Courier Prime", monospace;
+	color: var(--Cochinilla-Ink);
+	font-size: 14px;
+	line-height: 1.15;
+	font-weight: normal;
+	letter-spacing: -0.02em;
+	border: 1px solid var(--Cochinilla-Ink);
+	background-color: var(--Antique-White);
+	border-radius: 0;
+}
+::selection {
+	background-color: var(--Cochinilla-Ink);
+	color: var(--White-Paper);
+}
+
+/* container and sections */
+.container {
+	display: grid;
+	grid-template-columns: var(--section-width) 1fr var(--section-width) var(--section-width);
+	grid-template-rows: minmax(0, 1fr); /* an auto row would grow past the viewport to fit its content */
+	height: 100dvh;
+	max-height: 100dvh; /* expanding content scrolls inside a column, it never grows the page */
+	overflow: hidden;
+	transition: grid-template-columns linear .02s;
+}
+/* the open column takes the space, the rest stay at their fixed widths */
+.container[data-page="about"] {
+	grid-template-columns: 1fr var(--index-narrow) var(--section-width) var(--section-width);
+}
+.container[data-page="events"] {
+	grid-template-columns: var(--section-width) var(--index-narrow) 1fr var(--section-width);
+}
+.container[data-page="notes"] {
+	grid-template-columns: var(--section-width) var(--index-narrow) var(--section-width) 1fr;
+}
+.section {
+	position: relative;
+	overflow: hidden; /* crops the collapsed columns down to their sliver */
+	/* a grid item is never smaller than its content by default, which would grow the section past the viewport and stop anything inside it scrolling */
+	min-height: 0;
+	min-width: 0;
+	display: flex;
+	flex-direction: column;
+}
+.section[data-active="1"] {
+	background-color: var(--White-Paper);
+}
+@media (hover: hover) {
+	.section[data-active="0"]:hover {
+		background-color: var(--Cochinilla-Ink);
+		color: var(--White-Paper);
+	}
+	.section[data-active="0"]:hover * {
+		color: var(--White-Paper);
+	}
+}
+.section::before {
+	content: "";
+	width: 1px;
+	height: 100dvh;
+	position: absolute;
+	top: 0;
+	left: 0;
+	background-color: var(--Cochinilla-Ink);
+}
+.section:nth-child(1)::before {
+	display: none;
+}
+/* a collapsed column lays its content out at its open width and the section crops it, with the heading and click target over the top */
+.about {
+	--open-width: calc(100vw - var(--index-narrow) - var(--section-width) * 2);
+}
+.index {
+	--open-width: calc(100vw - var(--section-width) * 3);
+}
+.events,
+.notes {
+	--open-width: calc(100vw - var(--index-narrow) - var(--section-width) * 2);
+}
+.section[data-active="0"] .section-content {
+	width: var(--open-width);
+}
+.section-link {
+	position: absolute;
+	z-index: 2;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+}
+.section-heading {
+	position: absolute;
+	z-index: 1; /* image entries scroll underneath the title and controls */
+	top: 20px;
+	left: 20px;
+	writing-mode: vertical-lr;
+	text-orientation: upright;
+}
+.section[data-active="1"] .section-heading {
+	writing-mode: unset;
+	text-orientation: unset;
+	letter-spacing: .35em;
+}
+/* the short form of a heading is only ever wanted below the breakpoint */
+.section-heading-short {
+	display: none;
+}
+/* fills the section so in-flow content can size itself against it */
+.section-content {
+	position: relative; /* absolute content anchors here, so it follows the open width */
+	flex: 1;
+	min-height: 0;
+	display: flex;
+	flex-direction: column;
+}
+
+/* the mobile sidebar, hidden until the breakpoint claims it */
+.nav {
+	display: none;
+}
+
+/* language toggles */
+.lang {
+	position: absolute;
+	z-index: 11; /* the one thing left of an overlay that stays live */
+	left: 20px;
+	bottom: var(--baseline-bottom);
+	display: flex;
+	gap: 20px;
+}
+.lang-toggle {
+	writing-mode: vertical-lr;
+	text-orientation: upright;
+	border: 1px solid var(--Cochinilla-Ink);
+	padding: 2px 0 0 0;
+	width: 20px;
+	/* set sideways, the line runs across the box, so a line as tall as the box is wide centres the
+	   letters in it. the page's own line is narrower and left them sitting to the left */
+	line-height: 18px;
+	background-color: var(--White-Paper);
+}
+.lang-toggle[data-active="1"] {
+	background-color: var(--Cochinilla-Ink);
+	color: var(--White-Paper);
+}
+@media (hover: hover) {
+	.lang-toggle:hover {
+		background-color: var(--Cochinilla-Ink);
+		color: var(--White-Paper);
+	}
+	/* the toggles stand over the about column, so lighting that column up leaves the active one ink
+	   on ink. its border comes forward in paper to keep it legible */
+	.section.about[data-active="0"]:hover ~ .lang .lang-toggle[data-active="1"] {
+		border-color: var(--White-Paper);
+	}
+}
+
+/* dotted borders */
+.dotted-left,
+.dotted-right {
+	position: relative;
+	height: 100dvh;
+	pointer-events: none;
+}
+.dotted-left::before, 
+.dotted-right::before {
+	content: "";
+	width: 2px;
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	background-image: radial-gradient(circle, var(--Cochinilla-Ink) 1px, transparent 1.01px);
+	background-size: 2px var(--dot-gap);
+	background-repeat: repeat-y;
+	background-position: center calc(var(--dot-gap) / 2 + 1px);
+}
+.dotted-left::before {
+	left: 0;
+}
+.dotted-right::before {
+	right: 0;
+}
+
+/* index */
+.index {
+	--col1-width: max(200px, 20vw);
+}
+.index-controls {
+	position: absolute;
+	z-index: 1;
+	top: 20px;
+	right: 20px;
+	display: flex;
+	align-items: center;
+	gap: 40px;
+}
+.index-view[data-active="1"] {
+	text-decoration: underline;
+}
+@media (hover: hover) {
+	.index-controls a:hover {
+		text-decoration: underline;
+	}
+}
+.index-shuffle {
+	display: flex;
+	align-items: center;
+	gap: 1ch;
+}
+.index-shuffle svg {
+	fill: currentColor;
+	width: 1.1em;
+	height: 1.1em;
+	margin-top: -.15em;
+	overflow: visible;
+}
+
+/* view switching */
+.index-list[data-active="0"],
+.index-list-gridlines[data-active="0"],
+.index-images[data-active="0"],
+.index-images-gridlines[data-active="0"],
+.index-shuffle[data-active="0"] {
+	display: none;
+}
+.index-content {
+
+}
+.index-list {
+	position: absolute;
+	top: 50vh;
+	left: 20px;
+	right: 20px;
+	bottom: 0;
+	display: flex;
+	flex-direction: column;
+	min-height: 0;
+}
+.index-list-headings {
+	display: grid;
+	grid-template-columns: var(--col1-width) 1fr 1fr 1fr 1fr;
+	margin-bottom: 1.15em;
+	gap: 40px;
+}
+.index-list-heading {
+	cursor: pointer;
+	user-select: none;
+	width: fit-content;
+}
+/* the column picker only exists below the breakpoint, where one column shows at a time */
+.index-sort,
+.index-select,
+/* the date is written out in full until the column is too narrow for it, heading and entries together */
+.index-heading-short,
+.index-date-year {
+	display: none;
+}
+@media (hover: hover) {
+	.index-list-heading:hover::before {
+		content: "> ";
+	}
+}
+/* lifted by the same amount every row is, so the rows keep their place and the top one's rectangle
+   is not cropped by the scroller */
+.index-list-links {
+	flex: 1;
+	min-height: 0;
+	position: relative;
+	overflow: hidden;
+	overscroll-behavior: none;
+	margin-top: calc(var(--row-lift) * -1);
+}
+/* the padding lifts the top of the box clear of the capitals and the bottom margin gives the same
+   amount back, so the rhythm is untouched and only the hover rectangle grows */
+.index-list-link {
+	display: grid;
+	grid-template-columns: var(--col1-width) 1fr 1fr 1fr 1fr;
+	padding-top: var(--row-lift);
+	margin-bottom: calc(1.15em - var(--row-lift));
+	gap: 40px;
+}
+.index-list-link {
+	cursor: pointer;
+}
+@media (hover: hover) {
+	.index-list-link:hover {
+		background-color: var(--Cochinilla-Ink);
+		color: var(--White-Paper);
+	}
+}
+.index-list-link[data-active="1"] {
+	background-color: var(--Cochinilla-Ink);
+	color: var(--White-Paper);
+}
+.index-list-gridlines {
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	display: grid;
+	grid-template-columns: var(--col1-width) 1fr 1fr 1fr 1fr;
+	gap: 40px;
+	padding: 0 20px;
+	pointer-events: none;
+}
+.index-list-gridlines div {
+	margin-right: -20px;
+}
+
+/* index images */
+.index-images {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	display: flex;
+	overflow: hidden;
+}
+/* every column scrolls on its own, and loops on the copies stacked above and below wherever it opens */
+.index-images-column {
+	flex: 1;
+	min-width: 0;
+	height: 100%;
+	overflow-y: auto;
+	overscroll-behavior: contain;
+	display: flow-root; /* keeps the last item's margin inside the loop period */
+}
+.index-image {
+	display: block;
+	margin: 0 40px 80px 40px;
+}
+.index-image-crop {
+	position: relative;
+	display: block;
+	margin-bottom: 20px;
+	isolation: isolate; /* keeps the tint off everything behind the picture */
+}
+.index-image-thumb {
+	display: block;
+	width: 100%;
+	height: auto;
+}
+/* the rectangle is sized the same way as the one on a list row, the negative margin keeping the
+   words where they were */
+.index-image-info {
+	display: flex;
+	justify-content: space-between;
+	gap: 20px;
+	padding-top: var(--row-lift);
+	margin-top: calc(var(--row-lift) * -1);
+}
+@media (hover: hover) {
+	.index-image:hover .index-image-info {
+		background-color: var(--Cochinilla-Ink);
+		color: var(--White-Paper);
+	}
+}
+.index-image[data-active="1"] .index-image-info {
+	background-color: var(--Cochinilla-Ink);
+	color: var(--White-Paper);
+}
+.index-images-gridlines {
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	pointer-events: none;
+}
+.index-images-gridlines div:nth-child(2) {
+	display: none; /* the second rule only has a place once there is a third column */
+}
+/* a third column, once there is room for one. the pictures are dealt out between however many
+   columns are showing, and every other column runs the other way */
+@media only screen and (min-width: 1501px) {
+	.index-images-gridlines {
+		grid-template-columns: 1fr 1fr 1fr;
+	}
+	.index-images-gridlines div:nth-child(2) {
+		display: block;
+	}
+}
+
+/* index preview */
+.index-preview[data-active="0"] {
+	display: none;
+}
+.index-preview {
+	position: absolute;
+	top: calc(60px + 1ch);
+	left: 40px;
+	bottom: calc(50dvh + 40px);
+	width: calc(var(--col1-width) - 40px);
+	cursor: pointer; /* it opens the row it stands for */
+}
+/* the ratio sizes the box to the picture, so the tint ends where the paper does */
+.index-preview-crop {
+	position: absolute;
+	top: 50%;
+	left: 0;
+	transform: translateY(-50%);
+	width: 100%;
+	max-height: 100%;
+	aspect-ratio: var(--preview-ratio, 1);
+	isolation: isolate;
+}
+.index-preview-image {
+	display: block;
+	width: 100%;
+	height: 100%;
+	object-fit: contain; /* letterboxes rather than stretches if the ratio is ever missing */
+}
+
+/* a tinted picture is ink on paper, so multiplying the site's own paper over it leaves the ink alone and warms the sheet */
+.index-image[data-tint="1"] .index-image-crop::after,
+.index-preview[data-tint="1"] .index-preview-crop::after,
+.entry-frame[data-tint="1"]::after {
+	content: "";
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	background-color: var(--Antique-White);
+	mix-blend-mode: multiply;
+	pointer-events: none;
+}
+/* the picture masks the tint, so a cut out sheet is tinted only where the paper is */
+.index-image[data-tint="1"] .index-image-crop::after,
+.index-preview[data-tint="1"] .index-preview-crop::after,
+.entry-frame[data-zoom="1"][data-tint="1"]::after {
+	mask-image: var(--tint, none);
+	mask-size: 100% 100%;
+	mask-repeat: no-repeat;
+	-webkit-mask-image: var(--tint, none);
+	-webkit-mask-size: 100% 100%;
+	-webkit-mask-repeat: no-repeat;
+}
+.entry-frame {
+	isolation: isolate;
+}
+.entry-frame:not([data-zoom="1"]) .entry-scroll {
+	cursor: grab;
+}
+.entry-slide[data-panning="1"] .entry-scroll {
+	cursor: grabbing;
+}
+/* a monospace space is a whole character wide, which reads as too large a gap between the month and the year */
+.index-date {
+	word-spacing: -0.3em;
+}
+
+/* index table mobile styles */
+@media only screen and (max-width: 1400px) {
+	.index-list-headings {
+		grid-template-columns: var(--col1-width) 1fr 1fr 1fr;
+	}
+	.index-list-heading:nth-child(5) {
+		display: none;
+	}
+	.index-list-link {
+		grid-template-columns: var(--col1-width) 1fr 1fr 1fr;
+	}
+	.index-list-link span:nth-child(5) {
+		display: none;
+	}
+	.index-list-gridlines {
+		grid-template-columns: var(--col1-width) 1fr 1fr 1fr;
+	}
+	.index-list-gridlines div:nth-child(4) {
+		display: none;
+	}
+}
+@media only screen and (max-width: 1100px) {
+	.index-list-headings {
+		grid-template-columns: var(--col1-width) 1fr 1fr;
+	}
+	.index-list-heading:nth-child(4) {
+		display: none;
+	}
+	.index-list-link {
+		grid-template-columns: var(--col1-width) 1fr 1fr;
+	}
+	.index-list-link span:nth-child(4) {
+		display: none;
+	}
+	.index-list-gridlines {
+		grid-template-columns: var(--col1-width) 1fr 1fr;
+	}
+	.index-list-gridlines div:nth-child(3) {
+		display: none;
+	}
+}
+/* entry overlay */
+.entry-backdrop,
+.view-backdrop,
+.article-backdrop {
+	position: fixed;
+	z-index: 9; /* under the overlay, over everything to the left of it */
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+}
+.entry-backdrop[data-active="0"],
+.view-backdrop[data-active="0"],
+.article-backdrop[data-active="0"] {
+	display: none;
+}
+.entry {
+	position: fixed;
+	z-index: 10;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: calc(var(--section-width) + 120px);
+	display: flex;
+	background-color: rgba(255,255,255,.9);
+	border-left: 1px solid var(--Cochinilla-Ink);
+}
+.entry[data-active="0"] {
+	display: none;
+}
+
+/* entry info column */
+.entry-info {
+	position: relative;
+	flex: none;
+	width: var(--entry-info-width);
+}
+/* the rule between the information and the pictures belongs to this column, so it stays put while the strip moves */
+.entry-info::after {
+	content: "";
+	position: absolute;
+	z-index: 1;
+	width: 2px;
+	top: 20px;
+	bottom: 40px;
+	right: -2px;
+	background-image: radial-gradient(circle, var(--Cochinilla-Ink) 1px, transparent 1.01px);
+	background-size: 2px var(--dot-gap);
+	background-repeat: repeat-y;
+	background-position: center calc(var(--dot-gap) / 2 + 1px);
+	pointer-events: none;
+}
+/* the media column is laid over this one below the breakpoint, and these have to stay reachable through it */
+.entry-close,
+.entry-count,
+.entry-text {
+	z-index: 3;
+}
+.entry-close {
+	position: absolute;
+	top: 20px;
+	left: 20px;
+}
+/* any character that takes the ink circle on hover of the link it sits in */
+.mark {
+	position: relative;
+	/* a stacking context, so the circle sits behind the character but in front of the section background */
+	z-index: 0;
+}
+.mark::before {
+	content: "";
+	position: absolute;
+	top: .025em;
+	left: -.18em;
+	width: 1.6ch;
+	height: 1.6ch;
+	background-color: var(--Cochinilla-Ink);
+	pointer-events: none;
+	z-index: -1;
+	border-radius: 50%;
+	display: none;
+}
+@media (hover: hover) {
+	a:hover > .mark {
+		color: var(--Antique-White);
+	}
+	/* the circle is the hover state, so these links never underline as well */
+	a:has(.mark):hover {
+		text-decoration: none;
+	}
+	a:hover > .mark::before {
+		display: block;
+	}
+}
+/* the paired + and - swap with whatever they are attached to */
+.about-expand[data-active="0"] .mark-less,
+.about-expand[data-active="1"] .mark-more,
+.events-event[data-active="0"] .mark-less,
+.events-event[data-active="1"] .mark-more,
+.view-expand[data-active="0"] .mark-less,
+.view-expand[data-active="1"] .mark-more,
+.notes-expand[data-active="0"] .mark-less,
+.notes-expand[data-active="1"] .mark-more,
+.nav[data-active="0"] .mark-less,
+.nav[data-active="1"] .mark-more,
+.index-sort[data-active="0"] .mark-less,
+.index-sort[data-active="1"] .mark-more {
+	display: none;
+}
+.entry-text {
+	position: absolute;
+	top: 50vh;
+	left: 20px;
+	right: 20px;
+}
+.entry-line + .entry-line {
+	margin-top: 1.15em; /* a full empty line between each */
+}
+.entry-line:first-child {
+	display: flex;
+	align-items: center;
+	gap: 5px;
+}
+.entry-download svg {
+	display: block;
+	width: 1em;
+	height: 1em;
+	overflow: visible;
+	fill: var(--Cochinilla-Ink);
+	border: 1px solid var(--Cochinilla-Ink);
+	border-radius: 50%;
+}
+@media (hover: hover) {
+	.entry-download:hover svg {
+		background-color: var(--Cochinilla-Ink);
+		fill: var(--White-Paper);
+	}
+}
+.entry-count {
+	position: absolute;
+	bottom: var(--baseline-bottom);
+	left: 20px;
+	right: 20px;
+}
+
+/* entry media column */
+/* the measurements the pictures are laid out on, so one set of rules covers both breakpoints */
+.entry {
+	--slide-pad: 40px; /* how far a picture stands off the dotted rule to its left, and the next rule off its right edge */
+	--frame-top: 40px;
+	--frame-bottom: auto;
+	--frame-height: calc(100dvh - 40px - var(--entry-bottom));
+}
+/* a lone photograph gets the whole panel and reaches the bottom baseline */
+.entry[data-single="1"] {
+	--frame-height: calc(100dvh - 40px - var(--baseline-bottom));
+}
+.entry-media {
+	position: relative;
+	flex: 1;
+	min-width: 0;
+	overflow: hidden;
+	touch-action: none; /* every gesture in here is read by hand, so the browser must not claim one first */
+}
+/* the pictures run end to end in one strip, repeated until it covers the column, and the whole strip moves at once */
+.entry-track {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	display: flex;
+	align-items: stretch;
+	will-change: transform;
+}
+/* a picture's own width is what it takes, and the column width is the most it may take */
+.entry-slide {
+	position: relative;
+	flex: none;
+	width: min(calc(var(--frame-height) * var(--ratio, 1) + var(--slide-pad) * 2), var(--media-width, 100dvw));
+}
+.entry-frame {
+	position: absolute;
+	top: var(--frame-top);
+	bottom: var(--frame-bottom);
+	left: var(--slide-pad);
+	width: calc(100% - var(--slide-pad) * 2);
+	/* aspect-ratio turns the height cap into a width cap, so the box is exactly the picture and the zoom controls have something to sit on */
+	max-width: calc(var(--frame-height) * var(--ratio, 1));
+	aspect-ratio: var(--ratio, 1);
+	overflow: hidden;
+}
+/* the scroller sits inside the frame so the zoom controls don't pan away with it. it never scrolls itself: a drag moves it by hand */
+.entry-scroll {
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	overflow: hidden;
+}
+.entry-photo {
+	display: block;
+	width: calc(100% * var(--zoom, 1));
+	height: calc(100% * var(--zoom, 1));
+	object-fit: contain;
+	object-position: left top;
+	-webkit-user-drag: none;
+	user-select: none;
+}
+.entry-zoom {
+	position: absolute;
+	z-index: 1;
+	bottom: 20px;
+	right: 20px;
+	width: 60px;
+	height: 30px;
+	display: none;
+	background-color: var(--White-Paper);
+	padding: 2px 2px 0 2px;
+	border: 1px solid var(--Cochinilla-Ink);
+	align-items: center;
+	justify-content: center;
+}
+/* the controls belong to the picture in the first picture's place, and only a pointer can reach them */
+@media (hover: hover) {
+	.entry-slide[data-active="1"] .entry-frame:hover .entry-zoom {
+		display: flex;
+	}
+}
+.entry-zoom a {
+	position: relative;
+	cursor: pointer;
+}
+.entry-zoom a::before {
+	content: "";
+	position: absolute;
+	top: .025em;
+	left: -.18em;
+	width: 1.6ch;
+	height: 1.6ch;
+	background-color: var(--Cochinilla-Ink);
+	pointer-events: none;
+	z-index: -1;
+	border-radius: 50%;
+	display: none;
+}
+@media (hover: hover) {
+	.entry-zoom a:hover {
+		color: var(--Antique-White);
+	}
+	.entry-zoom a:hover::before {
+		display: block;
+	}
+}
+/* the caret points along the strip, which runs across here and down below the breakpoint */
+.entry-nav-down {
+	display: none;
+}
+/* the markers carry .mark, so the circle lands on the caret alone rather than the label beside it */
+.entry-nav {
+	position: absolute;
+	/* stays put while the strip moves underneath it, and above the information column, whose text
+	   box reaches under it along the bottom of the screen below the breakpoint */
+	z-index: 4;
+	bottom: var(--baseline-bottom);
+	left: 40px;
+}
+.entry[data-single="1"] .entry-nav {
+	display: none;
+}
+
+/* a dotted rule down the left of every picture, which puts one 40px off the right edge of the one before it */
+.entry-slide::before {
+	content: "";
+	position: absolute;
+	z-index: 1;
+	width: 2px;
+	top: 20px;
+	bottom: 40px;
+	left: 0;
+	background-image: radial-gradient(circle, var(--Cochinilla-Ink) 1px, transparent 1.01px);
+	background-size: 2px var(--dot-gap);
+	background-repeat: repeat-y;
+	background-position: center calc(var(--dot-gap) / 2 + 1px);
+	pointer-events: none;
+}
+
+
+/* idle */
+/* a copy of the open column laid exactly over it, where the words drift into asterisks and the
+   paper underneath shows through as a field of dots */
+.idle {
+	position: fixed;
+	z-index: 8; /* over the page, under anything the page has opened on top of itself */
+	overflow: hidden;
+	pointer-events: none;
+}
+.idle-dots {
+	position: absolute;
+	z-index: 0;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+}
+/* one line's worth of periods, run across the part of a column that has nothing standing on it.
+   they are set as characters, on the same grid as the words, so they arrive the way the words do */
+.idle-row {
+	position: absolute;
+	white-space: pre;
+	overflow: hidden;
+}
+/* the copy has to fill the overlay whatever the column or panel it was taken from places itself at,
+   and several of those are laid out by rules that come after this one */
+.idle-copy {
+	position: absolute !important;
+	z-index: 1;
+	top: 0 !important;
+	right: auto !important;
+	bottom: auto !important;
+	left: 0 !important;
+	width: 100% !important;
+	height: 100% !important;
+	margin: 0 !important;
+	transform: none !important;
+}
+/* the sheet belongs to the overlay now, and the periods are printed on it, so the copy of the
+   column must not lay its own paper over them */
+.idle:not([data-panel="1"]) .idle-copy {
+	background-color: transparent !important;
+}
+/* a panel keeps its own paper, so the periods are written over the copy rather than under it. they
+   only ever stand in the spaces between words there, so nothing of the writing is covered */
+.idle[data-panel="1"] {
+	z-index: 11; /* the panel it stands in for sits at 10 */
+}
+.idle[data-panel="1"] .idle-dots {
+	z-index: 2;
+}
+/* the column the pointer is resting on keeps the red paper it has on the page, so the copy of it
+   is written in the ink that goes with red rather than the ink it is set in by default */
+.idle[data-hover="1"] .idle-dots,
+.idle[data-hover="1"] .idle-copy,
+.idle[data-hover="1"] .idle-copy * {
+	color: var(--White-Paper);
+}
+/* nobody is pointing at anything any more, so the row last pointed at stops being lit */
+.idle-copy .index-list-link[data-active="1"],
+.idle-copy .index-image[data-active="1"] .index-image-info {
+	background-color: transparent;
+	color: var(--Cochinilla-Ink);
+}
+
+/* about */
+/* named apart from the .about on the section itself, which these rules would turn into a grid of its own */
+.about-columns {
+	position: relative;
+	flex: 1;
+	min-height: 0;
+	display: grid;
+	grid-template-columns: repeat(4, 1fr);
+	/* an auto row would grow to the tallest column and nothing would ever scroll */
+	grid-template-rows: minmax(0, 1fr);
+}
+/* spans the last two columns, behind the contact and legal text */
+.about-image {
+	position: absolute;
+	top: 50vh;
+	left: 50%;
+	right: 0;
+	bottom: var(--baseline-bottom); /* it stops on the line the text along the foot of the page sits on */
+	padding: 0 40px; /* it starts on the line it is anchored to, with no air above it */
+}
+/* the picture fills the whole box and is cropped to it, rather than scaled down inside it */
+.about-image img {
+	display: block;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	object-position: center;
+}
+/* contact and the small print under it, at the foot of the column the team is listed in */
+.about-contact > * + * {
+	margin-top: 1.15em;
+}
+/* an empty line more than the blocks above it keep between themselves, so contact reads as its own
+   thing at the foot of the column rather than as one more block of the team */
+.about-column > .about-contact {
+	margin-top: 2.3em;
+}
+/* two empty lines between the contact lines and the small print that follows them. the size belongs
+   to the lines rather than the block, so the gap above is still measured in the page's own line */
+.about-legal {
+	margin-top: 2.3em;
+}
+.about-legal .about-lines {
+	font-size: 12px;
+	line-height: 1.25em;
+}
+.about-copyright + :not(.about-copyright) {
+	margin-top: 1.25em; /* an empty line between the small print and the links under it */
+}
+.about-link,
+.about-policy {
+	overflow-wrap: anywhere; /* the email is longer than the column is wide */
+	display: block;
+}
+/* the caret arrives inline on hover, after a non breaking space so the line cannot break there and strand it */
+@media (hover: hover) {
+	.about-link:hover::before,
+	.about-policy:hover::before {
+		content: ">\00a0";
+	}
+}
+.about-column {
+	min-height: 0;
+	min-width: 0;
+	overflow-y: auto;
+	overscroll-behavior: contain;
+	/* the tail padding matches the head, so the last line can be scrolled up to the same 50vh line the first one starts on */
+	padding: 50vh 20px var(--baseline-bottom) 20px;
+}
+.about-column:nth-of-type(2) {
+	padding-bottom: 6em;
+}
+.about-column > * + * {
+	margin-top: 1.15em; /* a full empty line between blocks */
+}
+.about-hidden {
+	margin-top: 1.15em;
+}
+.about-expand[data-active="0"] .about-hidden {
+	display: none;
+}
+.about-hidden p + p {
+	margin-top: 1.15em;
+}
+.about-gridlines {
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	display: grid;
+	grid-template-columns: repeat(4, 1fr);
+	pointer-events: none;
+}
+
+/* about popups */
+.about-popup {
+	position: absolute;
+	z-index: 2;
+	top: 20px;
+	right: 20px;
+	width: calc(25% - 40px); /* the fourth column, inset 20px each side */
+	max-height: calc(100dvh - 40px);
+	display: flex;
+	flex-direction: column;
+	padding: 20px;
+	border: 1px solid var(--Cochinilla-Ink);
+	background-color: var(--White-Paper);
+}
+.about-popup[data-active="0"] {
+	display: none;
+}
+.about-popup-head {
+	display: flex;
+	justify-content: space-between;
+	gap: 20px;
+}
+/* only the body scrolls, so the title and close button stay put */
+.about-popup-body {
+	min-height: 0;
+	overflow-y: auto;
+	overscroll-behavior: contain;
+}
+.about-popup-text {
+	margin-top: 200px;
+	font-size: 12px;
+	line-height: 1.15;
+}
+.about-popup-text p + p {
+	margin-top: 1.15em;
+}
+
+/* events */
+.events-columns {
+	position: relative;
+	flex: 1;
+	min-height: 0;
+	display: grid;
+	grid-template-columns: repeat(3, minmax(0, 1fr));
+	grid-template-rows: minmax(0, 1fr);
+}
+.events-column {
+	position: relative;
+	min-height: 0;
+	min-width: 0;
+}
+/* the gap between a heading and the first entry under it */
+.events-columns {
+	--events-gap: calc(50vh - 20px - 1.15em);
+}
+.events-listing {
+	grid-column: 2 / 4;
+	display: grid;
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+	grid-template-rows: minmax(0, 1fr);
+	min-height: 0;
+	min-width: 0;
+}
+.events-group {
+	position: relative;
+	min-height: 0;
+	min-width: 0;
+}
+.events-heading {
+	position: absolute;
+	z-index: 1;
+	top: 20px;
+	left: 20px;
+	right: 20px;
+}
+/* the intro sits at 50vh and the calendar at the baseline, the column scrolling when the two would meet */
+.events-info {
+	display: flex;
+	flex-direction: column;
+	overflow-y: auto;
+	overscroll-behavior: contain;
+	padding: 50vh 20px var(--baseline-bottom) 20px;
+}
+.events-intro p + p {
+	margin-top: 1.15em;
+}
+
+/* calendar */
+.events-calendar {
+	margin-top: auto; /* drops to the baseline while there is room to spare */
+	padding-top: 1.15em; /* and keeps an empty line once there is not */
+}
+.events-calendar-days {
+	margin-top: 1.15em; /* one empty line under the month */
+	display: grid;
+	grid-template-columns: repeat(auto-fill, 2ch);
+	column-gap: 1ch;
+	row-gap: 0;
+	max-width: 38ch; /* 13 columns of 2ch with 1ch between them */
+}
+.events-calendar-days span {
+	width: 2ch;
+	text-align: center;
+	position: relative;
+	z-index: 0; /* own stacking context, so the circle can sit behind the number */
+}
+.events-calendar-days span[data-event="1"] {
+	color: var(--White-Paper);
+}
+.events-calendar-days span[data-event="1"]::before {
+	content: "";
+	top: -.15em;
+	left: -.1em;
+	width: 2.25ch;
+	height: 2.25ch;
+	position: absolute;
+	z-index: -1;
+	background-color: var(--Cochinilla-Ink);
+	border-radius: 50%;
+}
+.events-calendar-nav {
+	margin-top: 2.3em; /* two empty lines under the dates */
+}
+.events-calendar-nav a span {
+	position: relative;
+}
+.events-calendar-nav a span::before {
+	content: "";
+	position: absolute;
+	top: .025em;
+	left: -.18em;
+	width: 1.6ch;
+	height: 1.6ch;
+	background-color: var(--Cochinilla-Ink);
+	pointer-events: none;
+	z-index: -1;
+	border-radius: 50%;
+	display: none;
+}
+@media (hover: hover) {
+	.events-calendar-nav a:hover span {
+		color: var(--Antique-White);
+	}
+	.events-calendar-nav a:hover span::before {
+		display: block;
+	}
+}
+
+/* event listings */
+.events-list {
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	min-height: 0;
+	overflow-y: auto;
+	overscroll-behavior: contain;
+	padding: 50vh 20px var(--baseline-bottom) 20px;
+}
+.events-event + .events-event {
+	margin-top: 1.15em; /* the last of the five lines between entries */
+}
+.events-event:not(:last-child)::after {
+	content: "";
+	display: block;
+	margin-top: 4.6em; /* four empty lines, with the rule drawn on the fourth */
+	height: 2px;
+	background-image: radial-gradient(circle, var(--Cochinilla-Ink) 1px, transparent 1.01px);
+	background-size: var(--dot-gap) 2px;
+	background-repeat: repeat-x;
+	background-position: calc(var(--dot-gap) / 2 + 1px) center;
+}
+.events-event > * + * {
+	margin-top: 1.15em;
+}
+.events-thumb-link {
+	display: block;
+}
+.events-type {
+	text-decoration: underline;
+}
+.events-name {
+	text-transform: uppercase;
+}
+.events-thumb {
+	display: block;
+	width: 100%;
+	height: auto; /* the picture's own height attribute would otherwise stand in the way of the ratio */
+	aspect-ratio: 16 / 9;
+	object-fit: cover; /* a picture of another shape is cropped to the window rather than fitted to it */
+}
+.events-blurb p + p,
+.events-hidden p + p {
+	margin-top: 1.15em;
+}
+.events-event[data-active="0"] .events-less,
+.events-event[data-active="1"] .events-more,
+.events-event[data-active="0"] .events-hidden {
+	display: none;
+}
+.events-toggle,
+.events-submit,
+.events-view {
+	display: block; /* inline anchors ignore margin-top and share a line */
+	width: fit-content;
+}
+.events-event[data-active="0"] .events-submit,
+.events-event[data-active="0"] .events-view {
+	margin-top: 0; /* no empty line until the description pushes them apart */
+}
+/* what an open call asks for, set on dotted paper with the line height set to one grid row */
+.events-request {
+	--request-row: calc(1.15em + 10px); /* a line of text with 5px above and below it */
+	position: relative;
+	margin: 20px 0;
+	padding: 20px;
+	line-height: var(--request-row);
+	text-align: center;
+	text-transform: uppercase;
+	background-color: var(--Yellow-Paper);
+}
+/* the grid is drawn on its own box, reaching a pixel past the inset so a dot on the boundary is whole, and shifted half a row so the dots fall between rows */
+.events-request::before {
+	content: "";
+	position: absolute;
+	top: 19px;
+	right: 19px;
+	bottom: 19px;
+	left: 19px;
+	background-image: radial-gradient(circle, var(--Cochinilla-Ink) 1px, transparent 1.01px);
+	background-size: var(--request-row) var(--request-row);
+	background-position: center calc(1px - var(--request-row) / 2);
+	pointer-events: none;
+}
+/* positioned, so the text paints over the grid rather than under it */
+.events-request-row {
+	position: relative;
+}
+.events-request-row:empty::before {
+	content: "\00a0"; /* holds an empty row open to one line */
+}
+.events-gridlines {
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	pointer-events: none;
+}
+
+/* event view overlay */
+.view {
+	position: fixed;
+	z-index: 10;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	/* 120px into the events section, which starts after the two collapsed columns */
+	left: calc(var(--section-width) + var(--index-narrow) + 120px);
+	border-left: 1px solid var(--Cochinilla-Ink);
+	background-color: rgba(255,255,255,.9);
+}
+.view[data-active="0"] {
+	display: none;
+}
+.view-close {
+	position: absolute;
+	z-index: 2;
+	top: 20px;
+	left: 20px;
+}
+
+/* filmstrip: one row of equal height pictures, scrolled by whole images */
+.view-images {
+	position: absolute;
+	top: 50vh;
+	right: 0;
+	left: 0;
+	/* stops 40px above the controls, which sit on the baseline */
+	height: calc(50vh - var(--baseline-bottom) - 1.15em - 40px);
+	overflow: hidden;
+	touch-action: pan-y; /* a sideways drag is the strip's to scroll, not the page's */
+}
+.view-strip {
+	display: flex;
+	height: 100%;
+	width: max-content;
+}
+.view-image {
+	position: relative;
+	flex: none;
+	height: 100%;
+	padding: 0 40px; /* the dotted rule lands midway between two pictures */
+}
+.view-image img {
+	display: block;
+	height: 100%;
+	width: auto;
+}
+/* the rule separates one picture from the next, so whichever one is against the left edge of the
+   strip has nothing to its left: its own rule would double the panel's border */
+.view-image[data-lead="1"]::before {
+	display: none;
+}
+.view-image::before {
+	content: "";
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	width: 2px;
+	background-image: radial-gradient(circle, var(--Cochinilla-Ink) 1px, transparent 1.01px);
+	background-size: 2px var(--dot-gap);
+	background-repeat: repeat-y;
+	background-position: center calc(var(--dot-gap) / 2 + 1px);
+	pointer-events: none;
+}
+.view-nav {
+	position: absolute;
+	bottom: var(--baseline-bottom);
+	left: 40px;
+}
+
+/* the details panel pinned to the top right of the overlay */
+.view-info {
+	position: absolute;
+	z-index: 1;
+	top: 16px;
+	right: 40px;
+	width: 350px;
+	max-height: calc(100vh - 16px);
+	overflow-y: auto;
+	overscroll-behavior: contain;
+	background-color: var(--Yellow-Paper);
+}
+.view-info-title {
+	margin: 20px;
+}
+.view-info-rows {
+	margin-top: 80px;
+	margin-bottom: 40px;
+	border-bottom: 1px solid var(--Cochinilla-Ink);
+}
+.view-info-row {
+	border-top: 1px solid var(--Cochinilla-Ink);
+	padding: 10px 20px;
+}
+.view-info-name {
+	text-transform: uppercase;
+}
+.view-expand[data-active="0"] .view-info-hidden {
+	display: none;
+}
+/* a dotted rule separates the description from the label above it */
+.view-info-hidden::before {
+	content: "";
+	display: block;
+	margin: 10px 0 calc(10px + 1.15em) 0; /* an empty line between the rule and the text under it */
+	height: 2px;
+	background-image: radial-gradient(circle, var(--Cochinilla-Ink) 1px, transparent 1.01px);
+	background-size: var(--dot-gap) 2px;
+	background-repeat: repeat-x;
+	background-position: calc(var(--dot-gap) / 2 + 1px) center;
+}
+.view-info-hidden p + p {
+	margin-top: 1.15em;
+}
+
+/* signup, sitting over the collapsed columns on the about page */
+.signup {
+	position: fixed;
+	z-index: 10;
+	right: 40px;
+	bottom: var(--baseline-bottom);
+	/* 40px inside the index column on the left, 40px from the screen on the right */
+	width: calc(var(--index-narrow) + var(--section-width) * 2 - 80px);
+	border: 1px solid var(--Cochinilla-Ink);
+	background-color: var(--Yellow-Paper);
+}
+.signup[data-active="0"] {
+	display: none;
+}
+.signup-top {
+	padding: 20px;
+	border-bottom: 1px solid var(--Cochinilla-Ink);
+}
+.signup-head {
+	display: flex;
+	align-items: flex-start;
+	justify-content: space-between;
+	gap: 20px;
+}
+.signup-close {
+	flex: none;
+}
+.signup-label {
+	margin-top: 3.45em; /* three empty lines */
+}
+/* the field and the empty rows below it share a height */
+.signup-field,
+.signup-row {
+	display: block;
+	width: 100%;
+	padding: 10px 20px;
+	border-bottom: 1px solid var(--Cochinilla-Ink);
+}
+.signup-row::before {
+	content: "\00a0"; /* holds the row open to one line */
+}
+.signup-field {
+	font-family: inherit;
+	font-size: inherit;
+	line-height: inherit;
+	letter-spacing: inherit;
+	color: inherit;
+	background: none;
+	border: none;
+	border-bottom: 1px solid var(--Cochinilla-Ink);
+	border-radius: 0;
+}
+.signup-field:focus {
+	outline: none;
+}
+.signup-field:focus-visible {
+	outline: none;
+}
+.signup-foot {
+	padding: 20px;
+}
+.signup-submit {
+	display: block;
+	width: fit-content;
+}
+/* the button, the thank you and the nudge share one place, and the state picks which of them stands in it */
+.signup-send,
+.signup-sent,
+.signup-invalid,
+.signup-error {
+	display: none;
+}
+.signup-submit[data-state="idle"] .signup-send,
+.signup-submit[data-state="sent"] .signup-sent,
+.signup-submit[data-state="invalid"] .signup-invalid,
+.signup-submit[data-state="error"] .signup-error {
+	display: inline;
+}
+
+/* notes */
+.notes-columns {
+	position: relative;
+	flex: 1;
+	min-height: 0;
+	display: grid;
+	grid-template-columns: repeat(3, minmax(0, 1fr));
+	grid-template-rows: minmax(0, 1fr);
+}
+.notes-listing {
+	grid-column: 2 / 4;
+	display: grid;
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+	grid-template-rows: minmax(0, 1fr);
+	min-height: 0;
+	min-width: 0;
+}
+.notes-column {
+	position: relative;
+	min-height: 0;
+	min-width: 0;
+	overflow-y: auto;
+	overscroll-behavior: contain;
+	padding: 50vh 20px var(--baseline-bottom) 20px;
+}
+/* the intro sits at 50vh and the controls at the baseline, the column scrolling when the two would meet */
+.notes-info {
+	display: flex;
+	flex-direction: column;
+	padding-bottom: var(--baseline-bottom);
+}
+.notes-intro p + p {
+	margin-top: 1.15em;
+}
+.notes-nav {
+	margin-top: auto;
+	padding-top: 1.15em;
+}
+.notes-nav a[data-active="0"],
+.notes-nav[data-both="0"] .notes-sep {
+	display: none;
+}
+
+/* one issue shows at a time in each of the two right hand columns */
+.notes-issue[data-active="0"] {
+	display: none;
+}
+.notes-issue > * + * {
+	margin-top: 1.15em;
+}
+.notes-text {
+	margin-top: 2.3em; /* two empty lines under the issue number and date */
+}
+.notes-text p + p,
+.notes-hidden p + p {
+	margin-top: 1.15em;
+}
+.notes-hidden {
+	margin-top: 1.15em;
+}
+.notes-expand[data-active="0"] .notes-hidden,
+.notes-expand[data-active="0"] .notes-less,
+.notes-expand[data-active="1"] .notes-more {
+	display: none;
+}
+.notes-toggle {
+	display: block;
+	width: fit-content;
+}
+/* articles, separated like the events entries */
+.notes-article {
+	display: block;
+}
+.notes-article > * + * {
+	margin-top: 1.15em;
+}
+/* the whole block is one link, so the mark after the last of the author names stands for all of it */
+@media (hover: hover) {
+	.notes-article:hover .mark {
+		color: var(--Antique-White);
+	}
+	.notes-article:hover .mark::before {
+		display: block;
+	}
+}
+.notes-blurb {
+	margin-top: 2.3em; /* two empty lines under the title */
+}
+.notes-article + .notes-article {
+	margin-top: 1.15em; /* the last of the five lines between articles */
+}
+.notes-article:not(:last-child)::after {
+	content: "";
+	display: block;
+	margin-top: 4.6em; /* four empty lines, with the rule drawn on the fourth */
+	height: 2px;
+	background-image: radial-gradient(circle, var(--Cochinilla-Ink) 1px, transparent 1.01px);
+	background-size: var(--dot-gap) 2px;
+	background-repeat: repeat-x;
+	background-position: calc(var(--dot-gap) / 2 + 1px) center;
+}
+.notes-gridlines {
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	pointer-events: none;
+}
+
+/* article popup */
+.article {
+	position: fixed;
+	z-index: 10;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	/* 120px into the notes section, which starts after the three collapsed columns */
+	left: calc(var(--section-width) * 2 + var(--index-narrow) + 120px);
+	border-left: 1px solid var(--Cochinilla-Ink);
+	background-color: rgba(255,255,255,.9);
+	overflow: hidden;
+	/* the circles are punched out of the panel, so the page shows through them */
+	--hole-x: calc(25% - 140px);
+	mask-image:
+		radial-gradient(circle 13.5px at var(--hole-x) 25%, transparent 13.5px, #000 13.5px),
+		radial-gradient(circle 13.5px at var(--hole-x) 50%, transparent 13.5px, #000 13.5px),
+		radial-gradient(circle 13.5px at var(--hole-x) 75%, transparent 13.5px, #000 13.5px);
+	/* the rings are positioned against the padding box, so the mask must be too */
+	mask-origin: padding-box;
+	-webkit-mask-origin: padding-box;
+	mask-composite: intersect;
+	-webkit-mask-composite: source-in;
+}
+.article[data-active="0"] {
+	display: none;
+}
+/* fixed to the panel rather than the scroller, so they stay put */
+.article-close {
+	position: absolute;
+	z-index: 2;
+	top: 20px;
+	left: 20px;
+}
+.article-issue {
+	position: absolute;
+	z-index: 2;
+	top: 20px;
+	left: 0;
+	right: 0;
+	text-align: center;
+	pointer-events: none; /* it spans the full width, so it must not eat the close button */
+}
+/* the number alone once the centred line would reach the close button */
+.article-issue[data-short="1"] .article-issue-name {
+	display: none;
+}
+.article-holes {
+	position: absolute;
+	z-index: 2;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	pointer-events: none;
+}
+.article-hole {
+	position: absolute;
+	left: var(--hole-x);
+	width: 30px;
+	height: 30px;
+	margin: -15px 0 0 -15px;
+	border: 1px solid var(--Cochinilla-Ink);
+	border-radius: 50%;
+}
+.article-hole:nth-child(1) {
+	top: 25%;
+}
+.article-hole:nth-child(2) {
+	top: 50%;
+}
+.article-hole:nth-child(3) {
+	top: 75%;
+}
+.article-scroll {
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	overflow-y: auto;
+	overscroll-behavior: contain;
+}
+
+/* the head reserves the space above the body, and the box floats inside it so an open bio overlaps what follows */
+.article-head {
+	position: relative;
+	height: var(--article-head, 50vh);
+}
+.article-box {
+	position: absolute;
+	z-index: 1; /* .article-body is a later positioned sibling and would cover it */
+	top: calc(20px + 1.15em + 80px); /* 80px under the issue line */
+	left: 40px;
+	right: 40px;
+	max-width: 400px;
+	margin: 0 auto; /* centred in the panel */
+	padding: 40px 40px 80px 40px;
+	text-align: center;
+	background-color: var(--Yellow-Paper);
+}
+.article-type {
+	margin-bottom: 1.15em;
+}
+.article-author-line {
+	margin-top: 1.15em;
+}
+/* the names sit together until a bio is open */
+.article-box[data-active="0"] .article-author-line + .article-author-line {
+	margin-top: 0;
+}
+.article-author {
+	display: block;
+	width: fit-content;
+	margin: 0 auto;
+}
+.article-bio {
+	margin-top: 1.15em;
+}
+.article-box[data-active="0"] .article-bio,
+.article-box[data-active="0"] .mark-less,
+.article-box[data-active="1"] .mark-more {
+	display: none;
+}
+
+/* the running text, centred and capped, with pictures breaking out of it */
+.article-body {
+	position: relative;
+	/* everything inside measures against this box, so the picture offsets and the caption keep their relationships */
+	padding: 0 20px 60px 20px;
+}
+.article-paragraph {
+	max-width: 560px;
+	margin: 0 auto;
+}
+.article-paragraph + .article-paragraph {
+	margin-top: 1.15em; /* one line between paragraphs */
+}
+/* the figure spans the panel so the caption can sit against the text column, with the picture offset inside it */
+.article-figure {
+	position: relative;
+	margin: 60px 0;
+}
+.article-figure img {
+	display: block;
+	height: auto;
+}
+/* landscape starts 80px inside the text and runs to the right edge */
+.article-figure[data-orientation="landscape"] img {
+	margin-left: calc(50% - 200px);
+	width: calc(50% + 200px);
+}
+/* portrait keeps the text width, centred between the text and the right edge */
+.article-figure[data-orientation="portrait"] img {
+	margin-left: calc(75% - 420px);
+	width: 560px;
+}
+/* captions hang off the right edge of the text column, level with the next block */
+.article-caption {
+	position: absolute;
+	top: calc(100% + 60px);
+	left: calc(50% + 320px);
+	right: 0; /* the body padding already holds it off the edge */
+	font-size: 12px;
+	line-height: 1.15em;
+}
+.article-caption::before {
+	content: ">\00a0";
+}
+
+/* closing rule and the rest of the issue */
+.article-end {
+	max-width: 560px;
+	margin: 60px auto 0 auto;
+}
+.article-rule {
+	height: 2px;
+	background-image: radial-gradient(circle, var(--Cochinilla-Ink) 1px, transparent 1.01px);
+	background-size: var(--dot-gap) 2px;
+	background-repeat: repeat-x;
+	background-position: calc(var(--dot-gap) / 2 + 1px) center;
+}
+.article-more {
+	margin-top: 2.3em;
+}
+.article-more-item {
+	margin-top: 1.15em;
+}
+.article-more-link {
+	display: block;
+	width: fit-content;
+}
+
+/* annotations, numbered as they appear and opened by clicking */
+.article-note {
+	position: relative;
+	cursor: pointer;
+}
+.article-note-mark {
+	position: relative;
+	z-index: 0;
+	color: var(--White-Paper);
+}
+.article-note-mark::before {
+	content: "";
+	position: absolute;
+	z-index: -1;
+	top: .025em;
+	left: -.18em;
+	width: 1.6ch;
+	height: 1.6ch;
+	background-color: var(--Cochinilla-Ink);
+	border-radius: 50%;
+}
+.article-note-box {
+	position: absolute;
+	z-index: 3;
+	display: none;
+	bottom: calc(100% + 10px);
+	left: 10px;
+	width: max-content;
+	min-width: 200px;
+	max-width: 320px;
+	padding: 10px;
+	background-color: var(--Cochinilla-Ink);
+	color: var(--White-Paper);
+	cursor: auto;
+}
+.article-note[data-active="1"] .article-note-box {
+	display: block;
+}
+/* inside the red box the marker reads as the rest of the annotation, with no circle behind it */
+.article-note-box .article-note-mark {
+	color: inherit;
+}
+.article-note-box .article-note-mark::before {
+	display: none;
+}
+/* a link in the running text is underlined to tell it from the words around it, and one inside an
+   annotation is set in the paper colour of the box's own text */
+.article-paragraph a {
+	text-decoration: underline;
+}
+.article-note-box a {
+	color: var(--White-Paper);
+}
+
+/* notes article, once there is no room beside the text */
+@media only screen and (max-width: 1350px) {
+	/* pictures stop breaking out and line up with the text */
+	.article-figure[data-orientation="landscape"] img,
+	.article-figure[data-orientation="portrait"] img {
+		width: 100%;
+		max-width: 560px;
+		margin: 0 auto;
+	}
+	/* the caption drops under its picture, and the figure's margins sit above the image and below the caption */
+	.article-caption {
+		position: static;
+		width: 100%;
+		max-width: 560px;
+		margin: 10px auto 0 auto;
+	}
+	/* nothing left of the text to punch through */
+	.article {
+		mask-image: none;
+		-webkit-mask-image: none;
+	}
+	.article-holes {
+		display: none;
+	}
+}
+
+/* entry overlay mobile styles */
+@media only screen and (max-width: 1200px) {
+	/* the empty column goes and the image drops into the last one, alongside the contact and legal text */
+	.about-spacer {
+		display: none;
+	}
+	.about-columns {
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+	}
+	.about-image {
+		left: 66.6667%;
+	}
+	.about-gridlines {
+		grid-template-columns: repeat(3, 1fr);
+	}
+	.about-gridlines div:nth-child(3) {
+		display: none;
+	}
+	.about-popup {
+		width: calc(33.3333% - 40px);
+	}
+	.about-image {
+		padding: 0 20px;
+	}
+	/* the dates wrap onto more rows in a narrow column, so give the block more air */
+	.events-calendar {
+		padding-top: 2.3em;
+	}
+
+	/* the two lists become one scrolling column, headings scrolling with them */
+	.events-columns {
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+	}
+	.events-listing {
+		grid-column: 2 / 3;
+		display: block;
+		overflow-y: auto;
+		overscroll-behavior: contain;
+		padding: 20px 20px var(--baseline-bottom) 20px;
+	}
+	.events-group,
+	.events-heading,
+	.events-list {
+		position: static;
+	}
+	.events-heading {
+		margin-bottom: var(--events-gap);
+	}
+	.events-list {
+		overflow: visible;
+		padding: 0;
+	}
+	/* after the upcoming list: the gap, a dotted rule, 20px, then the past heading */
+	.events-group + .events-group::before {
+		content: "";
+		display: block;
+		margin-top: var(--events-gap);
+		margin-bottom: 20px;
+		height: 2px;
+		background-image: radial-gradient(circle, var(--Cochinilla-Ink) 1px, transparent 1.01px);
+		background-size: var(--dot-gap) 2px;
+		background-repeat: repeat-x;
+		background-position: calc(var(--dot-gap) / 2 + 1px) center;
+	}
+	.events-gridlines {
+		grid-template-columns: repeat(2, 1fr);
+	}
+	.events-gridlines div:nth-child(2) {
+		display: none;
+	}
+
+	/* the editor's note and the articles become one scrolling column */
+	.notes-columns {
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+	}
+	.notes-listing {
+		grid-column: 2 / 3;
+		display: block;
+		overflow-y: auto;
+		overscroll-behavior: contain;
+		padding: 50vh 20px var(--baseline-bottom) 20px;
+	}
+	.notes-editor,
+	.notes-articles {
+		overflow: visible;
+		padding: 0;
+	}
+	/* the same gap and rule that separate two articles */
+	.notes-articles .notes-issue[data-active="1"]::before {
+		content: "";
+		display: block;
+		margin-top: 4.6em;
+		margin-bottom: 1.15em;
+		height: 2px;
+		background-image: radial-gradient(circle, var(--Cochinilla-Ink) 1px, transparent 1.01px);
+		background-size: var(--dot-gap) 2px;
+		background-repeat: repeat-x;
+		background-position: calc(var(--dot-gap) / 2 + 1px) center;
+	}
+	.notes-gridlines {
+		grid-template-columns: repeat(2, 1fr);
+	}
+	.notes-gridlines div:nth-child(2) {
+		display: none;
+	}
+}
+
+/* mobile: a single column, a sidebar nav, and everything starting at 33dvh */
+@media only screen and (max-width: 900px) {
+	:root {
+		/* the baseline grid now runs down from 33dvh, and the common margin is 18px */
+		--baseline-bottom: calc(100dvh - 33dvh - round(down, 100dvh - 33dvh - 18px, var(--line)));
+	}
+	body,
+	h1, h2, h3, h4, h5, h6,
+	button {
+		font-size: 14px;
+		line-height: 1.15;
+	}
+
+	/* the four column nav gives way to the sidebar, and only the open section shows */
+	.container[data-page] {
+		grid-template-columns: 1fr;
+		padding-left: 60px;
+	}
+	.section[data-active="0"],
+	.lang {
+		display: none;
+	}
+	.section::before {
+		display: none; /* the sidebar already draws that line */
+	}
+	.section-heading {
+		top: 18px;
+		left: 18px;
+	}
+	.section-heading-full {
+		display: none;
+	}
+	.section-heading-short {
+		display: inline;
+	}
+
+	/* sidebar */
+	.nav {
+		display: block;
+		position: fixed;
+		z-index: 12;
+		top: 0;
+		bottom: 0;
+		left: 0;
+		width: 60px;
+		background-color: var(--Antique-White);
+	}
+	/* the rule is painted over the last pixel of the box, so the padding box is the full width in both states */
+	.nav::after {
+		content: "";
+		position: absolute;
+		z-index: 1;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		width: 1px;
+		background-color: var(--Cochinilla-Ink);
+	}
+	.nav[data-active="1"] {
+		width: calc(100% - 54px);
+	}
+	.nav-bar {
+		display: block;
+		position: absolute;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		left: 0;
+	}
+	/* the whole strip is one control while closed, but once open only the marker and the links are */
+	.nav[data-active="1"] .nav-bar {
+		cursor: default;
+	}
+	/* centred on the bar, and without the tracking that only suits horizontal text */
+	.nav-title {
+		position: absolute;
+		top: 18px;
+		left: 50%;
+		transform: translateX(-50%);
+		writing-mode: vertical-lr;
+		text-orientation: upright;
+	}
+	.nav[data-active="1"] .nav-title {
+		left: 18px;
+		transform: none;
+		writing-mode: unset;
+		text-orientation: unset;
+		letter-spacing: .35em;
+	}
+	.nav-open {
+		position: absolute;
+		bottom: var(--baseline-bottom);
+		left: 0;
+		right: 0;
+		text-align: center;
+	}
+	/* the marker stays put and turns into the close control, on the left margin */
+	.nav[data-active="1"] .nav-open {
+		left: 18px;
+		right: auto;
+		text-align: left;
+		cursor: pointer;
+	}
+	.nav-menu {
+		display: none;
+		position: absolute;
+		top: 33dvh;
+		left: 18px;
+		right: 18px;
+	}
+	.nav[data-active="1"] .nav-menu {
+		display: block;
+	}
+	.nav-link,
+	.nav-language > span,
+	.nav-language-row > span:first-child {
+		display: block;
+		letter-spacing: .35em;
+	}
+	/* an empty line, a dotted rule, an empty line, above every row after the first */
+	.nav-link + .nav-link,
+	.nav-language {
+		margin-top: 1.15em;
+	}
+	.nav-link + .nav-link::before,
+	.nav-language::before {
+		content: "";
+		display: block;
+		margin-top: 1.15em;
+		margin-bottom: 1.15em;
+		height: 2px;
+		background-image: radial-gradient(circle, var(--Cochinilla-Ink) 1px, transparent 1.01px);
+		background-size: var(--dot-gap) 2px;
+		background-repeat: repeat-x;
+		background-position: calc(var(--dot-gap) / 2 + 1px) center;
+	}
+	/* the rule sits above the row, so the flex pair lives one level in */
+	.nav-language-row {
+		display: flex;
+		justify-content: space-between;
+		gap: 1ch;
+	}
+	.nav-language-links {
+		letter-spacing: normal;
+		text-align: right;
+	}
+	.nav-language-links a[data-active="1"] {
+		text-decoration: underline;
+	}
+
+	/* index: heading and controls on the new margins */
+	.index-controls {
+		top: 18px;
+		right: 18px;
+		gap: 18px;
+	}
+	.index-shuffle-label {
+		display: none;
+	}
+	/* no hover preview on a touch screen, and no lit row left behind by a tap */
+	.index-preview {
+		display: none;
+	}
+	.index-list-link[data-active="1"],
+	.index-image[data-active="1"] .index-image-info {
+		background-color: transparent;
+		color: var(--Cochinilla-Ink);
+	}
+
+	/* list: one column at a time, chosen from the sort menu */
+	.index-list {
+		top: 33dvh;
+		left: 18px;
+		right: 18px;
+	}
+	.index-list-gridlines {
+		display: none;
+	}
+	.index-list-headings,
+	.index-list-link {
+		grid-template-columns: 1fr;
+		gap: 0;
+	}
+	.index-list-heading {
+		pointer-events: none; /* the order is fixed on mobile */
+	}
+	.index-list-headings > .index-list-heading,
+	.index-list-link > span {
+		display: none;
+	}
+	.index-list[data-column="0"][data-selecting="0"] .index-list-headings > .index-list-heading:nth-child(1),
+	.index-list[data-column="1"][data-selecting="0"] .index-list-headings > .index-list-heading:nth-child(2),
+	.index-list[data-column="2"][data-selecting="0"] .index-list-headings > .index-list-heading:nth-child(3),
+	.index-list[data-column="3"][data-selecting="0"] .index-list-headings > .index-list-heading:nth-child(4),
+	.index-list[data-column="4"][data-selecting="0"] .index-list-headings > .index-list-heading:nth-child(5) {
+		display: block;
+	}
+	.index-list[data-column="0"] .index-list-link > span:nth-child(1),
+	.index-list[data-column="1"] .index-list-link > span:nth-child(2),
+	.index-list[data-column="2"] .index-list-link > span:nth-child(3),
+	.index-list[data-column="3"] .index-list-link > span:nth-child(4),
+	.index-list[data-column="4"] .index-list-link > span:nth-child(5) {
+		display: block;
+	}
+	.index-list[data-selecting="1"] .index-select {
+		display: block;
+	}
+	/* the entries give way to the menu while a column is being picked */
+	.index-list[data-selecting="1"] .index-list-links {
+		display: none;
+	}
+	.index-heading-full,
+	.index-date-full {
+		display: none;
+	}
+	.index-heading-short,
+	.index-date-year {
+		display: inline;
+	}
+
+	/* the sort menu only picks which column shows */
+	.index-list-headings {
+		position: relative;
+	}
+	.index-sort {
+		display: block;
+		position: absolute;
+		top: 0;
+		right: 0;
+	}
+	/* anchored on the right, but as wide as the list, so it lines up with SELECT ONE */
+	.index-sort-menu {
+		display: none;
+		position: absolute;
+		top: 3.45em; /* two empty lines under the heading row */
+		left: auto;
+		right: 0;
+		width: calc(100vw - 60px - 36px);
+	}
+	.index-sort[data-active="1"] .index-sort-menu {
+		display: block;
+	}
+	.index-sort-option {
+		display: block;
+		text-align: left;
+	}
+	.index-sort-option + .index-sort-option {
+		margin-top: 1.15em;
+	}
+	.index-sort-option + .index-sort-option::before {
+		content: "";
+		display: block;
+		margin-top: 1.15em;
+		margin-bottom: 1.15em;
+		height: 2px;
+		background-image: radial-gradient(circle, var(--Cochinilla-Ink) 1px, transparent 1.01px);
+		background-size: var(--dot-gap) 2px;
+		background-repeat: repeat-x;
+		background-position: calc(var(--dot-gap) / 2 + 1px) center;
+	}
+
+	/* the strip scrolls itself here, so touch keeps its momentum and its rubber band */
+	.index-images {
+		overflow-y: auto;
+		overscroll-behavior: contain;
+		padding-top: 33dvh; /* the strip opens this far down, with nothing above it */
+	}
+	/* one column, scrolled by the view around it rather than on its own */
+	.index-images-column {
+		height: auto;
+		overflow: visible;
+	}
+	.index-image {
+		margin: 0 18px 36px 18px;
+	}
+	.index-image-crop {
+		margin-bottom: 9px;
+	}
+	.index-images-gridlines {
+		display: none;
+	}
+
+	/* an opened entry covers the content, leaving the sidebar clear */
+	.entry {
+		left: 60px;
+		background-color: var(--White-Paper);
+		border-left: none; /* the sidebar already draws that line */
+		/* the pictures sit 18px in, one to a screen */
+		--slide-pad: 18px;
+		/* the bottom edge every picture stands on, clear of the information below it */
+		--frame-top: auto;
+		--frame-bottom: calc(var(--baseline-bottom) + var(--entry-text, 5.75em) + 36px);
+		/* and how far up it may reach: one clear line below the close button */
+		--frame-height: calc(100dvh - 18px - var(--line) - 18px - var(--frame-bottom));
+	}
+	/* the same reach however many pictures the entry holds, since the information sits below it either way */
+	.entry[data-single="1"] {
+		--frame-height: calc(100dvh - 18px - var(--line) - 18px - var(--frame-bottom));
+	}
+	.entry-backdrop {
+		display: none;
+	}
+	.entry-info::after {
+		display: none; /* the sidebar already draws that line */
+	}
+	/* the strip stands on end here: one picture to a screen, swiped up and down */
+	.entry-track {
+		flex-direction: column;
+		right: auto;
+		bottom: auto;
+		width: var(--media-width, 100dvw);
+		height: auto;
+	}
+	.entry-slide {
+		width: 100%;
+		height: var(--media-height, 100dvh);
+	}
+	/* centred in the room between the close button and the words below, rather than standing on the
+	   bottom of it: the box is placed by its middle, so its own height need not be known */
+	.entry-frame {
+		bottom: calc(var(--frame-bottom) + var(--frame-height) / 2);
+		transform: translateY(50%);
+	}
+	.entry-slide::before {
+		display: none; /* no dotted rules with one picture to a screen */
+	}
+	.entry-info {
+		position: static;
+		width: auto;
+	}
+	.entry-close {
+		top: 18px;
+		left: 18px;
+	}
+	.entry-count {
+		top: 18px;
+		right: 18px;
+		bottom: auto;
+		left: auto;
+		text-align: right;
+	}
+	.entry-text {
+		top: auto;
+		bottom: var(--baseline-bottom);
+		left: 18px;
+		right: 18px;
+	}
+	.entry-line + .entry-line {
+		margin-top: 0; /* the lines run on, as one block */
+	}
+	.entry-nav {
+		bottom: var(--baseline-bottom);
+		left: auto;
+		right: 18px;
+	}
+	.entry-nav-label,
+	.entry-nav-prev,
+	.entry-nav-across,
+	.entry-zoom {
+		display: none;
+	}
+	.entry-nav-down {
+		display: inline;
+	}
+
+	/* about: the four columns become one, read straight down */
+	.about-columns {
+		display: block;
+		overflow-y: auto;
+		overscroll-behavior: contain;
+		/* the tail matches the head, so the last line can be scrolled up to the line the first one starts on */
+		padding: 33dvh 18px var(--baseline-bottom) 18px;
+	}
+	.about-column:nth-of-type(2) {
+		padding-bottom: 0;
+	}
+	.about-column {
+		display: block;
+		overflow: visible;
+		padding: 0;
+	}
+	/* the rule below already sets contact apart here, so it keeps no extra line of its own */
+	.about-column > .about-contact {
+		margin-top: 0;
+	}
+	/* the spacer column has no place in a single column */
+	.about-image,
+	.about-spacer,
+	.about-gridlines {
+		display: none;
+	}
+	/* four empty lines and a rule between one section and the next */
+	.about-column + .about-column::before,
+	.about-contact::before {
+		content: "";
+		display: block;
+		margin-top: 4.6em;
+		margin-bottom: 1.15em;
+		height: 2px;
+		background-image: radial-gradient(circle, var(--Cochinilla-Ink) 1px, transparent 1.01px);
+		background-size: var(--dot-gap) 2px;
+		background-repeat: repeat-x;
+		background-position: calc(var(--dot-gap) / 2 + 1px) center;
+	}
+	/* the policy popups sit on the baseline, in the width of the column they open from, and scroll once they reach 36px from the top */
+	.about-popup {
+		position: fixed;
+		top: auto;
+		bottom: var(--baseline-bottom);
+		left: 78px;
+		right: 18px;
+		width: auto;
+		max-height: calc(100dvh - 36px - var(--baseline-bottom));
+		padding: 18px;
+	}
+	.about-popup-head {
+		gap: 18px;
+	}
+	.about-popup-text {
+		margin-top: 120px;
+	}
+
+	/* events: the intro, the calendar and both lists become one column */
+	.events-columns {
+		display: block;
+		overflow-y: auto;
+		overscroll-behavior: contain;
+		padding: 33dvh 18px var(--baseline-bottom) 18px;
+	}
+	.events-info,
+	.events-listing {
+		display: block;
+		overflow: visible;
+		padding: 0;
+	}
+	.events-calendar {
+		margin-top: 4.6em; /* four empty lines under the intro */
+		padding-top: 0;
+	}
+	/* four empty lines and a rule before the upcoming list, and again before the past */
+	.events-listing::before,
+	.events-group + .events-group::before {
+		content: "";
+		display: block;
+		margin-top: 4.6em;
+		margin-bottom: 1.15em;
+		height: 2px;
+		background-image: radial-gradient(circle, var(--Cochinilla-Ink) 1px, transparent 1.01px);
+		background-size: var(--dot-gap) 2px;
+		background-repeat: repeat-x;
+		background-position: calc(var(--dot-gap) / 2 + 1px) center;
+	}
+	.events-heading {
+		margin-bottom: 4.6em; /* the same four empty lines that sit above the rule */
+	}
+	.events-gridlines {
+		display: none;
+	}
+
+	/* the event view: a card, the pictures stacked, then the details, with display: contents letting the rows order around the pictures */
+	.view {
+		left: 60px;
+		border-left: none; /* the sidebar already draws that line */
+		background-color: var(--White-Paper);
+		display: flex;
+		flex-direction: column;
+		overflow-y: auto;
+		overscroll-behavior: contain;
+		padding: 33dvh 0;
+	}
+	.view-info,
+	.view-info-rows {
+		display: contents;
+	}
+	/* each item keeps its own height, so the column flexbox cannot shrink them into each other */
+	.view-info-title,
+	.view-info-name,
+	.view-info-date,
+	.view-images,
+	.view-info-line,
+	.view-expand {
+		flex: none;
+	}
+	.view-close {
+		position: fixed;
+		top: 18px;
+		left: 78px;
+	}
+	.view-nav {
+		display: none;
+	}
+
+	/* a ruled card: an empty line, the label, an empty line, the name, the date, and one more empty line */
+	.view-info-title,
+	.view-info-name,
+	.view-info-date {
+		/* an empty row stands as tall as a line of text with its padding */
+		--card-row: calc(1.15em + 18px);
+		margin: 0 18px;
+		padding: 9px;
+		text-align: center;
+		background-color: var(--Yellow-Paper);
+		/* the rule belongs under each line, and the row's own top border would double it */
+		border: none;
+		border-bottom: 1px solid var(--Cochinilla-Ink);
+	}
+	.view-info-title {
+		order: 1;
+		text-transform: uppercase;
+	}
+	.view-info-name {
+		order: 2;
+	}
+	.view-info-date {
+		order: 3;
+		/* the rule comes straight after the date, and the closing row sits below it */
+		padding-bottom: 0;
+		border-bottom: none;
+	}
+	/* the negative margins reach back through the padding, so a rule on an empty row runs the full width of the card */
+	.view-info-title::before,
+	.view-info-name::before {
+		content: "";
+		display: block;
+		height: var(--card-row);
+		margin: -9px -9px 9px -9px;
+		border-bottom: 1px solid var(--Cochinilla-Ink);
+	}
+	.view-info-date::after {
+		content: "";
+		display: block;
+		height: var(--card-row);
+		margin: 9px -9px 0 -9px;
+		border-top: 1px solid var(--Cochinilla-Ink);
+	}
+
+	/* the filmstrip becomes a stack, and the gap below it separates card from details */
+	.view-images {
+		order: 4;
+		position: static;
+		height: auto;
+		overflow: visible;
+		margin: 18px 18px 72px 18px;
+	}
+	.view-strip {
+		display: block;
+		width: auto;
+		height: auto;
+	}
+	.view-image {
+		padding: 0;
+		height: auto;
+	}
+	.view-image + .view-image {
+		margin-top: 18px;
+	}
+	.view-image img {
+		width: 100%;
+		height: auto;
+	}
+	.view-image::before {
+		display: none; /* no rule between pictures once they are stacked */
+	}
+
+	/* an empty line between each detail, then three before the description */
+	.view-info-line {
+		order: 5;
+		margin: 0 18px;
+		padding: 0;
+		border: none;
+	}
+	.view-info-line + .view-info-line {
+		margin-top: 1.15em;
+	}
+	.view-expand {
+		order: 6;
+		margin: 3.45em 18px 0 18px;
+		padding: 0;
+		border: none;
+	}
+	/* the description is the point of opening this, so it is not folded away here */
+	.view-info-toggle {
+		display: none;
+	}
+	.view-expand[data-active="0"] .view-info-hidden {
+		display: block;
+	}
+	.view-info-hidden::before {
+		display: none;
+	}
+	/* the blurb reads as an opening, set apart from the longer text under it */
+	.view-info-hidden .view-info-blurb + p {
+		margin-top: 2.3em;
+	}
+
+	/* notes read straight down, the wrappers stepping aside so their columns can be ordered */
+	.notes-columns {
+		display: flex;
+		flex-direction: column;
+		overflow-y: auto;
+		overscroll-behavior: contain;
+		padding: 33dvh 18px 33dvh 18px;
+	}
+	.notes-info,
+	.notes-listing {
+		display: contents;
+	}
+	/* each item keeps its own height, so the column flexbox cannot shrink them into each other */
+	.notes-intro,
+	.notes-editor,
+	.notes-nav,
+	.notes-articles {
+		flex: none;
+	}
+	.notes-intro {
+		order: 1;
+	}
+	.notes-editor {
+		order: 2;
+	}
+	.notes-nav {
+		order: 3;
+		margin-top: 0; /* it is placed by its order here, not pushed to a baseline */
+		padding-top: 0;
+	}
+	.notes-articles {
+		order: 4;
+		margin-top: 72px; /* straight into the first article, with no rule before it */
+	}
+	.notes-articles .notes-issue[data-active="1"]::before {
+		display: none;
+	}
+	/* a rule before the editor's note, and a pair of them around the issue controls */
+	.notes-editor::before,
+	.notes-nav::before,
+	.notes-nav::after {
+		content: "";
+		display: block;
+		height: 2px;
+		background-image: radial-gradient(circle, var(--Cochinilla-Ink) 1px, transparent 1.01px);
+		background-size: var(--dot-gap) 2px;
+		background-repeat: repeat-x;
+		background-position: calc(var(--dot-gap) / 2 + 1px) center;
+	}
+	.notes-editor::before {
+		margin: 72px 0 1.15em 0;
+	}
+	.notes-nav::before {
+		margin: 18px 0 1.15em 0;
+	}
+	.notes-nav::after {
+		margin-top: 1.15em;
+	}
+	/* with a single issue there are no controls to hold between the rules, so the pair closes up into
+	   one rule, set like the one before the editor's note */
+	.notes-nav[data-empty="1"]::before {
+		margin: 72px 0 0 0;
+	}
+	.notes-nav[data-empty="1"]::after {
+		display: none;
+	}
+	.notes-columns:has(.notes-nav[data-empty="1"]) .notes-articles {
+		margin-top: 1.15em;
+	}
+	/* the same 72px between one article and the next */
+	.notes-article:not(:last-child)::after {
+		margin-top: 72px;
+	}
+	.notes-gridlines {
+		display: none;
+	}
+
+	/* the article popup covers the page, with the close button and issue line pinned */
+	.article {
+		left: 60px;
+		border-left: none; /* the sidebar already draws that line */
+		background-color: var(--White-Paper);
+	}
+	.article-close {
+		top: 18px;
+		left: 18px;
+	}
+	.article-issue {
+		top: 18px;
+	}
+	.article-issue-name {
+		display: none; /* the number alone fits across the top */
+	}
+	/* the title box opens on the line the pages start on, holding the width of the text below it */
+	.article-box {
+		top: 33dvh;
+		left: 18px;
+		right: 18px;
+		max-width: 560px;
+		margin: 0 auto;
+		padding: 36px 18px 72px 18px;
+	}
+	/* the box is never wider than the panel it opens in */
+	.article-note-box {
+		max-width: calc(100vw - 60px - 36px);
+	}
+	.article-body {
+		padding: 0 18px 72px 18px;
+	}
+	/* 72px above a picture and below it, or below its caption where there is one */
+	.article-figure {
+		margin: 72px 0;
+	}
+	.article-caption {
+		margin-top: 9px;
+	}
+
+	/* the signup covers the page rather than sitting beside it */
+	.signup {
+		top: 33dvh;
+		right: 18px;
+		bottom: auto;
+		left: 78px;
+		width: auto;
+	}
+	.signup-top,
+	.signup-foot {
+		padding: 18px;
+	}
+	.signup-field,
+	.signup-row {
+		padding: 9px 18px;
+	}
+	.signup-head {
+		gap: 18px;
+	}
+}

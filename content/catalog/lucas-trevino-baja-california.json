@@ -1,0 +1,84 @@
+{
+	"Addressee [ES]": "",
+	"Archive": [
+		{
+			"File": "L000078_LUCAS TREVINO_BAJA CALIFORNIA SUR_MEXICO.jpg",
+			"Code": "L00078",
+			"Type": "Letter",
+			"Type [ES]": "Carta",
+			"Tint": true
+		},
+		{
+			"File": "LR000078_LUCAS TREVINO_BAJA CALIFORNIA SUR_MEXICO.jpg",
+			"Code": "LR00078",
+			"Type": "Letter",
+			"Type [ES]": "Carta",
+			"Tint": true
+		},
+		{
+			"File": "LR000078d_LUCAS TREVINO_BAJA CALIFORNIA SUR_MEXICO.jpg",
+			"Code": "LR000078d",
+			"Type": "Letter",
+			"Type [ES]": "Carta",
+			"Tint": true
+		},
+		{
+			"File": "LR000078c_LUCAS TREVINO_BAJA CALIFORNIA SUR_MEXICO.jpg",
+			"Code": "LR000078c",
+			"Type": "Letter",
+			"Type [ES]": "Carta",
+			"Tint": true
+		},
+		{
+			"File": "LR000078b_LUCAS TREVINO_BAJA CALIFORNIA SUR_MEXICO.jpg",
+			"Code": "LR000078b",
+			"Type": "Letter",
+			"Type [ES]": "Carta",
+			"Tint": true
+		},
+		{
+			"File": "LR000078a_LUCAS TREVINO_BAJA CALIFORNIA SUR_MEXICO.jpg",
+			"Code": "LR000078a",
+			"Type": "Letter",
+			"Type [ES]": "Carta",
+			"Tint": true
+		},
+		{
+			"File": "P0000296_LUCAS TREVINO_BAJA CALIFORNIA SUR_MEXICO.jpeg",
+			"Code": "P00296",
+			"Type": "Photograph",
+			"Type [ES]": "Fotografía",
+			"Tint": false
+		},
+		{
+			"File": "P0000297_LUCAS TREVINO_BAJA CALIFORNIA SUR_MEXICO.jpeg",
+			"Code": "P00297",
+			"Type": "Photograph",
+			"Type [ES]": "Fotografía",
+			"Tint": false
+		},
+		{
+			"File": "P0000298_LUCAS TREVINO_BAJA CALIFORNIA SUR_MEXICO.jpeg",
+			"Code": "P00298",
+			"Type": "Photograph",
+			"Type [ES]": "Fotografía",
+			"Tint": false
+		},
+		{
+			"File": "P0000299_LUCAS TREVINO_BAJA CALIFORNIA SUR_MEXICO.jpeg",
+			"Code": "P00299",
+			"Type": "Photograph",
+			"Type [ES]": "Fotografía",
+			"Tint": false
+		}
+	],
+	"City [ES]": "",
+	"City": "Baja California",
+	"Thumbnail": "P00299",
+	"Date": "2026-03",
+	"Addressee": "Lucas Treviño",
+	"Country": "Mexico",
+	"Type [ES]": "Carta, Fotografía",
+	"Type": "Letter, Photograph",
+	"Country [ES]": "México"
+}

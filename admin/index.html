@@ -1,0 +1,290 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="robots" content="noindex">
+	<title>Archivo Latino — Content</title>
+	<link rel="icon" type="image/png" sizes="32x32" href="/assets/meta/favicon.png">
+	<link rel="apple-touch-icon" href="/assets/meta/webclip.png">
+	<style>
+		/* the cms's own preview buttons sit over the top right of the page, where the catalog keeps its
+		   list and image switch, so they move down to sit above the language buttons */
+		[class*="-ViewControls"] {
+			top: auto !important;
+			bottom: 56px;
+		}
+	</style>
+</head>
+<body>
+	<script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+	<script src="https://unpkg.com/decap-cms@^3.8.0/dist/decap-cms.js"></script>
+	<!-- the same code build.js writes the pages with, so the preview is the page itself -->
+	<script src="/render.js"></script>
+	<script>
+		// a picture in an article's body, written into the text as {{figure: path | caption}} so the
+		// build can set it the way the site sets every other picture
+		CMS.registerEditorComponent({
+			id: 'figure',
+			label: 'Image',
+			fields: [
+				{name: 'image', label: 'Image', widget: 'image'},
+				{name: 'caption', label: 'Caption', widget: 'string', required: false}
+			],
+			pattern: /^\{\{\s*figure:\s*(.+?)\s*(?:\|\s*(.*?))?\s*\}\}$/ms,
+			fromBlock: (match) => ({image: match[1], caption: match[2] || ''}),
+			toBlock: (data) => `{{figure: ${data.image || ''}${data.caption ? ` | ${data.caption}` : ''}}}`,
+			toPreview: (data) => `<figure><img src="${data.image || ''}" alt="" style="max-width: 100%"><figcaption>${data.caption || ''}</figcaption></figure>`
+		});
+
+		/* preview */
+
+		// which page each collection, or each file under pages, previews
+		const PREVIEW_PAGES = {catalog: 'index', events: 'events', journal: 'notes', about: 'about', 'events-intro': 'events'};
+
+		// every page carries the rest of the site too, so the preview borrows it from the live site, as
+		// the build gathered it, along with the sizes of the pictures that have already been built
+		let published = null;
+		let publishedLoad = Promise.all([
+			fetch('/assets/content.json', {cache: 'no-store'}).then(response => response.json()),
+			fetch('/assets/images/sizes.json', {cache: 'no-store'}).then(response => response.ok ? response.json() : {}).catch(() => ({}))
+		]).then(([content, sizes]) => {
+			published = {content, sizes};
+		});
+
+		// the entry being edited takes the place of its published copy, known by its file name, or joins
+		// the rest when it is new
+		function placeEntry(list, slug, entry) {
+			let index = slug ? list.findIndex(item => item._slug == slug) : -1;
+			let item = {...entry, _slug: slug};
+			if (index < 0) {
+				list.push(item);
+			} else {
+				list[index] = item;
+			}
+		}
+
+		// the site's content with the entry being edited put in, whichever kind it is
+		function previewData(key, entry) {
+			let data = JSON.parse(JSON.stringify(published.content));
+			let slug = entry.get('slug');
+			let edited = entry.get('data').toJS();
+			if (key == 'catalog') {
+				placeEntry(data.catalog.Entries, slug, edited);
+			} else if (key == 'events') {
+				placeEntry(data.events.Events, slug, edited);
+			} else if (key == 'journal') {
+				placeEntry(data.journal.Issues, slug, edited);
+				data.journal.Issues.sort((a, b) => Number(a.Number) - Number(b.Number));
+			} else if (key == 'about') {
+				data.about = edited;
+			} else if (key == 'events-intro') {
+				data.events = {...edited, Events: data.events.Events};
+			}
+			return data;
+		}
+
+		// the address the preview opens on, so an entry, an event with a gallery or an issue is what is
+		// in view to begin with. the page's own scripts read it the way they read the site's
+		function previewAddress(key, entry) {
+			let edited = entry.get('data').toJS();
+			let render = window.ArchivoRender;
+			let query = '';
+			if (key == 'catalog') {
+				// a code two pictures share gives the second an address of its own, so it is read from the
+				// catalog as the build would set it out
+				let data = previewData(key, entry);
+				render.prepareContent(data, {drafts: true});
+				let placed = data.catalog.Entries.find(item => item._slug == (entry.get('slug') || undefined)) || data.catalog.Entries.find(item => item.Addressee == edited.Addressee);
+				let archive = (placed && placed.Archive) || [];
+				let image = archive.find(item => item.Code == placed.Thumbnail) || archive[0];
+				if (image && image.Link) {
+					query = `?view=list&code=${encodeURIComponent(image.Link)}`;
+				}
+			} else if (key == 'events' && edited.View && edited.Name) {
+				query = `?event=${encodeURIComponent(render.slugify(edited.Name))}`;
+			} else if (key == 'journal' && edited.Number) {
+				query = `?issue=${encodeURIComponent(edited.Number)}`;
+			}
+			return `/admin/preview.html${query}`;
+		}
+
+		// the navigation stands aside, taking the room it keeps below the breakpoint with it, and the
+		// collapsed columns stop being links to the live site
+		const PREVIEW_STYLE = `<style>
+			.nav { display: none !important; }
+			.section-link { pointer-events: none; }
+			@media only screen and (max-width: 900px) {
+				.container[data-page] { padding-left: 0; }
+				.entry, .view, .article { left: 0; }
+			}
+		</style>`;
+
+		// the preview stays on the page being edited. the language links switch its language, and any
+		// other link that would load a page of the live site into it is held back
+		const PREVIEW_SCRIPT = `<script>
+			window.addEventListener('click', (event) => {
+				let link = event.target.closest('.lang-toggle, .nav-language-links a');
+				if (link) {
+					event.preventDefault();
+					event.stopPropagation();
+					window.top.archivoPreview.setLanguage(link.pathname.startsWith('/es/') ? 'es' : 'en');
+				}
+			}, true);
+			document.addEventListener('click', (event) => {
+				let link = event.target.closest('a[href]');
+				if (link && !event.defaultPrevented && link.target != '_blank' && link.origin == location.origin) {
+					event.preventDefault();
+				}
+			});
+		<\/script>`;
+
+		// the page as the build writes it, with every expanding text open so all of it is in view, the
+		// signup closed and the idle animation left out
+		function previewPage(key, entry, imageSource, code) {
+			let render = window.ArchivoRender;
+			let data = previewData(key, entry);
+
+			render.setImageSource(imageSource);
+			render.prepareContent(data, {drafts: true});
+			let language = render.LANGUAGES.find(item => item.code == code);
+			let html = render.renderPages(data, language, published.sizes)[PREVIEW_PAGES[key]];
+
+			let page = new DOMParser().parseFromString(html, 'text/html');
+			for (let expand of page.querySelectorAll('.about-expand, .events-event, .notes-expand, .article-box')) {
+				expand.dataset.active = '1';
+			}
+			let signup = page.querySelector('.signup');
+			if (signup) {
+				signup.dataset.active = '0';
+			}
+			let idle = page.querySelector('script[src="/idle.js"]');
+			if (idle) {
+				idle.remove();
+			}
+			return '<!DOCTYPE html>\n' + page.documentElement.outerHTML
+				.replace('</head>', `${PREVIEW_STYLE}\n</head>`)
+				.replace(/<\/body>(?![\s\S]*<\/body>)/, `${PREVIEW_SCRIPT}\n</body>`);
+		}
+
+		// where every scrolled box sat, so a reload can put them back. a box is known by its classes and
+		// its place among the boxes that share them
+		function scrollState(doc) {
+			let state = [];
+			let seen = new Map();
+			for (let element of doc.querySelectorAll('*')) {
+				let name = element.getAttribute('class') || element.tagName;
+				let count = seen.get(name) || 0;
+				seen.set(name, count + 1);
+				if (element.scrollTop || element.scrollLeft) {
+					state.push({name, count, top: element.scrollTop, left: element.scrollLeft});
+				}
+			}
+			return state;
+		}
+		function restoreScroll(doc, state) {
+			let seen = new Map();
+			let found = new Map();
+			for (let element of doc.querySelectorAll('*')) {
+				let name = element.getAttribute('class') || element.tagName;
+				let count = seen.get(name) || 0;
+				seen.set(name, count + 1);
+				found.set(`${name}|${count}`, element);
+			}
+			for (let item of state || []) {
+				let element = found.get(`${item.name}|${item.count}`);
+				if (element) {
+					element.scrollTop = item.top;
+					element.scrollLeft = item.left;
+				}
+			}
+		}
+
+		const PREVIEW_RELOAD = 400; // ms of quiet typing before the page is written again
+		const FRAME_STYLE = {position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', border: 0};
+		const TOOLBAR_STYLE = {position: 'fixed', zIndex: 1000, bottom: '8px', right: '8px', display: 'flex', gap: '6px', padding: '6px', background: '#fff', border: '1px solid #ccc', fontFamily: 'system-ui, sans-serif', fontSize: '12px'};
+		const BUTTON_STYLE = {font: 'inherit', padding: '2px 6px', border: '1px solid #ccc', background: '#fff', cursor: 'pointer'};
+
+		// the page lives in a frame of its own, which writes it in and is reloaded a moment after each
+		// change. its scripts run fresh every time, and the address they keep carries what was open
+		// across the reload
+		function previewFor(key) {
+			return createClass({
+				getInitialState() {
+					return {language: 'en'};
+				},
+				componentDidMount() {
+					// a picture the build has made is shown the way the site shows it, and one that has only
+					// just been uploaded is shown from the original the cms is holding. the address is kept,
+					// so asking again gives the same page and the preview has no reason to reload
+					this.sources = new Map();
+					this.imageSource = (file, size) => {
+						if (published.sizes[file] && published.sizes[file][size]) {
+							return null;
+						}
+						if (!this.sources.has(file)) {
+							this.sources.set(file, this.props.getAsset(`/assets/uploads/${file}`).toString());
+						}
+						return this.sources.get(file);
+					};
+					// what the frame's page asks for when it loads, and tells once it is written
+					window.archivoPreview = {
+						page: () => {
+							this.written = this.page();
+							return this.written;
+						},
+						written: (doc) => {
+							let scroll = this.scroll;
+							setTimeout(() => restoreScroll(doc, scroll), 50);
+						},
+						setLanguage: (code) => this.setState({language: code})
+					};
+					if (!published) {
+						publishedLoad.then(() => this.forceUpdate());
+					}
+				},
+				// the cms renders the preview far more often than the content changes, so the frame is only
+				// reloaded once the page it would be given is different from the one it has
+				componentDidUpdate() {
+					clearTimeout(this.timer);
+					this.timer = setTimeout(() => {
+						if (published && this.page() != this.written) {
+							this.reload();
+						}
+					}, PREVIEW_RELOAD);
+				},
+				page() {
+					return previewPage(key, this.props.entry, this.imageSource, this.state.language);
+				},
+				componentWillUnmount() {
+					clearTimeout(this.timer);
+				},
+				reload() {
+					if (!this.frame || !this.frame.contentWindow) {
+						return;
+					}
+					this.scroll = scrollState(this.frame.contentDocument);
+					this.frame.contentWindow.location.reload();
+				},
+				render() {
+					if (!published) {
+						return h('p', {style: {padding: '20px', fontFamily: 'system-ui, sans-serif'}}, 'Loading the preview…');
+					}
+					return h('div', null,
+						h('iframe', {src: previewAddress(key, this.props.entry), ref: (element) => this.frame = element, style: FRAME_STYLE}),
+						h('div', {style: TOOLBAR_STYLE}, ['en', 'es'].map(code => h('button', {
+							key: code,
+							style: {...BUTTON_STYLE, fontWeight: this.state.language == code ? 'bold' : 'normal'},
+							onClick: () => this.setState({language: code})
+						}, code.toUpperCase())))
+					);
+				}
+			});
+		}
+
+		for (let key of Object.keys(PREVIEW_PAGES)) {
+			CMS.registerPreviewTemplate(key, previewFor(key));
+		}
+	</script>
+</body>
+</html>

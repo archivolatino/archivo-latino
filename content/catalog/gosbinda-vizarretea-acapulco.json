@@ -1,0 +1,21 @@
+{
+	"Addressee [ES]": "",
+	"Archive": [
+		{
+			"File": "L000030_GOSBINDA_VIZARRETEA_ACAPULCO_MEXICO.jpg",
+			"Code": "L00030",
+			"Type": "Letter",
+			"Type [ES]": "Carta",
+			"Tint": true
+		}
+	],
+	"City [ES]": "",
+	"City": "Acapulco",
+	"Thumbnail": "L00030",
+	"Date": "2025-06",
+	"Addressee": "Gosbinda Vizarretea",
+	"Country": "Mexico",
+	"Type [ES]": "Carta",
+	"Type": "Letter",
+	"Country [ES]": "México"
+}
