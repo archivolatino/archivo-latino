@@ -175,6 +175,13 @@ function setImageSource(source) {
 	imageSource = source;
 }
 
+// the build tags each picture's address with its fingerprint, so a browser can keep a picture for as
+// long as it likes and still fetch the new one the moment it is replaced
+let imageVersion = null;
+function setImageVersion(version) {
+	imageVersion = version;
+}
+
 function imageUrl(file, size) {
 	if (!file) {
 		return '';
@@ -183,7 +190,8 @@ function imageUrl(file, size) {
 	if (url) {
 		return url;
 	}
-	return `/${IMAGES_DIR}/${imageName(file)}-${size}.webp`;
+	let version = imageVersion && imageVersion(file);
+	return `/${IMAGES_DIR}/${imageName(file)}-${size}.webp${version ? `?v=${version}` : ''}`;
 }
 
 // 2021-02-06 reads as 06 February 2021 and 2021-02 as February 2021, parsed by hand to dodge time zones
@@ -1479,6 +1487,7 @@ Object.assign(exports, {
 	baseName,
 	fileStem,
 	setImageSource,
+	setImageVersion,
 	prepareContent,
 	renderPages
 });

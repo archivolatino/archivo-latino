@@ -1,9 +1,10 @@
 const fs = require('fs');
 const path = require('path');
+const crypto = require('crypto');
 const sharp = require('sharp');
 const {
 	LANGUAGES, UPLOADS_DIR, IMAGES_DIR, META_DIR, OG_FILE, WEBCLIP_FILE, OG_WIDTH, OG_HEIGHT,
-	imageName, bodyFigures, today, lastDate, prepareContent, renderPages
+	imageName, bodyFigures, today, lastDate, prepareContent, renderPages, setImageVersion
 } = require('./render.js');
 
 // build settings
@@ -18,6 +19,10 @@ const ABOUT_FILE = 'about.json';
 const EVENTS_FILE = 'events.json';
 // everything the pages are made from, gathered into one file for the cms preview to read
 const BUNDLE_FILE = 'assets/content.json';
+// what each upload looked like when its copies were made, and how big the copies came out. git keeps
+// no dates, so a fresh checkout (which is every netlify build) makes every upload look newer than
+// its copies. the fingerprint says whether a picture has really changed
+const MANIFEST_FILE = 'assets/images/manifest.json';
 const OG_QUALITY = 85;
 const SOURCE_TYPES = ['.jpg', '.jpeg', '.png', '.tif', '.tiff', '.webp'];
 const THUMB_SIZE = 800;
@@ -78,8 +83,19 @@ async function convertIcons() {
 	return converted;
 }
 
-// compressed webp copies, originals in uploads are never touched
-async function convertImages() {
+// a picture's fingerprint, read from its contents rather than its date
+function fingerprint(file) {
+	return crypto.createHash('sha1').update(fs.readFileSync(file)).digest('hex');
+}
+
+function readManifest() {
+	let file = path.join(ROOT, MANIFEST_FILE);
+	return fs.existsSync(file) ? JSON.parse(fs.readFileSync(file, 'utf8')) : {};
+}
+
+// compressed webp copies, originals in uploads are never touched. an upload is only converted when it
+// is new or its contents have changed since its copies were made, or when the build is run with --force
+async function convertImages(manifest) {
 	let uploads = path.join(ROOT, UPLOADS_DIR);
 	let images = path.join(ROOT, IMAGES_DIR);
 	if (!fs.existsSync(uploads)) {
@@ -91,14 +107,35 @@ async function convertImages() {
 		{suffix: 'thumb', size: THUMB_SIZE, quality: THUMB_QUALITY},
 		{suffix: 'full', size: FULL_SIZE, quality: FULL_QUALITY}
 	];
+	let force = process.argv.includes('--force');
 
 	let converted = 0;
+	let present = new Set();
 	for (let file of fs.readdirSync(uploads)) {
 		if (!SOURCE_TYPES.includes(path.extname(file).toLowerCase())) {
 			continue;
 		}
+		present.add(file);
 		let source = path.join(uploads, file);
 		let name = imageName(file);
+		let outputs = sizes.map(size => path.join(images, `${name}-${size.suffix}.webp`));
+		let hash = fingerprint(source);
+		let known = manifest[file];
+		let made = outputs.every(output => fs.existsSync(output));
+		if (!force && made && known && known.hash == hash) {
+			continue;
+		}
+		// copies made before there was a manifest are taken as they are, as long as they are newer than
+		// their upload, and only measured
+		if (!force && made && !known && outputs.every(output => !isOutdated(source, output))) {
+			let entry = {hash};
+			for (let i = 0; i < sizes.length; i++) {
+				let metadata = await sharp(outputs[i]).metadata();
+				entry[sizes[i].suffix] = {width: metadata.width, height: metadata.height};
+			}
+			manifest[file] = entry;
+			continue;
+		}
 
 		// sideways exif orientations report their dimensions untumbled
 		let metadata = await sharp(source).metadata();
@@ -109,26 +146,34 @@ async function convertImages() {
 			height = metadata.width;
 		}
 
-		for (let size of sizes) {
-			let output = path.join(images, `${name}-${size.suffix}.webp`);
-			if (!isOutdated(source, output)) {
-				continue;
-			}
+		let entry = {hash};
+		for (let i = 0; i < sizes.length; i++) {
+			let size = sizes[i];
 			// lock the long edge so portraits and landscapes both fit the same box
 			let lock = width >= height ? {width: size.size} : {height: size.size};
-			await sharp(source)
+			let info = await sharp(source)
 				.rotate() // applies the exif orientation instead of dropping it
 				.resize({...lock, withoutEnlargement: true})
 				.webp({quality: size.quality})
-				.toFile(output);
+				.toFile(outputs[i]);
+			entry[size.suffix] = {width: info.width, height: info.height};
 			converted++;
 		}
+		manifest[file] = entry;
 	}
+	// an upload that has gone takes its line with it
+	for (let file of Object.keys(manifest)) {
+		if (!present.has(file)) {
+			delete manifest[file];
+		}
+	}
+	fs.writeFileSync(path.join(ROOT, MANIFEST_FILE), JSON.stringify(manifest, null, '\t') + '\n');
 	return converted;
 }
 
-// generated images ship their dimensions, so the layout settles before anything loads
-async function imageSizes(entries, events) {
+// generated images ship their dimensions, so the layout settles before anything loads. they are read
+// from the manifest, which holds them for every copy it made
+function imageSizes(entries, events, manifest) {
 	let sizes = {};
 	let files = [];
 	for (let entry of entries.concat(events || [])) {
@@ -152,14 +197,12 @@ async function imageSizes(entries, events) {
 		if (sizes[file]) {
 			continue;
 		}
+		let known = manifest[file] || {};
 		sizes[file] = {};
 		for (let size of ['thumb', 'full']) {
-			let generated = path.join(ROOT, IMAGES_DIR, `${imageName(file)}-${size}.webp`);
-			if (!fs.existsSync(generated)) {
-				continue;
+			if (known[size]) {
+				sizes[file][size] = known[size];
 			}
-			let metadata = await sharp(generated).metadata();
-			sizes[file][size] = {width: metadata.width, height: metadata.height};
 		}
 	}
 	return sizes;
@@ -210,10 +253,12 @@ async function build() {
 	let entries = data.catalog.Entries || [];
 	let events = data.events.Events || [];
 	let issues = data.journal.Issues || [];
-	let converted = await convertImages();
+	let manifest = readManifest();
+	let converted = await convertImages(manifest);
 	converted += await convertMeta();
 	converted += await convertIcons();
-	let sizes = await imageSizes(entries, events.concat(issues, data.about));
+	let sizes = imageSizes(entries, events.concat(issues, data.about), manifest);
+	setImageVersion(file => manifest[file] ? manifest[file].hash.slice(0, 10) : '');
 	// the cms preview has no way to measure the pictures, so it reads their sizes from here
 	fs.writeFileSync(path.join(ROOT, IMAGES_DIR, 'sizes.json'), JSON.stringify(sizes));
 

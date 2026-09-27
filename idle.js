@@ -603,7 +603,9 @@ function buildOverlay(section, panel) {
 				left: source.scrollLeft,
 				width: picture ? picture.width : 0,
 				height: picture ? picture.height : 0,
-				picture: picture != null
+				picture: picture != null,
+				// only a picture the page has already shown is worth showing in the copy
+				loaded: picture != null && source.complete && source.naturalWidth > 0
 			});
 		}
 	}
@@ -629,6 +631,13 @@ function buildOverlay(section, panel) {
 		// which would shuffle everything under it out from beneath the words. it is handed the
 		// room the picture it was copied from is already taking
 		if (note.picture) {
+			// one the page never loaded, most of them tucked away in the collapsed columns, keeps its room
+			// but loses its address, or the copy would fetch every picture in the archive at once. the
+			// address goes first, since a picture with one starts loading the moment it stops being lazy
+			if (!note.loaded) {
+				clone.removeAttribute('src');
+				clone.removeAttribute('srcset');
+			}
 			clone.removeAttribute('loading');
 			clone.style.width = note.width + 'px';
 			clone.style.height = note.height + 'px';

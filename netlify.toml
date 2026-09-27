@@ -8,6 +8,18 @@
 [build.environment]
   NODE_VERSION = "20"
 
+# the generated pictures carry their fingerprint in their address, and the fonts never change, so a
+# browser can keep both for a year without asking again. a replaced picture gets a new address
+[[headers]]
+  for = "/assets/images/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/assets/fonts/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
 # the cms is not a page anyone should land on from a search
 [[headers]]
   for = "/admin/*"
