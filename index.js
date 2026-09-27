@@ -512,9 +512,58 @@ function setActiveEntry(entry) {
 
 /* image view */
 
+// a picture is only asked for once it has sat on screen for a moment, so flinging a column past a
+// few hundred pictures loads the ones it comes to rest on rather than every one it passes. once an
+// address has loaded it is in the browser's cache, and every other copy of it can show at once
+const IMAGE_DWELL = 150;
+const loadedImages = new Set();
+const imageWatch = new IntersectionObserver(watched => {
+	for (let item of watched) {
+		let card = item.target;
+		clearTimeout(card.dwell);
+		if (item.isIntersecting) {
+			card.dwell = setTimeout(() => showImage(card), loadedImages.has(card.dataset.src) ? 0 : IMAGE_DWELL);
+		}
+	}
+});
+
+// the tint is a mask drawn from the same picture, and a mask loads the moment its card is laid
+// out, lazy or not, so it waits with the picture
+function holdImage(card) {
+	let image = card.querySelector('.index-image-thumb');
+	if (!image || !image.getAttribute('src')) {
+		return;
+	}
+	card.dataset.src = image.getAttribute('src');
+	image.removeAttribute('src');
+	image.removeAttribute('loading');
+	card.style.removeProperty('--tint');
+}
+
+// the pictures only watched for are the ones actually standing in a column
+function watchImages(container) {
+	for (let card of container.querySelectorAll('.index-image[data-src]')) {
+		if (!card.querySelector('.index-image-thumb[src]')) {
+			imageWatch.observe(card);
+		}
+	}
+}
+
+function showImage(card) {
+	imageWatch.unobserve(card);
+	let src = card.dataset.src;
+	let image = card.querySelector('.index-image-thumb');
+	image.addEventListener('load', () => loadedImages.add(src), {once: true});
+	image.setAttribute('src', src);
+	if (card.dataset.tint == '1') {
+		card.style.setProperty('--tint', `url('${src}')`);
+	}
+}
+
 // every copy of an item carries the hover state, so it reads the same wherever it turns up
 function imageClone(index, repeat) {
 	let clone = originalImages[index].cloneNode(true);
+	holdImage(clone);
 	clone.dataset.image = index;
 	clone.dataset.active = originalImages[index] == activeImage ? '1' : '0';
 	if (repeat) {
@@ -593,6 +642,7 @@ function buildImages() {
 		imageStack = 0;
 		imageRepeats = 0;
 		columns[0].replaceChildren(imageStacks(1, false));
+		watchImages(columns[0]);
 		IMAGES.scrollTop = 0;
 		isBuildingImages = false;
 		return;
@@ -609,6 +659,7 @@ function buildImages() {
 		let measure = imageStacks(1, false);
 		measure.appendChild(imageClone(0, true));
 		columns[0].replaceChildren(measure);
+		watchImages(columns[0]);
 	}
 	let tops = measureImageTops(columns[0], count + 1);
 	imageCopy = tops[count];
@@ -631,6 +682,7 @@ function buildImages() {
 		for (let column of columns) {
 			column.scrollTop = 0;
 			column.replaceChildren(stacks.cloneNode(true));
+			watchImages(column);
 		}
 		// the first pass down the first column is the real one, and the only one anything reads
 		for (let n = 0; n < count; n++) {
@@ -706,6 +758,7 @@ function extendImages() {
 	for (let index = 0; index < originalImages.length; index++) {
 		columns[0].appendChild(imageClone(index, true));
 	}
+	watchImages(columns[0]);
 }
 
 function shuffleImages() {
@@ -1562,8 +1615,9 @@ new ResizeObserver(queueTrack).observe(ENTRY_TEXT);
 
 setColumn(0); // addressee shows first on mobile
 
-// the thumbnails load once the page itself has, so they never hold up anything on screen
-window.addEventListener('load', preloadThumbnails);
+// the thumbnails wait until the pointer first comes onto the list, so they never hold up anything
+// on screen and a visit that never hovers the list never loads them
+LIST.addEventListener('pointerover', preloadThumbnails, {once: true});
 setSortMenu(false);
 bindInput();
 sortByColumn(DEFAULT_SORT); // opens on date received, newest first
