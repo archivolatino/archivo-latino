@@ -1145,7 +1145,8 @@ ${cells.join('\n')}
 					</a>`;
 }
 
-// shown a whole column wide, so these take the full sized render rather than the small one
+// a column is only a few hundred pixels wide, so the small render is plenty here. the full sized
+// one is left for the overlay, where a picture is opened and zoomed into
 // one card per picture rather than per entry, each opening the overlay on its own image
 function indexImage(entry, index, image, photo, language, sizes) {
 	let file = image.File;
@@ -1154,9 +1155,9 @@ function indexImage(entry, index, image, photo, language, sizes) {
 	let city = field(entry, 'City', language.suffix);
 	let country = field(entry, 'Country', language.suffix);
 	let tinted = hasTint(image);
-	let tint = tinted ? ` style="--tint: url('${imageUrl(file, 'full')}')"` : '';
+	let tint = tinted ? ` style="--tint: url('${imageUrl(file, 'thumb')}')"` : '';
 	return `					<a href="${entryHref(language, 'image', image.Link)}" class="index-image" data-entry="${index}" data-photo="${photo}" data-tint="${tinted ? 1 : 0}"${tint}>
-						<span class="index-image-crop"><img class="index-image-thumb" src="${imageUrl(file, 'full')}"${dimensions} alt="" loading="lazy"></span>
+						<span class="index-image-crop"><img class="index-image-thumb" src="${imageUrl(file, 'thumb')}"${dimensions} alt="" loading="lazy"></span>
 
 						<div class="index-image-info">
 							<span>[${escapeHtml(image.Code || '')}] ${escapeHtml(city)}, ${escapeHtml(country)}</span>
