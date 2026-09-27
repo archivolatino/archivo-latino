@@ -61,7 +61,7 @@ const NAV_LINKS = [
 	{key: 'notes', label: WORDS('JOURNAL', 'REVISTA')},
 	{key: 'about', label: WORDS('ABOUT', 'ACERCA DE')}
 ];
-const SITE_NAME = 'ARCHIVO LATINO';
+const SITE_NAME = 'Archivo Latino';
 // sharing cards need whole urls, so the site's own address is named here
 const SITE_URL = 'https://archivolatino.org';
 const SITE_DESCRIPTION = WORDS(
@@ -120,10 +120,10 @@ const LANGUAGES = [
 
 // the four columns of the site, the one being built open and the rest collapsed
 const SECTIONS = [
-	{key: 'about', heading: 'ARCHIVO<br>LATINO', short: WORDS('ABOUT', 'ACERCA DE'), title: WORDS('ABOUT', 'ACERCA DE'), path: 'about/'},
+	{key: 'about', heading: 'ARCHIVO<br>LATINO', short: WORDS('ABOUT', 'ACERCA DE'), title: WORDS('About', 'Acerca de'), path: 'about/'},
 	{key: 'index', heading: WORDS('CATALOG', 'CATÁLOGO'), title: WORDS('', ''), path: ''}, // the catalog is the site itself, so it carries the name alone
-	{key: 'events', heading: WORDS('EVENTS', 'EVENTOS'), title: WORDS('EVENTS', 'EVENTOS'), path: 'events/'},
-	{key: 'notes', heading: WORDS('JOURNAL', 'REVISTA'), title: WORDS('JOURNAL', 'REVISTA'), path: 'journal/'}
+	{key: 'events', heading: WORDS('EVENTS', 'EVENTOS'), title: WORDS('Events', 'Eventos'), path: 'events/'},
+	{key: 'notes', heading: WORDS('JOURNAL', 'REVISTA'), title: WORDS('Journal', 'Revista'), path: 'journal/'}
 ];
 
 const SHUFFLE_ICON = `<svg viewBox="0 0 17 14"><path d="M13.76 6.896C14.32 6.4 15.184 5.888 16.304 5.36V6.288C14.992 7.408 14.032 8.592 13.424 9.808H12.96C12.352 8.592 11.376 7.408 10.08 6.288V5.36C11.184 5.888 12.048 6.4 12.624 6.896V6.88C12.624 3.696 10.048 1.136 6.88 1.136C3.696 1.136 1.136 3.696 1.136 6.88C1.136 10.064 3.696 12.624 6.88 12.624C9.072 12.624 10.768 11.376 11.504 10.288L12.352 11.04C11.344 12.48 9.312 13.76 6.88 13.76C3.072 13.76 0 10.688 0 6.88C0 3.072 3.072 0 6.88 0C10.688 0 13.76 3.072 13.76 6.88V6.896Z"/></svg>
@@ -346,8 +346,9 @@ ${navLinks}
 		</div>
 	</div>`;
 
-	// the index carries the site name alone, every other page adds its own
-	let title = escapeHtml([SITE_NAME, say(page.title, language)].filter(part => part).join(' '));
+	// the index carries the site name alone, every other page adds its own in brackets: Archivo Latino [About]
+	let subpage = say(page.title, language);
+	let title = escapeHtml(subpage ? `${SITE_NAME} [${subpage}]` : SITE_NAME);
 	let description = escapeHtml(say(SITE_DESCRIPTION, language));
 	let url = `${SITE_URL}${language.home}${page.path}`;
 
@@ -587,8 +588,10 @@ function eventBlock(event, language, sizes) {
 	}
 
 	// what an open call is asking for, on dotted paper with a line of text to each row. every open call
-	// gets the paper, so one saved without a request still has it, with that row left empty
-	let request = field(event, 'Request', language.suffix);
+	// gets the paper, so one saved without a request still has it, with that row left empty. the
+	// request and the link to submit to are kept together, in the event's open call settings
+	let call = event['Open Call'] || {};
+	let request = field(call, 'Request', language.suffix);
 	if (request || isOpenCall(event)) {
 		parts.push(`						<div class="events-request">
 							<div class="events-request-row">${say(REQUEST_LABEL, language)}</div>
@@ -619,8 +622,8 @@ function eventBlock(event, language, sizes) {
 		parts.push(`						<div class="events-hidden">\n${paragraphs(description, '							')}\n						</div>`);
 	}
 
-	if (event['Submission Link']) {
-		parts.push(`						<a href="${escapeHtml(event['Submission Link'])}" class="events-submit" target="_blank" rel="noopener">${say(SUBMIT, language)}${MARK('&gt;')}</a>`);
+	if (call['Submission Link']) {
+		parts.push(`						<a href="${escapeHtml(call['Submission Link'])}" class="events-submit" target="_blank" rel="noopener">${say(SUBMIT, language)}${MARK('&gt;')}</a>`);
 	}
 
 	if (event.View) {

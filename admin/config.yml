@@ -80,7 +80,7 @@ collections:
             name: Code
             widget: string
             hint: Unique across the whole archive. It is what a link to this picture carries.
-          - {label: Type, name: Type, widget: string, required: false}
+          - {label: Type, name: Type, widget: string}
           - {label: "Type [ES]", name: "Type [ES]", widget: string, required: false}
           - label: Paper tint
             name: Tint
@@ -145,13 +145,15 @@ collections:
       - {label: "Collaborator [ES]", name: "Collaborator [ES]", widget: string, required: false}
       - {label: Location, name: Location, widget: string, required: false}
       - {label: "Location [ES]", name: "Location [ES]", widget: string, required: false}
-      - label: Request
-        name: Request
-        widget: string
+      - label: Open call
+        name: Open Call
+        widget: object
         required: false
-        hint: What an open call asks for. It is set on the dotted paper.
-      - {label: "Request [ES]", name: "Request [ES]", widget: string, required: false}
-      - {label: Submission link, name: Submission Link, widget: string, required: false}
+        hint: "Only for an event whose type is Open Call. The request is printed on the dotted paper under it in the listing, and the link is where its Submit button goes. Every open call gets the dotted paper, even with the request left empty."
+        fields:
+          - {label: Request, name: Request, widget: string, required: false, hint: "What the call asks for, e.g. Text & Image."}
+          - {label: "Request [ES]", name: "Request [ES]", widget: string, required: false}
+          - {label: Submission link, name: Submission Link, widget: string, required: false, hint: "An address or a mailto: link."}
       - label: Thumbnail
         name: Thumbnail
         widget: object
