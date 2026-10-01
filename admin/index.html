@@ -6,6 +6,7 @@
 	<meta name="robots" content="noindex">
 	<title>Archivo Latino — Content</title>
 	<link rel="icon" type="image/png" sizes="32x32" href="/assets/meta/favicon.png">
+	<link rel="icon" type="image/svg+xml" sizes="any" href="/assets/meta/favicon.svg">
 	<link rel="apple-touch-icon" href="/assets/meta/webclip.png">
 	<style>
 		/* the cms's own preview buttons sit over the top right of the page, where the catalog keeps its
@@ -17,8 +18,8 @@
 	</style>
 </head>
 <body>
-	<script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
-	<script src="https://unpkg.com/decap-cms@^3.8.0/dist/decap-cms.js"></script>
+	<!-- decap turbo needs decap's beta build -->
+	<script src="https://cdn.jsdelivr.net/npm/decap-cms@beta/dist/decap-cms.js"></script>
 	<!-- the same code build.js writes the pages with, so the preview is the page itself -->
 	<script src="/render.js"></script>
 	<script>

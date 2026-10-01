@@ -1,0 +1,14 @@
+{
+	"name": "archivo-latino",
+	"main": "worker.js",
+	"compatibility_date": "2026-09-01",
+	"observability": {"enabled": true},
+	"d1_databases": [
+		{"binding": "SIGNUPS", "database_name": "archivo-latino-signups", "database_id": "a4ccdf8d-1dbb-4c6f-8fc7-202e0ab129ee"}
+	],
+
+	"vars": {
+		"ALLOWED_ORIGINS": "https://archivolatino.org,https://www.archivolatino.org,https://archivolatino.github.io",
+		"NOTIFY_TO": "gabriel@noreplica.com"
+	}
+}

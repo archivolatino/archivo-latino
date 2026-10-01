@@ -89,7 +89,8 @@ if (SIGNUP) {
 	}
 
 	// the browser's own check does the reading, but an empty box passes it. the address goes to
-	// netlify's forms as the page's own form would send it, without leaving the page
+	// worker.js on cloudflare, at the form's own address, as the form would send it but without
+	// leaving the page
 	let sending = false;
 	function sendSignup() {
 		if (!field.value.trim() || !field.checkValidity()) {
@@ -106,7 +107,7 @@ if (SIGNUP) {
 			return;
 		}
 		sending = true;
-		fetch('/', {
+		fetch(SIGNUP.getAttribute('action'), {
 			method: 'POST',
 			headers: {'Content-Type': 'application/x-www-form-urlencoded'},
 			body: new URLSearchParams(new FormData(SIGNUP)).toString()

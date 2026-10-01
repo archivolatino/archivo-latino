@@ -9,8 +9,12 @@
 # Longer texts are rich text fields that hold paragraphs and links and nothing else. Enter starts a
 # new paragraph and Shift+Enter breaks a line inside one.
 
+# logins go through decap turbo. name is the kind of backend and is always turbo-github, the site
+# itself is picked by its id, the uuid on the site's overview tab in turbo. the id is not a secret:
+# this file is public on the site anyway, and nothing can be saved without a turbo login
 backend:
-  name: git-gateway
+  name: turbo-github
+  turbo_site_id: 3cf55bb7-86f1-44ed-8ddd-aff40f94d8ba
   branch: main
 
 # saving keeps a change as a draft, on a branch of its own, so several pages can be worked on at once

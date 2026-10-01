@@ -9,6 +9,8 @@
 	<!-- the webclip is the icon a phone keeps: ios takes it for the home screen, android for its own tile -->
 	<link rel="apple-touch-icon" href="/assets/meta/webclip.png">
 	<link rel="icon" type="image/png" sizes="256x256" href="/assets/meta/webclip.png">
+	<!-- the drawn favicon goes last, so a browser that can show it sharp at any size picks it for the tab -->
+	<link rel="icon" type="image/svg+xml" sizes="any" href="/assets/meta/favicon.svg">
 
 	<meta property="og:type" content="website">
 	<meta property="og:site_name" content="Archivo Latino">
@@ -74,7 +76,7 @@
 					</div>
 
 					<div class="about-column">
-						<h2 class="about-heading">[El Archivo]</h2>
+						<h2 class="about-heading">[El archivo]</h2>
 
 						<p>Archivo Latino es un proyecto de investigación inspirado en el mail art como método de recopilación y construcción de archivos. Nos enfocamos en documentar identidades, culturas y prácticas de América Latina y su diáspora. Somos un archivo open source y en constante evolución, parte de nuestro proceso incluye invitar a viajeros y habitantes a convertirse en coautores del archivo a través de una “Carta de Solicitud”: una invitación dirigida a cualquiera que habite o transite América Latina.</p>
 
@@ -82,8 +84,8 @@
 							<a href="#" class="about-toggle">Lee más [<span class="mark"><span class="mark-more">+</span><span class="mark-less">-</span></span>]</a>
 
 							<div class="about-hidden">
-								<p>El Archivo documenta en una forma poética las formas de habitar y construir en la región, al igual que sus formas de adaptación y desplazamiento, enfocándose en irregularidades arquitectónicas, encuentros cotidianos y en el ingenio vernáculo.</p>
-								<p>El Archivo guarda tanto lo ausente como lo presente, estudiando ciudades y espacios a través de lo informal, lo precario, lo autoconstruido y lo inacabado.</p>
+								<p>El archivo documenta en una forma poética las formas de habitar y construir en la región, al igual que sus formas de adaptación y desplazamiento, enfocándose en irregularidades arquitectónicas, encuentros cotidianos y en el ingenio vernáculo.</p>
+								<p>El archivo guarda tanto lo ausente como lo presente, estudiando ciudades y espacios a través de lo informal, lo precario, lo autoconstruido y lo inacabado.</p>
 								<p>Al reunir a artistas, arquitectos, escritores, diseñadores y teóricos de la cultura, Archivo Latino propone métodos alternativos de investigación y documentación, recopilando historias ocultas y revelando cómo las condiciones sociales, económicas y culturales de la región quedan inscritas en el paisaje cotidiano.</p>
 							</div>
 						</div>
@@ -196,7 +198,7 @@
 
 			<div class="section-content" inert>
 				<div class="index-controls">
-					<a href="#" class="index-shuffle" data-active="0"><span class="index-shuffle-label">BARAJAR</span><svg viewBox="0 0 17 14"><path d="M13.76 6.896C14.32 6.4 15.184 5.888 16.304 5.36V6.288C14.992 7.408 14.032 8.592 13.424 9.808H12.96C12.352 8.592 11.376 7.408 10.08 6.288V5.36C11.184 5.888 12.048 6.4 12.624 6.896V6.88C12.624 3.696 10.048 1.136 6.88 1.136C3.696 1.136 1.136 3.696 1.136 6.88C1.136 10.064 3.696 12.624 6.88 12.624C9.072 12.624 10.768 11.376 11.504 10.288L12.352 11.04C11.344 12.48 9.312 13.76 6.88 13.76C3.072 13.76 0 10.688 0 6.88C0 3.072 3.072 0 6.88 0C10.688 0 13.76 3.072 13.76 6.88V6.896Z"/></svg>
+					<a href="#" class="index-shuffle" data-active="0"><span class="index-shuffle-label">MEZCLA</span><svg viewBox="0 0 17 14"><path d="M13.76 6.896C14.32 6.4 15.184 5.888 16.304 5.36V6.288C14.992 7.408 14.032 8.592 13.424 9.808H12.96C12.352 8.592 11.376 7.408 10.08 6.288V5.36C11.184 5.888 12.048 6.4 12.624 6.896V6.88C12.624 3.696 10.048 1.136 6.88 1.136C3.696 1.136 1.136 3.696 1.136 6.88C1.136 10.064 3.696 12.624 6.88 12.624C9.072 12.624 10.768 11.376 11.504 10.288L12.352 11.04C11.344 12.48 9.312 13.76 6.88 13.76C3.072 13.76 0 10.688 0 6.88C0 3.072 3.072 0 6.88 0C10.688 0 13.76 3.072 13.76 6.88V6.896Z"/></svg>
 </a>
 					<div class="index-views">
 						<a href="#" class="index-view" data-view="list" data-active="1">LISTA</a> / <a href="#" class="index-view" data-view="image" data-active="0">IMAGEN</a>
@@ -3788,14 +3790,14 @@
 							</div>
 
 							<div class="events-calendar-nav">
-								<a href="#" class="events-prev"> [<span class="mark">&lt;</span>] PREVIOUS</a> / <a href="#" class="events-next">NEXT [<span class="mark">&gt;</span>]</a>
+								<a href="#" class="events-prev"> [<span class="mark">&lt;</span>] ANTERIOR</a> / <a href="#" class="events-next">SIGUIENTE [<span class="mark">&gt;</span>]</a>
 							</div>
 						</div>
 					</div>
 
 					<div class="events-listing">
 						<div class="events-group">
-							<h2 class="events-heading">[Próximamente]</h2>
+							<h2 class="events-heading">[Próximos]</h2>
 
 							<div class="events-list">
 					<div class="events-event" data-active="0">
@@ -3833,7 +3835,7 @@
 						</div>
 
 						<div class="events-group">
-							<h2 class="events-heading">[Pasados]</h2>
+							<h2 class="events-heading">[Anteriores]</h2>
 
 							<div class="events-list">
 					<div class="events-event" data-active="0">
@@ -3927,21 +3929,21 @@
 				<div class="notes-columns">
 					<div class="notes-column notes-info">
 						<div class="notes-intro">
-						<div class="notes-issue" data-index="0" data-issue="1" data-active="0">
+						<div class="notes-issue" data-index="0" data-issue="1" data-active="1">
 							<p>Querido lector,</p>
 							<p>La extensión editorial de Archivo Latino se articula en torno a ensayos críticos y selecciones curatoriales del archivo, reunidos en una publicación impresa semestral. A través de ella, contextualizamos y compartimos una colección en constante crecimiento, activando el archivo como detonador para nuevas lecturas, preguntas e investigaciones.</p>
 						</div>
 						</div>
 
-						<div class="notes-nav" data-both="1" data-empty="1">
-							<a href="#" class="notes-prev" data-active="1"> [<span class="mark">&lt;</span>] VOLUMEN ANTERIOR</a><span class="notes-sep"> / </span><a href="#" class="notes-next" data-active="1">VOLUMEN SIGUIENTE [<span class="mark">&gt;</span>]</a>
+						<div class="notes-nav" data-both="0" data-empty="1">
+							<a href="#" class="notes-prev" data-active="0"> [<span class="mark">&lt;</span>] VOLUMEN ANTERIOR</a><span class="notes-sep"> / </span><a href="#" class="notes-next" data-active="0">VOLUMEN SIGUIENTE [<span class="mark">&gt;</span>]</a>
 						</div>
 					</div>
 
 					<div class="notes-listing">
 						<div class="notes-column notes-editor">
-					<div class="notes-issue" data-index="0" data-issue="1" data-active="0">
-						<h2 class="notes-heading">[Nota Editorial]</h2>
+					<div class="notes-issue" data-index="0" data-issue="1" data-active="1">
+						<h2 class="notes-heading">[Nota editorial]</h2>
 
 						<div class="notes-lines">
 							<div>La Hoja by Latino Archivo</div>
@@ -3967,7 +3969,7 @@
 						</div>
 
 						<div class="notes-column notes-articles">
-					<div class="notes-issue" data-index="0" data-issue="1" data-active="0">
+					<div class="notes-issue" data-index="0" data-issue="1" data-active="1">
 						<a href="/es/journal/?issue=1&amp;article=the-gate-remembers" class="notes-article notes-open" data-issue="1" data-article="the-gate-remembers">
 							<h2 class="notes-heading">[Ensayo]</h2>
 
@@ -4000,8 +4002,7 @@
 		</div>
 	</div>
 
-	<form class="signup" name="signup" method="POST" data-netlify="true" netlify-honeypot="company" data-active="1">
-		<input type="hidden" name="form-name" value="signup">
+	<form class="signup" action="https://archivo-latino.gabrieldrozdov.workers.dev/signup" method="POST" data-active="1">
 		<p hidden><label>Leave this empty: <input name="company" tabindex="-1" autocomplete="off"></label></p>
 
 		<div class="signup-top">

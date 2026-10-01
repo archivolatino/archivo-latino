@@ -1,0 +1,23 @@
+# kept off the published site. github pages publishes a copy of the repository root once the build
+# has run (see .github/workflows/deploy.yml), so everything that is only there to build or run the
+# site is left out of that copy here. render.js stays public, since the cms preview runs it.
+# a line starting with / only matches at the root, the others match anywhere
+.git
+.DS_Store
+node_modules
+/.github
+/.gitignore
+/.gitattributes
+/.pagesignore
+/.node-version
+/.vscode
+/.wrangler
+/_to_delete
+/turbo-test
+/content
+/build.js
+/worker.js
+/wrangler.jsonc
+/netlify.toml
+/package.json
+/package-lock.json

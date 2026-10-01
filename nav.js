@@ -1,12 +1,5 @@
 (function () {
 
-// netlify identity mails its invite, password reset and confirmation links to the root of the
-// site, but only the cms page knows what to do with them, so they are passed along to it
-if (/(invite|recovery|confirmation|email_change)_token=/.test(location.hash)) {
-	location.replace('/admin/' + location.hash);
-	return;
-}
-
 // ios zooms in on any field set smaller than 16px when it is tapped, and the site's text is 14px.
 // capping the scale stops that, and ios still lets a pinch zoom past the cap. it is left off
 // everywhere else, since android would take the cap as a ban on pinching

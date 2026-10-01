@@ -20,7 +20,7 @@ const EVENTS_FILE = 'events.json';
 // everything the pages are made from, gathered into one file for the cms preview to read
 const BUNDLE_FILE = 'assets/content.json';
 // what each upload looked like when its copies were made, and how big the copies came out. git keeps
-// no dates, so a fresh checkout (which is every netlify build) makes every upload look newer than
+// no dates, so a fresh checkout (which is every github build) makes every upload look newer than
 // its copies. the fingerprint says whether a picture has really changed
 const MANIFEST_FILE = 'assets/images/manifest.json';
 const OG_QUALITY = 85;

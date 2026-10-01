@@ -93,8 +93,10 @@ button {
 	background-color: var(--Antique-White);
 	border-radius: 0;
 }
+/* browsers wash a fully opaque selection colour out with white, and one that is a hair short of
+opaque they leave alone, so this is the ink at 99% */
 ::selection {
-	background-color: var(--Cochinilla-Ink);
+	background-color: rgb(239 39 53 / .99);
 	color: var(--White-Paper);
 }
 

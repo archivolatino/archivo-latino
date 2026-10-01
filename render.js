@@ -17,24 +17,35 @@ const MARK = (character) => ` [<span class="mark">${character}</span>]`;
 const TOGGLE_MARK = (open, close) => ` [<span class="mark"><span class="mark-more">${open}</span><span class="mark-less">${close}</span></span>]`;
 const OPEN_CLOSE = TOGGLE_MARK('+', '-');
 const READ_LESS = WORDS('Read less', 'Lee menos');
-const UPCOMING_HEADING = WORDS('[Upcoming]', '[Próximamente]');
+const UPCOMING_HEADING = WORDS('[Upcoming]', '[Próximos]');
 const NO_UPCOMING = WORDS('There are currently no upcoming events.', 'No se encuentran eventos programados en este momento.');
-const PAST_HEADING = WORDS('[Past]', '[Pasados]');
+const PAST_HEADING = WORDS('[Past]', '[Anteriores]');
 const SUBMIT = WORDS('Submit', 'Enviar');
 const REQUEST_LABEL = WORDS('[Request]', '[Solicitud]');
 const SIGNUP_THANKS = WORDS('Thanks for your email!', '¡Gracias por tu correo!');
 const SIGNUP_INVALID = WORDS('Please enter an email!', '¡Escribe tu correo!');
 const SIGNUP_ERROR = WORDS('Something went wrong. Try again!', 'Algo salió mal. ¡Inténtalo de nuevo!');
-// the name the signups are filed under in netlify's forms
-const SIGNUP_FORM = 'signup';
+// where the signup form is sent: worker.js, deployed to cloudflare on its own, answers this address,
+// keeps the email and sends the notification. the account part of the address is the cloudflare
+// account the worker is deployed from
+const SIGNUP_URL = 'https://archivo-latino.gabrieldrozdov.workers.dev/signup';
 const VIEW = WORDS('View the', 'Ver');
 const INFORMATION = WORDS('Information', 'Información');
-// spanish puts the state first, since it cannot agree with every kind of event after it
+// spanish puts the state after the kind. anterior agrees with every kind, próximo has to agree with
+// its gender, which is read off how the kind's first word ends: exposición and convocatoria are
+// feminine, taller is masculine. a masculine word ending in a, like programa, would need adding here
+const FEMININE_ENDING = /(a|ión|dad|tad|tud|umbre|sis)$/;
 const VIEW_TITLE = {
 	en: (kind, past) => `[${past ? 'Past' : 'Upcoming'} ${kind}]`,
-	es: (kind, past) => `[${past ? 'Pasado' : 'Próximamente'}: ${kind}]`
+	es: (kind, past) => {
+		if (past) {
+			return `[${kind} anterior]`;
+		}
+		let first = kind.trim().split(/\s+/)[0].toLowerCase();
+		return `[${kind} ${FEMININE_ENDING.test(first) ? 'próxima' : 'próximo'}]`;
+	}
 };
-const EDITORS_NOTE = WORDS('[Editor’s Note]', '[Nota Editorial]');
+const EDITORS_NOTE = WORDS('[Editor’s Note]', '[Nota editorial]');
 const VOLUME_LABEL = WORDS('Volume', 'Volumen');
 const PREVIOUS_ISSUE = WORDS('PREVIOUS VOLUME', 'VOLUMEN ANTERIOR');
 const NEXT_ISSUE = WORDS('NEXT VOLUME', 'VOLUMEN SIGUIENTE');
@@ -51,7 +62,7 @@ const EVENT_LABELS = {
 	en: {Reception: 'Reception', 'On View': 'On View', Collaborator: 'Collaborator', Date: 'Date', Opens: 'Opens', Closes: 'Closes', Location: 'Location'},
 	es: {Reception: 'Recepción', 'On View': 'En exhibición', Collaborator: 'Colaboradores', Date: 'Fecha', Opens: 'Abre', Closes: 'Cierra', Location: 'Lugar'}
 };
-const WHAT_HEADING = WORDS('[What]', '[El Archivo]');
+const WHAT_HEADING = WORDS('[What]', '[El archivo]');
 const WHO_HEADING = WORDS('[Who]', '[Equipo]');
 const CONTACT_HEADING = WORDS('[Contact]', '[Contacto]');
 // the mobile nav, in its own order and with its own labels
@@ -77,7 +88,7 @@ const OG_HEIGHT = 630;
 const NAV_TITLE = 'ARCHIVO<br>LATINO';
 const LANGUAGE_LABEL = WORDS('LANGUAGE', 'IDIOMA');
 const LANGUAGE_NAMES = {en: 'ENGLISH', es: 'ESPAÑOL'};
-const SHUFFLE_LABEL = WORDS('SHUFFLE', 'BARAJAR');
+const SHUFFLE_LABEL = WORDS('SHUFFLE', 'MEZCLA');
 const LIST_LABEL = WORDS('LIST', 'LISTA');
 const IMAGE_LABEL = WORDS('IMAGE', 'IMAGEN');
 const SORT_LABEL = WORDS('SORT', 'ORDENAR');
@@ -371,6 +382,8 @@ ${navLinks}
 	<!-- the webclip is the icon a phone keeps: ios takes it for the home screen, android for its own tile -->
 	<link rel="apple-touch-icon" href="/${META_DIR}/${WEBCLIP_FILE}">
 	<link rel="icon" type="image/png" sizes="256x256" href="/${META_DIR}/${WEBCLIP_FILE}">
+	<!-- the drawn favicon goes last, so a browser that can show it sharp at any size picks it for the tab -->
+	<link rel="icon" type="image/svg+xml" sizes="any" href="/${META_DIR}/favicon.svg">
 
 	<meta property="og:type" content="website">
 	<meta property="og:site_name" content="${SITE_NAME}">
@@ -686,7 +699,7 @@ ${images}
 		</div>
 
 		<div class="view-nav">
-			<a href="#" class="view-prev">${MARK('&lt;')} PREVIOUS</a> / <a href="#" class="view-next">NEXT${MARK('&gt;')}</a>
+			<a href="#" class="view-prev">${MARK('&lt;')} ${say(PREVIOUS_LABEL, language)}</a> / <a href="#" class="view-next">${say(NEXT_LABEL, language)}${MARK('&gt;')}</a>
 		</div>
 
 		<div class="view-info">
@@ -748,7 +761,7 @@ ${calendar.days}
 							</div>
 
 							<div class="events-calendar-nav">
-								<a href="#" class="events-prev">${MARK('&lt;')} PREVIOUS</a> / <a href="#" class="events-next">NEXT${MARK('&gt;')}</a>
+								<a href="#" class="events-prev">${MARK('&lt;')} ${say(PREVIOUS_LABEL, language)}</a> / <a href="#" class="events-next">${say(NEXT_LABEL, language)}${MARK('&gt;')}</a>
 							</div>
 						</div>
 					</div>
@@ -801,12 +814,10 @@ ${views}
 
 function aboutExtras(language) {
 	let rows = Array(SIGNUP_ROWS).fill('		<div class="signup-row"></div>').join('\n');
-	// a netlify form: netlify finds it in the page when the site is deployed and keeps what is sent to
-	// it. the hidden field names the form, and the one set aside is a trap left empty by people and
-	// filled in by the bots that fill in everything
+	// about.js sends the form to worker.js in the background. the field set aside is a trap left
+	// empty by people and filled in by the bots that fill in everything
 	return `
-	<form class="signup" name="${SIGNUP_FORM}" method="POST" data-netlify="true" netlify-honeypot="company" data-active="1">
-		<input type="hidden" name="form-name" value="${SIGNUP_FORM}">
+	<form class="signup" action="${SIGNUP_URL}" method="POST" data-active="1">
 		<p hidden><label>Leave this empty: <input name="company" tabindex="-1" autocomplete="off"></label></p>
 
 		<div class="signup-top">
@@ -873,7 +884,11 @@ ${inside}
 // every issue ships in the page and the controls swap between them
 function notesContent(data, language) {
 	let issues = data.Issues || [];
-	let notes = issues.map((issue, index) => `					<div class="notes-issue" data-index="${index}" data-issue="${issue.Number}" data-active="0">
+	// the newest issue is laid down open, as journal.js opens it, since the journal only runs its
+	// script on its own page and has to read right from every other page's collapsed column too
+	let newest = issues.length - 1;
+	let open = (index) => index == newest ? '1' : '0';
+	let notes = issues.map((issue, index) => `					<div class="notes-issue" data-index="${index}" data-issue="${issue.Number}" data-active="${open(index)}">
 						<h2 class="notes-heading">${say(EDITORS_NOTE, language)}</h2>
 
 						<div class="notes-lines">
@@ -897,11 +912,11 @@ ${paragraphs(field(issue, 'More', language.suffix), '								')}
 						</div>
 					</div>`).join('\n\n');
 
-	let articles = issues.map((issue, index) => `					<div class="notes-issue" data-index="${index}" data-issue="${issue.Number}" data-active="0">
+	let articles = issues.map((issue, index) => `					<div class="notes-issue" data-index="${index}" data-issue="${issue.Number}" data-active="${open(index)}">
 ${(issue.Articles || []).map(article => notesArticle(article, language, issue)).join('\n\n')}
 					</div>`).join('\n\n');
 
-	let intros = issues.map((issue, index) => `						<div class="notes-issue" data-index="${index}" data-issue="${issue.Number}" data-active="0">
+	let intros = issues.map((issue, index) => `						<div class="notes-issue" data-index="${index}" data-issue="${issue.Number}" data-active="${open(index)}">
 ${introParagraphs(issue, language, '							')}
 						</div>`).join('\n\n');
 
@@ -911,8 +926,8 @@ ${introParagraphs(issue, language, '							')}
 ${intros}
 						</div>
 
-						<div class="notes-nav" data-both="1" data-empty="${issues.length < 2 ? 1 : 0}">
-							<a href="#" class="notes-prev" data-active="1">${MARK('&lt;')} ${say(PREVIOUS_ISSUE, language)}</a><span class="notes-sep"> / </span><a href="#" class="notes-next" data-active="1">${say(NEXT_ISSUE, language)}${MARK('&gt;')}</a>
+						<div class="notes-nav" data-both="0" data-empty="${issues.length < 2 ? 1 : 0}">
+							<a href="#" class="notes-prev" data-active="${issues.length > 1 ? 1 : 0}">${MARK('&lt;')} ${say(PREVIOUS_ISSUE, language)}</a><span class="notes-sep"> / </span><a href="#" class="notes-next" data-active="0">${say(NEXT_ISSUE, language)}${MARK('&gt;')}</a>
 						</div>
 					</div>
 
@@ -1382,7 +1397,7 @@ Object.assign(exports, {
 	SIGNUP_THANKS,
 	SIGNUP_INVALID,
 	SIGNUP_ERROR,
-	SIGNUP_FORM,
+	SIGNUP_URL,
 	VIEW,
 	INFORMATION,
 	VIEW_TITLE,
