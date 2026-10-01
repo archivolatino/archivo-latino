@@ -9,7 +9,7 @@
 
 	"vars": {
 		"ALLOWED_ORIGINS": "https://archivolatino.org,https://www.archivolatino.org,https://archivolatino.github.io",
-		"NOTIFY_TO": "gabriel@noreplica.com",
+		"NOTIFY_TO": "info@archivolatino.com",
 		// who the notification comes from. its domain has to be verified in resend (domains), or resend
 		// refuses to send. the part in front of the brackets is the name inboxes show
 		"NOTIFY_FROM": "Archivo Latino <info@archivolatino.org>"
