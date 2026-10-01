@@ -28,7 +28,7 @@ const SIGNUP_ERROR = WORDS('Something went wrong. Try again!', 'Algo salió mal.
 // where the signup form is sent: worker.js, deployed to cloudflare on its own, answers this address,
 // keeps the email and sends the notification. the account part of the address is the cloudflare
 // account the worker is deployed from
-const SIGNUP_URL = 'https://archivo-latino.gabrieldrozdov.workers.dev/signup';
+const SIGNUP_URL = 'https://archivo-latino.latinoarchivo.workers.dev/signup';
 const VIEW = WORDS('View the', 'Ver');
 const INFORMATION = WORDS('Information', 'Información');
 // spanish puts the state after the kind. anterior agrees with every kind, próximo has to agree with
