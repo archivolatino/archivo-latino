@@ -6,6 +6,9 @@ const TABLE = 'CREATE TABLE IF NOT EXISTS signups (email TEXT, created TEXT)';
 export default {
 	async fetch(request, env, ctx) {
 		let url = new URL(request.url);
+		if (url.pathname == '/signups.csv') {
+			return exportSignups(url, env);
+		}
 		if (url.pathname != '/signup') {
 			return new Response('Not found', {status: 404});
 		}
@@ -60,6 +63,25 @@ export default {
 		return new Response('ok', {headers});
 	}
 };
+
+// the list as a spreadsheet, which google sheets keeps up to date by itself with
+// =IMPORTDATA("https://<this worker's address>/signups.csv?key=<the key>"). the key is a secret on the
+// worker (npx wrangler secret put EXPORT_KEY), and until it is set the list can't be read at all.
+// anyone with the key can read every address, so it only goes in a sheet shared with the people who
+// should see them
+async function exportSignups(url, env) {
+	if (!env.EXPORT_KEY || url.searchParams.get('key') != env.EXPORT_KEY) {
+		return new Response('Not found', {status: 404});
+	}
+	await env.SIGNUPS.prepare(TABLE).run();
+	let {results} = await env.SIGNUPS.prepare('SELECT email, created FROM signups ORDER BY created DESC').all();
+	let rows = [['Email', 'Signed up (UTC)'], ...results.map(row => [row.email, row.created.slice(0, 16).replace('T', ' ')])];
+	// a cell that starts like a formula is kept as text, so an address typed to look like one is never
+	// run by whatever spreadsheet opens the file
+	let cell = value => `"${String(value).replace(/^[=+\-@]/, "'$&").replace(/"/g, '""')}"`;
+	let csv = rows.map(row => row.map(cell).join(',')).join('\n');
+	return new Response(csv, {headers: {'Content-Type': 'text/csv; charset=utf-8', 'Cache-Control': 'no-store'}});
+}
 
 // resend's shared address can send without a domain of your own, but only to the email address
 // the resend account was made with, which is all a notification needs

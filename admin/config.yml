@@ -24,6 +24,11 @@ publish_mode: editorial_workflow
 media_folder: assets/uploads
 public_folder: /assets/uploads
 
+# every picture field turns away a file over 5 MB (max_file_size, in bytes). the build never shows a
+# picture wider than 2000px anyway, and turbo sends every picture added since the last save to github
+# in one go, so a handful of big ones can be more than it will carry and the save fails with "Failed
+# to fetch". decap only reads this on each field, so it is repeated on every image widget below
+
 site_url: https://archivolatino.org
 display_url: https://archivolatino.org
 
@@ -79,7 +84,7 @@ collections:
         label_singular: Picture
         summary: "{{fields.Code}}: {{fields.Type}}"
         fields:
-          - {label: File, name: File, widget: image}
+          - {label: File, name: File, widget: image, media_library: {config: {max_file_size: 5000000}}}
           - label: Code
             name: Code
             widget: string
@@ -164,7 +169,7 @@ collections:
         required: false
         collapsed: true
         fields:
-          - {label: File, name: File, widget: image, required: false}
+          - {label: File, name: File, widget: image, required: false, media_library: {config: {max_file_size: 5000000}}}
       - {label: Blurb, name: Blurb, widget: markdown, modes: [rich_text], buttons: [link], editor_components: [], required: false}
       - {label: "Blurb [ES]", name: "Blurb [ES]", widget: markdown, modes: [rich_text], buttons: [link], editor_components: [], required: false}
       - {label: Read more, name: Description, widget: markdown, modes: [rich_text], buttons: [link], editor_components: [], required: false, hint: Folded away behind “Read more”.}
@@ -181,7 +186,7 @@ collections:
         required: false
         label_singular: Picture
         fields:
-          - {label: File, name: File, widget: image}
+          - {label: File, name: File, widget: image, media_library: {config: {max_file_size: 5000000}}}
       - label: Archived
         name: Archived
         widget: boolean
@@ -297,7 +302,7 @@ collections:
             widget: object
             hint: The picture at the foot of the page.
             fields:
-              - {label: File, name: File, widget: image}
+              - {label: File, name: File, widget: image, media_library: {config: {max_file_size: 5000000}}}
           - label: Team
             name: Team
             widget: object

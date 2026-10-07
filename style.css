@@ -82,6 +82,10 @@ a {
 	text-decoration: none;
 	color: var(--Cochinilla-Ink);
 }
+/* a link written into a text in the cms, as opposed to one the page is built out of */
+.text-link {
+	text-decoration: underline;
+}
 button {
 	font-family: "Courier Prime", monospace;
 	color: var(--Cochinilla-Ink);

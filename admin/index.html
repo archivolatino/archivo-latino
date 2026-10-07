@@ -29,7 +29,7 @@
 			id: 'figure',
 			label: 'Image',
 			fields: [
-				{name: 'image', label: 'Image', widget: 'image'},
+				{name: 'image', label: 'Image', widget: 'image', media_library: {config: {max_file_size: 5000000}}}, // the same limit as config.yml
 				{name: 'caption', label: 'Caption', widget: 'string', required: false}
 			],
 			pattern: /^\{\{\s*figure:\s*(.+?)\s*(?:\|\s*(.*?))?\s*\}\}$/ms,

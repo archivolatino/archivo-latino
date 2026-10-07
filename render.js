@@ -1019,9 +1019,13 @@ function inlineMarkdown(text) {
 		// underscores are left alone, since an instagram handle is full of them
 		.replace(/\*\*(?=\S)([\s\S]*?\S)\*\*/g, '$1')
 		.replace(/\*(?=\S)([\s\S]*?\S)\*/g, '$1')
-		.replace(/\r?\n/g, ' ') // a single line break in the source is only a space
+		// a bare line break only gets in by pasting (shift+enter writes a backslash), and the editor shows
+		// it as a break, so the page does too
+		.replace(/\r?\n/g, '<br>')
 		.replace(/\u0001/g, '<br>')
-		.replace(/\u0003(\d+)\u0003/g, (match, index) => `<a href="${links[index]}" target="_blank" rel="noopener">`)
+		// a link written into a text is marked as one, so the stylesheet can underline it apart from the
+		// links the pages are built out of
+		.replace(/\u0003(\d+)\u0003/g, (match, index) => `<a href="${links[index]}" class="text-link" target="_blank" rel="noopener">`)
 		.replace(/\u0004/g, '</a>');
 	return out.replace(/\u0000(\d+)\u0000/g, (match, index) => escapeHtml(escapes[index]));
 }
