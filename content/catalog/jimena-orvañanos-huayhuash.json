@@ -41,6 +41,13 @@
       "Code": "P00303",
       "Type": "Photograph",
       "Type [ES]": "Fotografía"
+    },
+    {
+      "Tint": false,
+      "File": "/assets/uploads/p00304_.jpg",
+      "Code": "P00304",
+      "Type": "Photograph",
+      "Type [ES]": "Fotografía"
     }
   ],
   "City": "Huayhuash",
