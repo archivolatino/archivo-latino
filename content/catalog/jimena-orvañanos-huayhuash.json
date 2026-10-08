@@ -13,6 +13,13 @@
       "Code": "LR00079",
       "Type": "Letter",
       "Type [ES]": "Carta"
+    },
+    {
+      "Tint": false,
+      "File": "/assets/uploads/p00300_.jpg",
+      "Code": "P00300",
+      "Type": "Photograph",
+      "Type [ES]": "Fotografía"
     }
   ],
   "City": "Huayhuash",
