@@ -69,6 +69,13 @@
       "File": "/assets/uploads/p00307_.jpg",
       "Type": "Photograph",
       "Type [ES]": "Fotografía"
+    },
+    {
+      "Tint": false,
+      "File": "/assets/uploads/d00001.jpg",
+      "Code": "D00001",
+      "Type": "Drawing",
+      "Type [ES]": "Dibujo"
     }
   ],
   "City": "Huayhuash",
