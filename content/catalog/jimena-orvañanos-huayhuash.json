@@ -90,6 +90,13 @@
       "Code": "D00003",
       "Type": "Drawing",
       "Type [ES]": "Dibujo"
+    },
+    {
+      "Tint": false,
+      "File": "/assets/uploads/d00004.jpg",
+      "Code": "D00004",
+      "Type": "Drawing",
+      "Type [ES]": "Dibujo"
     }
   ],
   "City": "Huayhuash",
