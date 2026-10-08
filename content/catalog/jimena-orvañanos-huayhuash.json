@@ -1,0 +1,82 @@
+{
+  "Archive": [
+    {
+      "Tint": true,
+      "File": "/assets/uploads/l00079.jpg",
+      "Code": "L00079",
+      "Type": "Letter",
+      "Type [ES]": "Carta"
+    },
+    {
+      "Tint": true,
+      "File": "/assets/uploads/lr00079_jpeg.jpg",
+      "Code": "LR00079",
+      "Type": "Letter",
+      "Type [ES]": "Carta"
+    },
+    {
+      "Tint": false,
+      "File": "/assets/uploads/p00300_.jpg",
+      "Code": "P00300",
+      "Type": "Photograph",
+      "Type [ES]": "Fotografía"
+    },
+    {
+      "Tint": false,
+      "Code": "P00301",
+      "File": "/assets/uploads/p00301_.jpg",
+      "Type": "Photograph",
+      "Type [ES]": "Fotografía"
+    },
+    {
+      "Tint": false,
+      "File": "/assets/uploads/p00302_.jpg",
+      "Code": "P00302",
+      "Type": " Photograph",
+      "Type [ES]": "Fotografía"
+    },
+    {
+      "Tint": false,
+      "File": "/assets/uploads/p00303_.jpg",
+      "Code": "P00303",
+      "Type": "Photograph",
+      "Type [ES]": "Fotografía"
+    },
+    {
+      "Tint": false,
+      "File": "/assets/uploads/p00304_.jpg",
+      "Code": "P00304",
+      "Type": "Photograph",
+      "Type [ES]": "Fotografía"
+    },
+    {
+      "Tint": false,
+      "File": "/assets/uploads/p00305_.jpg",
+      "Code": "P00305",
+      "Type": "Photograph",
+      "Type [ES]": "Fotografía"
+    },
+    {
+      "Tint": false,
+      "File": "/assets/uploads/p00306_.jpg",
+      "Code": "P00306",
+      "Type": "Photograph",
+      "Type [ES]": "Fotografía"
+    },
+    {
+      "Tint": false,
+      "Code": "P00307",
+      "File": "/assets/uploads/p00307_.jpg",
+      "Type": "Photograph",
+      "Type [ES]": "Fotografía"
+    }
+  ],
+  "City": "Huayhuash",
+  "Thumbnail": "L00079",
+  "Date": "2026-10",
+  "Addressee": "Jimena Orvañanos",
+  "Country": "Peru",
+  "Type [ES]": "Carta, Fotografía, Dibujo",
+  "Type": "Letter, Photograph, Drawing",
+  "Country [ES]": "Perú"
+}
