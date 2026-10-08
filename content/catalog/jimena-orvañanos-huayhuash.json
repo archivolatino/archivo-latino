@@ -69,10 +69,52 @@
       "File": "/assets/uploads/p00307_.jpg",
       "Type": "Photograph",
       "Type [ES]": "Fotografía"
+    },
+    {
+      "Tint": false,
+      "File": "/assets/uploads/d00001.jpg",
+      "Code": "D00001",
+      "Type": "Drawing",
+      "Type [ES]": "Dibujo"
+    },
+    {
+      "Tint": false,
+      "File": "/assets/uploads/d00002.jpg",
+      "Code": "D00002",
+      "Type": "Drawing",
+      "Type [ES]": "Dibujo"
+    },
+    {
+      "Tint": false,
+      "File": "/assets/uploads/d00003.jpg",
+      "Code": "D00003",
+      "Type": "Drawing",
+      "Type [ES]": "Dibujo"
+    },
+    {
+      "Tint": false,
+      "File": "/assets/uploads/d00004.jpg",
+      "Code": "D00004",
+      "Type": "Drawing",
+      "Type [ES]": "Dibujo"
+    },
+    {
+      "Tint": false,
+      "File": "/assets/uploads/d00005.jpg",
+      "Code": "D00005",
+      "Type": "Drawing",
+      "Type [ES]": "Dibujo"
+    },
+    {
+      "Tint": false,
+      "File": "/assets/uploads/d00006.jpg",
+      "Code": "D00006",
+      "Type": "Drawing",
+      "Type [ES]": "Dibujo"
     }
   ],
   "City": "Huayhuash",
-  "Thumbnail": "L00079",
+  "Thumbnail": "D00001",
   "Date": "2026-10",
   "Addressee": "Jimena Orvañanos",
   "Country": "Peru",
