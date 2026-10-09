@@ -32,7 +32,7 @@
       "Tint": false,
       "File": "/assets/uploads/p00302_.jpg",
       "Code": "P00302",
-      "Type": " Photograph",
+      "Type": "Photograph",
       "Type [ES]": "Fotografía"
     },
     {
@@ -118,7 +118,7 @@
   "Date": "2026-10",
   "Addressee": "Jimena Orvañanos",
   "Country": "Peru",
-  "Type [ES]": "Carta, Fotografía, Dibujo",
-  "Type": "Letter, Photograph, Drawing",
+  "Type [ES]": "Carta, Fotografía",
+  "Type": "Letter, Photograph",
   "Country [ES]": "Perú"
 }
