@@ -38,6 +38,37 @@
 			toPreview: (data) => `<figure><img src="${data.image || ''}" alt="" style="max-width: 100%"><figcaption>${data.caption || ''}</figcaption></figure>`
 		});
 
+		/* saving */
+
+		// text pasted from a pdf or a word document can bring its indents along as tabs or spaces at the
+		// start of a line, and markdown reads a line that starts that way as code. the editor would turn
+		// it into a code block the next time the entry is opened, and save it fenced in ``` after that.
+		// nothing on the site is code, so before every save any code block is opened back up into plain
+		// text and the space at the start of each line, and tabs at the end of one, are taken off
+		function cleanText(text) {
+			return text
+				.replace(/^```[^\n]*\n([\s\S]*?)\n```[ \t]*$/gm, '$1')
+				.replace(/^[ \t]+/gm, '')
+				.replace(/\t+$/gm, '');
+		}
+
+		// every text in the entry, however deep in its lists it sits. the cms keeps the entry as immutable
+		// maps and lists, which map into the same kind
+		function cleanValue(value) {
+			if (typeof value == 'string') {
+				return cleanText(value);
+			}
+			if (value && typeof value.map == 'function' && typeof value.toJS == 'function') {
+				return value.map(item => cleanValue(item));
+			}
+			return value;
+		}
+
+		CMS.registerEventListener({
+			name: 'preSave',
+			handler: ({entry}) => cleanValue(entry.get('data'))
+		});
+
 		/* preview */
 
 		// which page each collection, or each file under pages, previews
