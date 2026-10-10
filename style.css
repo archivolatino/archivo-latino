@@ -62,6 +62,13 @@ html, body {
 	overflow: hidden;
 	overscroll-behavior: none;
 }
+/* phone browsers enlarge text they judge too small to read, and safari does it again whenever the
+   phone turns sideways, then keeps the larger size when it turns back. every size here is set on
+   purpose, so the text is always left at the size it is given */
+html {
+	-webkit-text-size-adjust: 100%;
+	text-size-adjust: 100%;
+}
 body {
 	background-color: var(--Antique-White);
 	font-family: "Courier Prime", monospace;
@@ -911,6 +918,11 @@ opaque they leave alone, so this is the ink at 99% */
 	height: 100% !important;
 	margin: 0 !important;
 	transform: none !important;
+}
+/* the first column draws no rule down its left edge (.section:nth-child(1)), but its copy is not the
+   first thing in the overlay, so it would draw one. it is named instead */
+.idle-copy.about::before {
+	display: none;
 }
 /* the sheet belongs to the overlay now, and the periods are printed on it, so the copy of the
    column must not lay its own paper over them */
@@ -1764,6 +1776,15 @@ opaque they leave alone, so this is the ink at 99% */
 }
 .article-caption::before {
 	content: ">\00a0";
+}
+/* with no block after it the caption would sit level with the closing rule, so the last picture's
+   caption takes up its own room, in the same place, and the rule falls below it. under 1350px the
+   caption is already under its picture */
+@media only screen and (min-width: 1351px) {
+	.article-figure:has(+ .article-end) .article-caption {
+		position: static;
+		margin: 60px 0 0 calc(50% + 320px);
+	}
 }
 
 /* closing rule and the rest of the issue */
